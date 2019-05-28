@@ -19,7 +19,7 @@ class Chat
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $chat_text;
+    private $chatText;
 
     /**
      * @ORM\Column(type="datetime")
@@ -27,16 +27,16 @@ class Chat
     private $date;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\user")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="userId")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $user;
+    private $userId;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\trick")
+     * @ORM\ManyToOne(targetEntity="App\Entity\trick", inversedBy="chats")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $trick;
+    private $trickId;
 
     public function getId(): ?int
     {
@@ -45,12 +45,12 @@ class Chat
 
     public function getChatText(): ?string
     {
-        return $this->chat_text;
+        return $this->chatText;
     }
 
-    public function setChatText(string $chat_text): self
+    public function setChatText(string $chatText): self
     {
-        $this->chat_text = $chat_text;
+        $this->chatText = $chatText;
 
         return $this;
     }
@@ -67,26 +67,26 @@ class Chat
         return $this;
     }
 
-    public function getUser(): ?user
+    public function getUserId(): ?user
     {
-        return $this->user;
+        return $this->userId;
     }
 
-    public function setUser(?user $user): self
+    public function setUserId(?user $userId): self
     {
-        $this->user = $user;
+        $this->userId = $userId;
 
         return $this;
     }
 
-    public function getTrick(): ?trick
+    public function getTrickId(): ?trick
     {
-        return $this->trick;
+        return $this->trickId;
     }
 
-    public function setTrick(?trick $trick): self
+    public function setTrickId(?trick $trickId): self
     {
-        $this->trick = $trick;
+        $this->trickId = $trickId;
 
         return $this;
     }

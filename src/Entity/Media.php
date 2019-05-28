@@ -27,10 +27,10 @@ class Media
     private $type;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\trick")
+     * @ORM\ManyToOne(targetEntity="App\Entity\trick", inversedBy="media")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $trick;
+    private $trickId;
 
     public function getId(): ?int
     {
@@ -61,14 +61,14 @@ class Media
         return $this;
     }
 
-    public function getTrick(): ?trick
+    public function getTrickId(): ?trick
     {
-        return $this->trick;
+        return $this->trickId;
     }
 
-    public function setTrick(?trick $trick): self
+    public function setTrickId(?trick $trickId): self
     {
-        $this->trick = $trick;
+        $this->trickId = $trickId;
 
         return $this;
     }
