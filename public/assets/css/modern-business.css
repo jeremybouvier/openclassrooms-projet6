@@ -11,12 +11,19 @@
 
 }
 .carousel-caption {
-    background: rgba(0,0,0,0.3);
+  bottom : 350px;
+  background: rgba(0,0,0,0.2);
+  border-radius: 20px;
 }
 
-.carousel-caption p, .carousel-caption h1{
+.carousel-caption p{
   color: white;
   font-weight: bold;
+}
+.carousel-caption h1{
+    font-size: 3em;
+    color: white;
+    font-weight: bold;
 }
 
 .portfolio-item {
