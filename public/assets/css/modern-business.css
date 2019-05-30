@@ -38,3 +38,11 @@
 .icon:hover{
     color:cornflowerblue;
 }
+
+.header #title{
+    font-size: 7vw;
+    position: relative;
+    bottom: 8.2vw;
+    color: white;
+    background: rgba(0,0,0,0.3);
+}

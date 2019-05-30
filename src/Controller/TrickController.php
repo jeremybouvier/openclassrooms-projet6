@@ -9,6 +9,8 @@
 namespace App\Controller;
 
 
+use App\Entity\Group;
+use App\Repository\GroupRepository;
 use App\Repository\MediaRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,8 +30,6 @@ class TrickController extends  AbstractController
      */
     private $manager;
 
-    private $media;
-
     /**
      * TrickController constructor.
      * @param TrickRepository $repository
@@ -44,18 +44,38 @@ class TrickController extends  AbstractController
     /**
      * Affichage de la liste des figures
      * @Route("Liste-des-figures", name="trick.index")
+     * @param MediaRepository $mediaRepository
      * @return Response
      */
     public function index(MediaRepository $mediaRepository) : Response
     {
         $tricks = $this->repository->findAll();
-
         foreach ($tricks as $trick){
 
-            $this->media[] = $mediaRepository->findOneBy(['trickId'=> $trick, 'header' => 1]);
+            $media[] = $mediaRepository->findOneBy(['trickId'=> $trick, 'header' => 1]);
         }
-        dump($this->media);
-
-        return $this->render('trick/index.html.twig', ['activeMenu' => 'tricks', 'tricks' => $tricks, 'medias' => $this->media]);
+        return $this->render('trick/index.html.twig', ['activeMenu' => 'tricks', 'tricks' => $tricks, 'medias' => $media]);
     }
+
+    /**
+     * Affichage le detaille d'une figure
+     * @Route("Figures/{id}", name="trick.show")
+     * @param $id
+     * @param MediaRepository $mediaRepository
+     * @param GroupRepository $groupRepository
+     * @return Response
+     */
+    public function show($id, MediaRepository $mediaRepository, GroupRepository $groupRepository) : Response
+    {
+        $trick = $this->repository->find(['id' => $id]);
+        $media = $mediaRepository->findBy(['trickId'=> $trick]);
+    dump($groupRepository->findAll());
+
+        return $this->render('trick/show.html.twig', [
+            'activeMenu' => 'tricks',
+            'trick' => $trick,
+            'medias' => $media]);
+    }
+
+
 }

@@ -44,6 +44,16 @@ class Trick
      */
     private $media;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $creation_date;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $update_date;
+
     public function __construct()
     {
         $this->trickId = new ArrayCollection();
@@ -153,4 +163,29 @@ class Trick
 
         return $this;
     }
+
+    public function getCreationDate(): ?\DateTimeInterface
+    {
+        return $this->creation_date;
+    }
+
+    public function setCreationDate(\DateTimeInterface $creation_date): self
+    {
+        $this->creation_date = $creation_date;
+
+        return $this;
+    }
+
+    public function getUpdateDate(): ?\DateTimeInterface
+    {
+        return $this->update_date;
+    }
+
+    public function setUpdateDate(\DateTimeInterface $update_date): self
+    {
+        $this->update_date = $update_date;
+
+        return $this;
+    }
+
 }
