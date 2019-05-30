@@ -32,6 +32,11 @@ class Media
      */
     private $trickId;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $header;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -69,6 +74,18 @@ class Media
     public function setTrickId(?trick $trickId): self
     {
         $this->trickId = $trickId;
+
+        return $this;
+    }
+
+    public function getHeader(): ?bool
+    {
+        return $this->header;
+    }
+
+    public function setHeader(?bool $header): self
+    {
+        $this->header = $header;
 
         return $this;
     }

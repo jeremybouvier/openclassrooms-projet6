@@ -23,7 +23,7 @@
 <body>
 
 <!-- Navigation -->
-<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-none fixed-top" style="border-bottom: 0.5px solid slategrey; background-color: rgba(0,0,0,0.2);font-weight: bold;">
     <div class="container">
         <a class="navbar-brand" href="{{ path('trick.index') }}">Jimmy Sweat Snowboard</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,6 +40,7 @@
 </nav>
 
 <header>
+    {% block header %}
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -52,7 +53,7 @@
                 <div class="carousel-caption d-none d-md-block">
                     <h1>Partager son expérience</h1>
                     <p>This is a description for the first slide.</p>
-                    <a href="#section" ><i class="icon fa fa-arrow-down m-1" style="font-size: 40px"></i></a>
+                    <a href="#section" ><i class="icon fa fa-arrow-down m-1" style="font-size: 40px;color: white;"></i></a>
 
                 </div>
             </div>
@@ -61,7 +62,7 @@
                 <div class="carousel-caption d-none d-md-block">
                     <h1>Apprendre des meilleurs</h1>
                     <p>This is a description for the second slide.</p>
-                    <a href="#section" ><i class="icon fa fa-arrow-down m-1" style="font-size: 40px"></i></a>
+                    <a href="#section" ><i class="icon fa fa-arrow-down m-1" style="font-size: 40px;color: white;"></i></a>
                 </div>
             </div>
             <!-- Slide Three - Set the background image for this slide in the line below -->
@@ -69,7 +70,7 @@
                 <div class="carousel-caption d-none d-md-block">
                     <h1>Se lancer dans l'aventure</h1>
                     <p>This is a description for the third slide.</p>
-                    <a href="#section" ><i class="icon fa fa-arrow-down m-1" style="font-size: 40px"></i></a>
+                    <a href="#section" ><i class="icon fa fa-arrow-down m-1" style="font-size: 40px;color: white;"></i></a>
                 </div>
             </div>
         </div>
@@ -82,6 +83,7 @@
             <span class="sr-only">Next</span>
         </a>
     </div>
+    {% endblock %}
 </header>
 
 <!-- Page Content -->
