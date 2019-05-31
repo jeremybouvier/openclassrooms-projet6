@@ -69,7 +69,7 @@ class TrickController extends  AbstractController
     {
         $trick = $this->repository->find(['id' => $id]);
         $media = $mediaRepository->findBy(['trickId'=> $trick]);
-    dump($groupRepository->findAll());
+    
 
         return $this->render('trick/show.html.twig', [
             'activeMenu' => 'tricks',
