@@ -15,6 +15,18 @@
 
 {% block body%}
     <div class="container-fluid bg-light" id="section">
+        <div class="row">
+            <div class="col-2 offset-5 d-flex justify-content-center mb-3" style="border: 1px solid cornflowerblue; border-radius: 5px;">
+                <div>
+                    <a href="#"><i class="icon fa fa-pencil " ></i></a>
+                    <form method="post"  style="display:inline-block" onsubmit="return confirm('Etes vous sure de vouloir supprimer?')">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete') }}">
+                        <button type="submit" class="icon fa fa-trash-o " style="background: none;border:none; cursor: pointer"></button>
+                    </form>
+                </div>
+            </div>
+        </div>
         <div class="row .d-xs.none .d-sm-none .d-md-block mb-5 mt-2" >
             {% for media in medias %}
                 <div class="col-2">
@@ -29,14 +41,17 @@
         </div>
 
         <div class="row">
-            <div class="col-12 col-lg-6 offset-lg-3">
-
-
+            <div class="col-12 col-lg-8 offset-lg-3 ">
+                <div class="row ">
+                    <div class="col-3 text-center mr-2 ml-2" style="border-radius: 5px;border: 1px solid cornflowerblue">Group : {{ group.name }}</div>
+                    <div class="col-3 text-center mr-2 ml-2" style="border-radius: 5px;border: 1px solid cornflowerblue">Crée le : {{ trick.creationDate.date |date("d/m/y") }}</div>
+                    <div class="col-3 text-center mr-2 ml-2" style="border-radius: 5px;border: 1px solid cornflowerblue">Modifié le : {{ trick.updateDate.date |date("d/m/y") }}</div>
+                </div>
             </div>
         </div>
         <hr>
         <div class="row">
-            <div class="col-12 col-lg-8 offset-lg-2" style="background-color: grey;height: 200px;">
+            <div class="col-12 col-lg-8 offset-lg-2" style="background-color: grey;height:50px;">
                 formulaire discution
 
             </div>

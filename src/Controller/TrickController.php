@@ -10,6 +10,7 @@ namespace App\Controller;
 
 
 use App\Entity\Group;
+use App\Repository\CategoryRepository;
 use App\Repository\GroupRepository;
 use App\Repository\MediaRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -65,16 +66,17 @@ class TrickController extends  AbstractController
      * @param GroupRepository $groupRepository
      * @return Response
      */
-    public function show($id, MediaRepository $mediaRepository, GroupRepository $groupRepository) : Response
+    public function show($id, MediaRepository $mediaRepository,CategoryRepository $categoryRepository) : Response
     {
         $trick = $this->repository->find(['id' => $id]);
         $media = $mediaRepository->findBy(['trickId'=> $trick]);
-    
-
+        $group = $categoryRepository->findOneBy(['id' => $trick->getGroupId()->getId()]);
+        dump($group);
         return $this->render('trick/show.html.twig', [
             'activeMenu' => 'tricks',
             'trick' => $trick,
-            'medias' => $media]);
+            'medias' => $media,
+            'group' => $group]);
     }
 
 
