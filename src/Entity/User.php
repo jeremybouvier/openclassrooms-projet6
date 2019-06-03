@@ -44,13 +44,13 @@ class User
     private $password;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Chat", mappedBy="userId")
+     * @ORM\OneToMany(targetEntity="App\Entity\Chat", mappedBy="user")
      */
-    private $userId;
+    private $chats;
 
     public function __construct()
     {
-        $this->userId = new ArrayCollection();
+        $this->chats = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -121,28 +121,28 @@ class User
     /**
      * @return Collection|Chat[]
      */
-    public function getUserId(): Collection
+    public function getChats(): Collection
     {
-        return $this->userId;
+        return $this->chats;
     }
 
-    public function addUserId(Chat $userId): self
+    public function addChats(Chat $chats): self
     {
-        if (!$this->userId->contains($userId)) {
-            $this->userId[] = $userId;
-            $userId->setUserId($this);
+        if (!$this->chats->contains($chats)) {
+            $this->chats[] = $chats;
+            $chats->setUser($this);
         }
 
         return $this;
     }
 
-    public function removeUserId(Chat $userId): self
+    public function removeChats(Chat $chats): self
     {
-        if ($this->userId->contains($userId)) {
-            $this->userId->removeElement($userId);
+        if ($this->chats->contains($chats)) {
+            $this->chats->removeElement($chats);
             // set the owning side to null (unless already changed)
-            if ($userId->getUserId() === $this) {
-                $userId->setUserId(null);
+            if ($chats->getUser() === $this) {
+                $chats->setUser(null);
             }
         }
 

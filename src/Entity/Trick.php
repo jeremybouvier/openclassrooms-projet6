@@ -24,25 +24,25 @@ class Trick
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="text")
      */
     private $description;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Group", inversedBy="groupId")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Group", inversedBy="trick")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $groupId;
+    private $groups;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Chat", mappedBy="trickId")
+     * @ORM\OneToMany(targetEntity="App\Entity\Chat", mappedBy="trick")
      */
     private $chats;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Media", mappedBy="trickId")
+     * @ORM\OneToMany(targetEntity="App\Entity\Media", mappedBy="trick")
      */
-    private $media;
+    private $medias;
 
     /**
      * @ORM\Column(type="datetime")
@@ -56,9 +56,8 @@ class Trick
 
     public function __construct()
     {
-        $this->trickId = new ArrayCollection();
         $this->chats = new ArrayCollection();
-        $this->media = new ArrayCollection();
+        $this->medias = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -90,14 +89,14 @@ class Trick
         return $this;
     }
 
-    public function getGroupId(): ?group
+    public function getGroup(): ?group
     {
-        return $this->groupId;
+        return $this->groups;
     }
 
-    public function setGroupId(?group $groupId): self
+    public function setGroup(?group $group): self
     {
-        $this->groupId = $groupId;
+        $this->groups = $group;
 
         return $this;
     }
@@ -110,11 +109,11 @@ class Trick
         return $this->chats;
     }
 
-    public function addChat(Chat $chat): self
+    public function addChats(Chat $chat): self
     {
         if (!$this->chats->contains($chat)) {
             $this->chats[] = $chat;
-            $chat->setTrickId($this);
+            $chat->setTrick($this);
         }
 
         return $this;
@@ -125,8 +124,8 @@ class Trick
         if ($this->chats->contains($chat)) {
             $this->chats->removeElement($chat);
             // set the owning side to null (unless already changed)
-            if ($chat->getTrickId() === $this) {
-                $chat->setTrickId(null);
+            if ($chat->getTrick() === $this) {
+                $chat->setTrick(null);
             }
         }
 
@@ -136,28 +135,28 @@ class Trick
     /**
      * @return Collection|Media[]
      */
-    public function getMedia(): Collection
+    public function getMedias(): Collection
     {
-        return $this->media;
+        return $this->medias;
     }
 
-    public function addMedium(Media $medium): self
+    public function addMedias(Media $media): self
     {
-        if (!$this->media->contains($medium)) {
-            $this->media[] = $medium;
-            $medium->setTrickId($this);
+        if (!$this->medias->contains($media)) {
+            $this->medias[] = $media;
+            $media->setTrick($this);
         }
 
         return $this;
     }
 
-    public function removeMedium(Media $medium): self
+    public function removeMedias(Media $media): self
     {
-        if ($this->media->contains($medium)) {
-            $this->media->removeElement($medium);
+        if ($this->medias->contains($media)) {
+            $this->medias->removeElement($media);
             // set the owning side to null (unless already changed)
-            if ($medium->getTrickId() === $this) {
-                $medium->setTrickId(null);
+            if ($media->getTrick() === $this) {
+                $media->setTrick(null);
             }
         }
 
