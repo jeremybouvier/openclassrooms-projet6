@@ -19,7 +19,7 @@ class Chat
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $chatText;
+    private $message;
 
     /**
      * @ORM\Column(type="datetime")
@@ -43,14 +43,14 @@ class Chat
         return $this->id;
     }
 
-    public function getChatText(): ?string
+    public function getMessage(): ?string
     {
-        return $this->chatText;
+        return $this->message;
     }
 
-    public function setChatText(string $chatText): self
+    public function setMessage(string $message): self
     {
-        $this->chatText = $chatText;
+        $this->message = $message;
 
         return $this;
     }

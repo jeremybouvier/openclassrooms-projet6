@@ -52,12 +52,8 @@ class TrickController extends  AbstractController
     public function index(MediaRepository $mediaRepository) : Response
     {
         $tricks = $this->trickRepository->findAll();
+        $medias = $mediaRepository->findBy(['trick'=> $tricks, 'header' => 1]);
 
-        foreach ($tricks as $trick){
-        $medias[] = $trick->getMedias()->get('collection');
-
-        }
-        dump($medias);
         return $this->render('trick/index.html.twig', ['activeMenu' => 'tricks', 'tricks' => $tricks, 'medias' => $medias]);
     }
 
