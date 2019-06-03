@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\GroupRepository")
+ * @ORM\Table(name="group")
  */
 class Group
 {
@@ -24,13 +25,14 @@ class Group
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Trick", mappedBy="groupId")
+     * @ORM\OneToMany(targetEntity="App\Entity\Trick", mappedBy="groups")
      */
-    private $groupId;
+    private $trick;
+
 
     public function __construct()
     {
-        $this->groupId = new ArrayCollection();
+        $this->trick = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -53,28 +55,28 @@ class Group
     /**
      * @return Collection|Trick[]
      */
-    public function getGroupId(): Collection
+    public function getTrick(): Collection
     {
-        return $this->groupId;
+        return $this->trick;
     }
 
-    public function addGroupId(Trick $groupId): self
+    public function addTrick(Trick $trick): self
     {
-        if (!$this->groupId->contains($groupId)) {
-            $this->groupId[] = $groupId;
-            $groupId->setGroupId($this);
+        if (!$this->trick->contains($trick)) {
+            $this->trick[] = $trick;
+            $trick->setGroup($this);
         }
 
         return $this;
     }
 
-    public function removeGroupId(Trick $groupId): self
+    public function removeTrick(Trick $trick): self
     {
-        if ($this->groupId->contains($groupId)) {
-            $this->groupId->removeElement($groupId);
+        if ($this->trick->contains($trick)) {
+            $this->trick->removeElement($trick);
             // set the owning side to null (unless already changed)
-            if ($groupId->getGroupId() === $this) {
-                $groupId->setGroupId(null);
+            if ($trick->getGroup() === $this) {
+                $trick->setGroup(null);
             }
         }
 

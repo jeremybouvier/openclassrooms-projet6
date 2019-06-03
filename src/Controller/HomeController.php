@@ -21,7 +21,7 @@ class HomeController extends AbstractController
      */
     Public function index() : Response
     {
-        return $this->redirectToRoute('trick.index',[],301);
+        return $this->redirectToRoute('trick.index');
     }
 
 }
