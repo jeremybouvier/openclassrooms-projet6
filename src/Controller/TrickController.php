@@ -9,37 +9,39 @@
 namespace App\Controller;
 
 
-use App\Entity\Group;
-use App\Repository\CategoryRepository;
-use App\Repository\GroupRepository;
-use App\Repository\MediaRepository;
+
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\HttpFoundation\Response;
+use App\Entity\Trick;
+use App\Repository\MediaRepository;
 use App\Repository\TrickRepository;
 use Doctrine\Common\Persistence\ObjectManager;
+
 
 class TrickController extends  AbstractController
 {
     /**
      * @var
      */
-    private $repository;
+    private $trickRepository;
 
     /**
      * @var
      */
-    private $manager;
+    private $objectManager;
 
     /**
      * TrickController constructor.
-     * @param TrickRepository $repository
-     * @param ObjectManager $manager
+     * @param TrickRepository $trickRepository
+     * @param ObjectManager $objectManager
      */
-    public function __construct(TrickRepository $repository, ObjectManager $manager)
+    public function __construct(TrickRepository $trickRepository, ObjectManager $objectManager)
     {
-        $this->repository = $repository;
-        $this->manager = $manager;
+        $this->trickRepository = $trickRepository;
+        $this->objectManager = $objectManager;
     }
 
     /**
@@ -50,33 +52,28 @@ class TrickController extends  AbstractController
      */
     public function index(MediaRepository $mediaRepository) : Response
     {
-        $tricks = $this->repository->findAll();
-        foreach ($tricks as $trick){
+        $tricks = $this->trickRepository->findAll();
+        $medias = $mediaRepository->findBy(['trick'=> $tricks, 'header' => 1]);
 
-            $media[] = $mediaRepository->findOneBy(['trickId'=> $trick, 'header' => 1]);
-        }
-        return $this->render('trick/index.html.twig', ['activeMenu' => 'tricks', 'tricks' => $tricks, 'medias' => $media]);
+        return $this->render('trick/index.html.twig', ['activeMenu' => 'tricks', 'tricks' => $tricks, 'medias' => $medias]);
     }
 
     /**
      * Affichage le detaille d'une figure
      * @Route("Figures/{id}", name="trick.show")
-     * @param $id
-     * @param MediaRepository $mediaRepository
-     * @param GroupRepository $groupRepository
+     * @ParamConverter("trick", class="App:Trick")
+     * @param Trick $trick
      * @return Response
      */
-    public function show($id, MediaRepository $mediaRepository,CategoryRepository $categoryRepository) : Response
+    public function show(Trick $trick) : Response
     {
-        $trick = $this->repository->find(['id' => $id]);
-        $media = $mediaRepository->findBy(['trickId'=> $trick]);
-        $group = $categoryRepository->findOneBy(['id' => $trick->getGroupId()->getId()]);
-        dump($group);
+        $media = $trick->getMedias();
+        $group = $trick->getGroup();
         return $this->render('trick/show.html.twig', [
             'activeMenu' => 'tricks',
             'trick' => $trick,
             'medias' => $media,
-            'group' => $group]);
+            'group'=> $group]);
     }
 
 
