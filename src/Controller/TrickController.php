@@ -9,8 +9,6 @@
 namespace App\Controller;
 
 
-
-
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -69,12 +67,12 @@ class TrickController extends  AbstractController
     {
         $media = $trick->getMedias();
         $group = $trick->getGroup();
+
         return $this->render('trick/show.html.twig', [
             'activeMenu' => 'tricks',
             'trick' => $trick,
             'medias' => $media,
             'group'=> $group]);
     }
-
 
 }

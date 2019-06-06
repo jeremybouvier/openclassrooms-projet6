@@ -9,29 +9,40 @@
         {% for media in medias %}
             {% if media.header == 1 %}<img src="{{ media.path }}" alt="Media de la figure{{ trick.name }}" class="img-fluid"/>{% endif %}
         {% endfor %}
-        <h1 id="title" class="col-12 text-center">{{ trick.name }}</h1>
+        <div id="titleArea" class="col-6 offset-3">
+            <h1 id="title" class="col-12 text-center p-0 mb-0 font-weight-bold">{{ trick.name | upper}}</h1>
+            <div class="row justify-content-center">
+                <div class="col-12 d-flex justify-content-center mb-3" style="font-size: 1.2em;">
+                    <div>
+                        <a href="#"><i class="icon fa fa-pencil " ></i></a>
+                        <form method="post"  style="display:inline-block" onsubmit="return confirm('Etes vous sure de vouloir supprimer?')">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete') }}">
+                            <button type="submit" class="icon fa fa-trash-o " style="background: none;border:none; cursor: pointer"></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 {% endblock %}
 
 {% block body%}
     <div class="container-fluid bg-light" id="section">
-        <div class="row">
-            <div class="col-12 d-flex justify-content-end mb-3" style="border-bottom: 2px solid rgba(100,149,237,0.2)">
-                <div>
-                    <a href="#"><i class="icon fa fa-pencil " ></i></a>
-                    <form method="post"  style="display:inline-block" onsubmit="return confirm('Etes vous sure de vouloir supprimer?')">
-                        <input type="hidden" name="_method" value="DELETE">
-                        <input type="hidden" name="_token" value="{{ csrf_token('delete') }}">
-                        <button type="submit" class="icon fa fa-trash-o " style="background: none;border:none; cursor: pointer"></button>
-                    </form>
-                </div>
-            </div>
-        </div>
 
-        {% include 'trick/_picturesGalery.html.twig' %}
+            <span id="view"></span>
 
-        {% include 'trick/_videoGalery.html.twig' %}
-        </div>
+            {% include 'trick/_picturesGalery.html.twig' %}
+
+            {% set showPlayer = 0  %}
+            {% for media in medias %}
+                {% if media.type == 'video' and showPlayer != 1 %}<script>initPath = '{{ media.path }}';</script>{% set showPlayer = 1 %}{% endif %}
+            {% endfor %}
+            {% if showPlayer == 1 %}
+                {% include 'trick/_videoGalery.html.twig' %}
+            {% endif %}
+
         <div class="row">
             <div class="col-12 col-lg-10 offset-lg-1">
                 <p>{{ trick.description |nl2br}}</p>
@@ -41,9 +52,9 @@
         <div class="row">
             <div class="col-12 col-lg-8 offset-lg-3 ">
                 <div class="row ">
-                    <div class="col-3 text-center mr-2 ml-2" style="border-radius: 5px;border: 1px solid cornflowerblue">Group : {{ group.name }}</div>
-                    <div class="col-3 text-center mr-2 ml-2" style="border-radius: 5px;border: 1px solid cornflowerblue">Crée le : {{ trick.creationDate.date |date("d/m/y") }}</div>
-                    <div class="col-3 text-center mr-2 ml-2" style="border-radius: 5px;border: 1px solid cornflowerblue">Modifié le : {{ trick.updateDate.date |date("d/m/y") }}</div>
+                    <div class="col-3 text-center mr-2 ml-2 btn btn-outline-info">Group : {{ group.name }}</div>
+                    <div class="col-3 text-center mr-2 ml-2 btn btn-outline-info">Crée le : {{ trick.creationDate.date |date("d/m/y") }}</div>
+                    <div class="col-3 text-center mr-2 ml-2 btn btn-outline-info">Modifié le : {{ trick.updateDate.date |date("d/m/y") }}</div>
                 </div>
             </div>
         </div>
@@ -63,3 +74,16 @@
         </div>
     </div>
 {% endblock %}
+
+{% block javascripts %}
+    <script>
+        window.onload = function () {
+            document.getElementById('player').src = initPath;
+        }
+
+        function setPath(path){
+            document.getElementById('player').src = path;
+        }
+    </script>
+{% endblock %}
+
