@@ -9,20 +9,9 @@
         {% for media in medias %}
             {% if media.header == 1 %}<img src="{{ media.path }}" alt="Media de la figure{{ trick.name }}" class="img-fluid"/>{% endif %}
         {% endfor %}
-        <div id="titleArea" class="col-6 offset-3">
+        <div id="titleArea" class="col-6 offset-3 ">
             <h1 id="title" class="col-12 text-center p-0 mb-0 font-weight-bold">{{ trick.name | upper}}</h1>
-            <div class="row justify-content-center">
-                <div class="col-12 d-flex justify-content-center mb-3" style="font-size: 1.2em;">
-                    <div>
-                        <a href="#"><i class="icon fa fa-pencil " ></i></a>
-                        <form method="post"  style="display:inline-block" onsubmit="return confirm('Etes vous sure de vouloir supprimer?')">
-                            <input type="hidden" name="_method" value="DELETE">
-                            <input type="hidden" name="_token" value="{{ csrf_token('delete') }}">
-                            <button type="submit" class="icon fa fa-trash-o " style="background: none;border:none; cursor: pointer"></button>
-                        </form>
-                    </div>
-                </div>
-            </div>
+            <div class="col-12 d-flex justify-content-center"><a href="#section" class="text-center"><i class="icon fa fa-arrow-down m-1" style="font-size: 40px;color: white;"></i></a></div>
         </div>
 
     </div>
@@ -30,9 +19,23 @@
 
 {% block body%}
     <div class="container-fluid bg-light" id="section">
-
-            <span id="view"></span>
-
+        <div class="row justify-content-center">
+            <div class="col-12 d-flex justify-content-center mb-3" style="font-size: 1.2em;background-color: rgba(70,80,90,0.2)">
+                <div>
+                    <a href="#"><i class="icon fa fa-pencil " ></i></a>
+                    <form method="post"  style="display:inline-block" onsubmit="return confirm('Etes vous sure de vouloir supprimer?')">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete') }}">
+                        <button type="submit" class="icon fa fa-trash-o " style="background: none;border:none; cursor: pointer"></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <span id="view"></span>
+        <div class="col-12 d-flex justify-content-center d-block d-sm-none mb-2" style="bottom: 15vw;">
+            <a href="#galery" class="btn btn-outline-info" onclick="showGalery()"> Voir la Galery</a>
+        </div>
+        <div id="galery">
             {% include 'trick/_picturesGalery.html.twig' %}
 
             {% set showPlayer = 0  %}
@@ -42,6 +45,7 @@
             {% if showPlayer == 1 %}
                 {% include 'trick/_videoGalery.html.twig' %}
             {% endif %}
+        </div>
 
         <div class="row">
             <div class="col-12 col-lg-10 offset-lg-1">
@@ -49,12 +53,12 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="container">
             <div class="col-12 col-lg-8 offset-lg-3 ">
                 <div class="row ">
-                    <div class="col-3 text-center mr-2 ml-2 btn btn-outline-info">Group : {{ group.name }}</div>
-                    <div class="col-3 text-center mr-2 ml-2 btn btn-outline-info">Crée le : {{ trick.creationDate.date |date("d/m/y") }}</div>
-                    <div class="col-3 text-center mr-2 ml-2 btn btn-outline-info">Modifié le : {{ trick.updateDate.date |date("d/m/y") }}</div>
+                    <div class="col-12 col-lg-3 text-center m-2 btn btn-outline-info">Group : {{ group.name }}</div>
+                    <div class="col-12 col-lg-3 text-center m-2 btn btn-outline-info">Crée le : {{ trick.creationDate.date |date("d/m/y") }}</div>
+                    <div class="col-12 col-lg-3 text-center m-2 btn btn-outline-info">Modifié le : {{ trick.updateDate.date |date("d/m/y") }}</div>
                 </div>
             </div>
         </div>
@@ -81,9 +85,19 @@
             document.getElementById('player').src = initPath;
         }
 
+        if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+            document.getElementById('galery').style.display = "none";
+        }
+
         function setPath(path){
             document.getElementById('player').src = path;
         }
+
+        function showGalery(){
+            document.getElementById('galery').style.display = "block";
+        }
+
+
     </script>
 {% endblock %}
 

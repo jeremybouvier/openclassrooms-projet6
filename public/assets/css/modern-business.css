@@ -49,10 +49,22 @@ a{
 
 }
 .header #title{
-    font-size: 5vw;
+    font-size: 7vw;
+}
+.header #titleAreaMobile{
+    position: relative;
+    bottom: 65vw;
+    color: white;
+}
+.header #titleMobile{
+    font-size: 8vw;
 }
 
 .shadow{
     border: 1px solid grey;
     box-shadow: 2px 2px 6px grey;
+}
+
+#galery{
+    display: block;
 }

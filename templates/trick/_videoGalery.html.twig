@@ -10,7 +10,7 @@
             {% for media in medias %}
                 {% if media.type == 'video' %}
                     {% set i = i+1 %}
-                    <div class="col-2"><a href="#view" class="btn btn-outline-info" onclick="setPath('{{ media.path }}')">video {{ i }}</a></div>
+                    <div class="col-12 col-lg-2"><a href="#view" class="btn btn-outline-info col-12 mb-2" onclick="setPath('{{ media.path }}')">video {{ i }}</a></div>
                 {% endif %}
             {% endfor %}
         </div>
