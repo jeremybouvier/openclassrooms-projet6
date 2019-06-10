@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -40,6 +42,16 @@ class User
      * @ORM\Column(type="string", length=255)
      */
     private $password;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Chat", mappedBy="user")
+     */
+    private $chats;
+
+    public function __construct()
+    {
+        $this->chats = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -102,6 +114,37 @@ class User
     public function setPassword(string $password): self
     {
         $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Chat[]
+     */
+    public function getChats(): Collection
+    {
+        return $this->chats;
+    }
+
+    public function addChats(Chat $chats): self
+    {
+        if (!$this->chats->contains($chats)) {
+            $this->chats[] = $chats;
+            $chats->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeChats(Chat $chats): self
+    {
+        if ($this->chats->contains($chats)) {
+            $this->chats->removeElement($chats);
+            // set the owning side to null (unless already changed)
+            if ($chats->getUser() === $this) {
+                $chats->setUser(null);
+            }
+        }
 
         return $this;
     }

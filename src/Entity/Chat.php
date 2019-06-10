@@ -19,7 +19,7 @@ class Chat
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $chat_text;
+    private $message;
 
     /**
      * @ORM\Column(type="datetime")
@@ -27,13 +27,13 @@ class Chat
     private $date;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\user")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="chats")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\trick")
+     * @ORM\ManyToOne(targetEntity="App\Entity\trick", inversedBy="chats")
      * @ORM\JoinColumn(nullable=false)
      */
     private $trick;
@@ -43,14 +43,14 @@ class Chat
         return $this->id;
     }
 
-    public function getChatText(): ?string
+    public function getMessage(): ?string
     {
-        return $this->chat_text;
+        return $this->message;
     }
 
-    public function setChatText(string $chat_text): self
+    public function setMessage(string $message): self
     {
-        $this->chat_text = $chat_text;
+        $this->message = $message;
 
         return $this;
     }
