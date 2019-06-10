@@ -1,0 +1,28 @@
+{{ form_start(form) }}
+
+<div class="col-12 col-lg-10 offset-lg-1">
+    <div class="row">
+        <div class="col-12 form-group" >{{ form_row(form.name) }}</div>
+        <div class="col-12 form-group">{{ form_row(form.description, {'attr':{'rows': 15}})}}</div>
+        <div class="col-12 form-group">{{ form_row(form.groups) }}</div>
+        <button class="btn btn-outline-info col-12 col-lg-3" onclick="showPhotoSelect()">Gestion des photo</button>
+    </div>
+</div>
+<div id="photoSelect" style="display: none;">
+    <hr/>
+    <div class="col-12 mb-3">
+        {% include 'trick/_picturesGalery.html.twig' %}
+    </div>
+    <div class="col-12" onchange="loadFile(event)">{{ form_row(form.file) }}</div>
+    <div class="col-12"><img class="col-12 col-lg-2" src="#" alt=" " id="imgFile"></div>
+    <hr/>
+</div>
+
+
+{{ form_widget(form) }}
+
+<div class="col-12 d-flex mb-5 justify-content-center">
+    <button class="btn btn-sm btn-outline-secondary col-6">{{ button }}</button>
+</div>
+
+{{ form_end(form) }}

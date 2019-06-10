@@ -126,7 +126,7 @@ class User
         return $this->chats;
     }
 
-    public function addChats(Chat $chats): self
+    public function addChat(Chat $chats): self
     {
         if (!$this->chats->contains($chats)) {
             $this->chats[] = $chats;
@@ -136,7 +136,7 @@ class User
         return $this;
     }
 
-    public function removeChats(Chat $chats): self
+    public function removeChat(Chat $chats): self
     {
         if ($this->chats->contains($chats)) {
             $this->chats->removeElement($chats);

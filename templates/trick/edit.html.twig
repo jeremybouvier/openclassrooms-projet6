@@ -1,0 +1,49 @@
+{%  extends 'base.html.twig' %}
+
+{% block title %}
+    Modification de la figure {{ trick.name }}
+{% endblock %}
+
+{% block header %}
+    <div class="container-fluid header p-0">
+        {% for media in medias %}
+            {% if media.header == 1 %}<img src="{{ media.path }}" alt="Media de la figure{{ trick.name }}" class="img-fluid"/>{% endif %}
+        {% endfor %}
+        <div id="titleArea" class="col-6 offset-3 ">
+            <h1 id="title" class="col-12 text-center p-0 mb-0 font-weight-bold">{{ trick.name }}</h1>
+            <div class="col-12 d-flex justify-content-center"><a href="#section" class="text-center"><i class="icon fa fa-arrow-down m-1" style="font-size: 40px;color: white;"></i></a></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block body%}
+    <div class="container-fluid bg-light" id="section">
+        <div class="row justify-content-center">
+           <div class="col-12  mb-5">
+               <h1 >Modification de la figure {{ trick.name }}</h1>
+               <hr class="mb-2"/>
+           </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                {{ include ('trick/_formTrick.html.twig' , {form: form, button: 'Ajouter'}) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        function showPhotoSelect() {
+            document.getElementById('photoSelect').style.display = "block";
+        }
+
+        function loadFile(event) {
+            var output = document.getElementById('imgFile');
+            output.src = URL.createObjectURL(event.target.files[0]);
+        }
+    </script>
+{% endblock %}
+
+

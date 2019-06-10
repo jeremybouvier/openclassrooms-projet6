@@ -5,6 +5,9 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TrickRepository")
@@ -20,6 +23,7 @@ class Trick
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(max = 20, maxMessage = "Le nom ne doit pas excéder 20 charatères")
      */
     private $name;
 
@@ -40,7 +44,7 @@ class Trick
     private $chats;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Media", mappedBy="trick")
+     * @ORM\OneToMany(targetEntity="App\Entity\Media", mappedBy="trick",cascade="persist")
      */
     private $medias;
 
@@ -53,6 +57,11 @@ class Trick
      * @ORM\Column(type="datetime")
      */
     private $update_date;
+
+    /**
+     * @Assert\File(maxSize="5000000",mimeTypes = {"image/jpeg", "image/png"})
+     */
+    private $file;
 
     public function __construct()
     {
@@ -89,16 +98,32 @@ class Trick
         return $this;
     }
 
-    public function getGroup(): ?group
+    public function getGroups(): ?group
     {
         return $this->groups;
     }
 
-    public function setGroup(?group $group): self
+    public function setGroups(?group $groups): self
     {
-        $this->groups = $group;
+        $this->groups = $groups;
 
         return $this;
+    }
+
+    /**
+     * @return UploadedFile
+     */
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    /**
+     * @param UploadedFile|null $file
+     */
+    public function setFile(UploadedFile $file = null)
+    {
+        $this->file = $file;
     }
 
     /**
@@ -109,7 +134,7 @@ class Trick
         return $this->chats;
     }
 
-    public function addChats(Chat $chat): self
+    public function addChat(Chat $chat): self
     {
         if (!$this->chats->contains($chat)) {
             $this->chats[] = $chat;
@@ -140,7 +165,7 @@ class Trick
         return $this->medias;
     }
 
-    public function addMedias(Media $media): self
+    public function addMedia(Media $media): self
     {
         if (!$this->medias->contains($media)) {
             $this->medias[] = $media;
@@ -150,7 +175,7 @@ class Trick
         return $this;
     }
 
-    public function removeMedias(Media $media): self
+    public function removeMedia(Media $media): self
     {
         if ($this->medias->contains($media)) {
             $this->medias->removeElement($media);

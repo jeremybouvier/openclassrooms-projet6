@@ -1,10 +1,10 @@
 <div class="row .d-xs.none .d-sm-none .d-md-block mb-5 mt-2 justify-content-center" >
-    {% for media in medias %}
+    {% for media in trick.medias %}
         {% if media.type == 'picture' %}
-            <div class="col-12 col-lg-2">
+            <div class="col-12 col-lg-2 p-0 m-2 shadow d-flex align-items-center" style="overflow:hidden;">
                 <a href="#" data-toggle="modal" data-target="#displayPicture{{ media.id }}">
 
-                    <img src="{{ media.path}}" alt="Media de la figure {{ trick.name }}" class="img-fluid mb-2 shadow" />
+                    <img src="{{ media.path}}" alt="Media de la figure {{ trick.name }}" class="img-fluid mb-2" />
                 </a>
             </div>
         {% endif %}
@@ -12,12 +12,14 @@
             <div class="modal-dialog" role="document" style="min-width: 90vw;">
                 <div class="modal-content">
                     <div class="modal-body">
-                        <div class="">
+                        <div>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <img src="{{ media.path}}" alt="Media de la figure {{ trick.name }}" class="img-fluid mb-2" style="border: 1px solid grey; box-shadow: 2px 2px 6px grey"/>
+                        <div class="col-12 d-flex justify-content-center">
+                            <img src="{{ media.path}}" alt="Media de la figure {{ trick.name }}" class="img-fluid mb-2" style="border: 1px solid grey; box-shadow: 2px 2px 6px grey"/>
+                        </div>
                     </div>
                 </div>
             </div>
