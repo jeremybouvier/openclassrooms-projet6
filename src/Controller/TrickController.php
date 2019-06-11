@@ -10,6 +10,7 @@ namespace App\Controller;
 
 
 use App\Entity\Trick;
+use App\Repository\ChatRepository;
 use App\Repository\TrickRepository;
 use App\Repository\MediaRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -56,13 +57,15 @@ class TrickController extends  AbstractController
 
     /**
      * Affichage le detail d'une figure
-     * @Route("Figures/{id}", name="trick.show")
+     * @Route("Figures/{id}/{page}", name="trick.show")
      * @param Trick $trick
      * @return Response
      */
-    public function show(Trick $trick) : Response
+    public function show(Trick $trick, $page, ChatRepository $chatRepository) : Response
     {
-        return $this->render('trick/show.html.twig', ['activeMenu' => 'tricks', 'trick' => $trick]);
+       $chats = $chatRepository->findBy(['trick' => $trick], ['date' => 'DESC'], 10, ($page-1)*10);
+       $pages = ceil($chatRepository->count(['trick' => $trick])/10);
+        return $this->render('trick/show.html.twig', ['activeMenu' => 'tricks', 'trick' => $trick, 'chats'=>$chats, 'pages' => $pages]);
     }
 
 }
