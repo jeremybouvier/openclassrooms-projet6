@@ -9,13 +9,15 @@
 namespace App\Controller;
 
 
-use App\Entity\Trick;
-use App\Repository\TrickRepository;
+
+use App\Entity\Group;
+use App\Entity\Media;
+use App\Repository\CategoryRepository;
+use App\Repository\GroupRepository;
 use App\Repository\MediaRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Common\Persistence\ObjectManager;
 
 
@@ -47,11 +49,13 @@ class TrickController extends  AbstractController
      * @Route("Liste-des-figures", name="trick.index")
      * @return Response
      */
-    public function index() : Response
+    public function index(MediaRepository $mediaRepository) : Response
     {
         $tricks = $this->trickRepository->findAll();
+        $medias = $mediaRepository->findBy(['trick'=> $tricks, 'header' => 1]);
 
-        return $this->render('trick/index.html.twig', ['activeMenu' => 'tricks', 'tricks' => $tricks]);
+        return $this->render('trick/index.html.twig', ['activeMenu' => 'tricks', 'tricks' => $tricks, 'medias' => $medias]);
+
     }
 
     /**
@@ -60,9 +64,17 @@ class TrickController extends  AbstractController
      * @param Trick $trick
      * @return Response
      */
-    public function show(Trick $trick) : Response
+
+    public function show($id, MediaRepository $mediaRepository, GroupRepository $groupRepository) : Response
     {
-        return $this->render('trick/show.html.twig', ['activeMenu' => 'tricks', 'trick' => $trick]);
+        $trick = $this->trickRepository->find(['id' => $id]);
+        $media = $mediaRepository->findBy(['trickId'=> $trick]);
+        //$group = $groupRepository->findOneBy(['id' => $trick->getGroupId()->getId()]);
+        return $this->render('trick/show.html.twig', [
+            'activeMenu' => 'tricks',
+            'trick' => $trick,
+            'medias' => $media]);
+
     }
 
 }
