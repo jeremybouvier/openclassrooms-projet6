@@ -126,7 +126,11 @@ class User
         return $this->chats;
     }
 
+<<<<<<< HEAD
     public function addChat(Chat $chats): self
+=======
+    public function addChats(Chat $chats): self
+>>>>>>> a8eda677f29c4ea275ca8c28a4711d6ba96277a8
     {
         if (!$this->chats->contains($chats)) {
             $this->chats[] = $chats;
@@ -136,7 +140,11 @@ class User
         return $this;
     }
 
+<<<<<<< HEAD
     public function removeChat(Chat $chats): self
+=======
+    public function removeChats(Chat $chats): self
+>>>>>>> a8eda677f29c4ea275ca8c28a4711d6ba96277a8
     {
         if ($this->chats->contains($chats)) {
             $this->chats->removeElement($chats);
