@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ChatRepository")
@@ -18,6 +19,8 @@ class Chat
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(max = 255, maxMessage = "Le message ne doit pas excéder 255 charatères")
+     * @Assert\NotBlank
      */
     private $message;
 
@@ -27,7 +30,7 @@ class Chat
     private $date;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="chats")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="chats",cascade="persist")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
@@ -35,8 +38,14 @@ class Chat
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\trick", inversedBy="chats")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotBlank
      */
     private $trick;
+
+    public function __construct()
+    {
+        $this->date = new \DateTime();
+    }
 
     public function getId(): ?int
     {

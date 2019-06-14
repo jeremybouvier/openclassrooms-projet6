@@ -49,7 +49,7 @@
 
         <div class="row">
             <div class="col-12 col-lg-10 offset-lg-1">
-                <p>{{ trick.description |nl2br}}</p>
+                <p class="text-justify">{{ trick.description |nl2br}}</p>
             </div>
         </div>
 
@@ -64,16 +64,26 @@
         </div>
         <hr>
         <div class="row">
-            <div class="col-12 col-lg-8 offset-lg-2" style="background-color: grey;height:50px;">
-                formulaire discution
+            <div class="col-12 col-lg-8 offset-lg-2">
+               {% include 'trick/_formChat.html.twig' %}
 
             </div>
         </div>
         <hr>
         <div class="row">
-            <div class="col-12 col-lg-8 offset-lg-2 mb-5" style="background-color: grey;height: 200px;">
-                discutions
-
+            <div class="col-12 col-lg-8 offset-lg-2 mb-2" id="chat">
+                {% for chat in chats %}
+                    <div class="col-12 mb-1" style="background-color: #ecf1f2;border-radius: 0 30px 0 30px;">
+                        <p class="col-12" style="color:#17a2b8;"> {{ chat.user.surname |capitalize}}  {{ chat.user.firstname |capitalize}} (le {{ chat.date.date | date("d/m/y")}})</p>
+                        <p class="col-10 offset-1 text-justify">{{ chat.message }}</p>
+                    </div>
+                {% endfor %}
+                <div class="col-12 col-lg-8 offset-lg-2 mb-5 text-center" style="color:#17a2b8">
+                    Pages :
+                    {% for i in 1..pages %}
+                        <a href="{{ path('trick.show', {id: trick.id, page: i})}}#chat" style="color:#17a2b8" class="col-1 p-1"> {{ i }} </a>
+                    {% endfor %}
+                </div>
             </div>
         </div>
     </div>

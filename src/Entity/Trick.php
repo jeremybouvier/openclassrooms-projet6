@@ -39,7 +39,7 @@ class Trick
     private $groups;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Chat", mappedBy="trick")
+     * @ORM\OneToMany(targetEntity="App\Entity\Chat", mappedBy="trick",cascade="persist")
      */
     private $chats;
 
