@@ -44,11 +44,7 @@ class Trick
     private $chats;
 
     /**
-<<<<<<< HEAD
      * @ORM\OneToMany(targetEntity="App\Entity\Media", mappedBy="trick",cascade="persist")
-=======
-     * @ORM\OneToMany(targetEntity="App\Entity\Media", mappedBy="trick")
->>>>>>> a8eda677f29c4ea275ca8c28a4711d6ba96277a8
      */
     private $medias;
 
@@ -102,24 +98,14 @@ class Trick
         return $this;
     }
 
-<<<<<<< HEAD
     public function getGroups(): ?group
-=======
-    public function getGroup(): ?group
->>>>>>> a8eda677f29c4ea275ca8c28a4711d6ba96277a8
     {
         return $this->groups;
     }
 
-<<<<<<< HEAD
     public function setGroups(?group $groups): self
     {
         $this->groups = $groups;
-=======
-    public function setGroup(?group $group): self
-    {
-        $this->groups = $group;
->>>>>>> a8eda677f29c4ea275ca8c28a4711d6ba96277a8
 
         return $this;
     }
@@ -148,7 +134,7 @@ class Trick
         return $this->chats;
     }
 
-    public function addChats(Chat $chat): self
+    public function addChat(Chat $chat): self
     {
         if (!$this->chats->contains($chat)) {
             $this->chats[] = $chat;
@@ -179,11 +165,7 @@ class Trick
         return $this->medias;
     }
 
-<<<<<<< HEAD
     public function addMedia(Media $media): self
-=======
-    public function addMedias(Media $media): self
->>>>>>> a8eda677f29c4ea275ca8c28a4711d6ba96277a8
     {
         if (!$this->medias->contains($media)) {
             $this->medias[] = $media;
@@ -193,11 +175,7 @@ class Trick
         return $this;
     }
 
-<<<<<<< HEAD
     public function removeMedia(Media $media): self
-=======
-    public function removeMedias(Media $media): self
->>>>>>> a8eda677f29c4ea275ca8c28a4711d6ba96277a8
     {
         if ($this->medias->contains($media)) {
             $this->medias->removeElement($media);

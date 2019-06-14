@@ -27,11 +27,7 @@ class Media
     private $type;
 
     /**
-<<<<<<< HEAD
      * @ORM\ManyToOne(targetEntity="App\Entity\trick", inversedBy="medias",cascade="persist")
-=======
-     * @ORM\ManyToOne(targetEntity="App\Entity\trick", inversedBy="medias")
->>>>>>> a8eda677f29c4ea275ca8c28a4711d6ba96277a8
      * @ORM\JoinColumn(nullable=false)
      */
     private $trick;
