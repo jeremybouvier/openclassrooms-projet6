@@ -48,7 +48,6 @@ class TrickController extends  AbstractController
     /**
      * Affichage de la liste des figures
      * @Route("Liste-des-figures", name="trick.index")
-     * @param MediaRepository $mediaRepository
      * @return Response
      */
     public function index() : Response
