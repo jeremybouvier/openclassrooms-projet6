@@ -109,10 +109,6 @@ class TrickController extends  AbstractController
 
             foreach ($trick->getMedias() as $media){
                 foreach ($trick->getFiles() as $file){
-                    var_dump($media->getPath() );
-                    var_dump($file->getName());
-                    var_dump($media->getPath() == $file->getName());
-                    var_dump('---------------------');
                     if ($media->getPath() == $file->getName()){
                         $media->setPath('/'.$file->getPath());
                     }
