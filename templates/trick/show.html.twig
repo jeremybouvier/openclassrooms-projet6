@@ -6,8 +6,9 @@
 
 {% block header %}
     <div class="container-fluid header p-0">
+        {% set header = 'false' %}
         {% for media in trick.medias %}
-            {% if media.header == 1 %}<img src="{{ media.path }}" alt="Media de la figure{{ trick.name }}" class="img-fluid"/>{% endif %}
+            {% if media.type == 'picture' and header == 'false' %} <img src="{{ media.path }}" alt="Media de la figure{{ trick.name }}" class="img-fluid"/> {% set header = 'true' %}{% endif %}
         {% endfor %}
         <div id="titleArea" class="col-6 offset-3 ">
             <h1 id="title" class="col-12 text-center p-0 mb-0 font-weight-bold">{{ trick.name | upper}}</h1>
@@ -22,7 +23,7 @@
         <div class="row justify-content-center">
             <div class="col-12 d-flex justify-content-center mb-3" style="font-size: 1.2em;background-color: rgba(70,80,90,0.2)">
                 <div>
-                    <a href="#"><i class="icon fa fa-pencil " ></i></a>
+                    <a href="{{ path('trick.update',{id: trick.id}) }} "><i class="icon fa fa-pencil " ></i></a>
                     <form method="post"  style="display:inline-block" onsubmit="return confirm('Etes vous sure de vouloir supprimer?')">
                         <input type="hidden" name="_method" value="DELETE">
                         <input type="hidden" name="_token" value="{{ csrf_token('delete') }}">

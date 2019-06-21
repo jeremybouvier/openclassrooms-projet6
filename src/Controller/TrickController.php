@@ -12,6 +12,7 @@ namespace App\Controller;
 use App\Entity\Chat;
 use App\Entity\Trick;
 use App\Form\ChatType;
+use App\Form\TrickType;
 use App\Repository\ChatRepository;
 use App\Repository\TrickRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -90,5 +91,44 @@ class TrickController extends  AbstractController
         ]);
 
     }
+
+    /**
+     * @Route("/Edition-Figure/{id}", name="trick.update", methods="GET|POST")
+     * @param Trick $trick
+     * @param Request $request
+     * @return Response
+     */
+    public function update(Trick $trick, Request $request) : Response
+    {
+        $form = $this->createForm(TrickType::class, $trick)->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()){
+
+            $trick->upload();
+
+
+            foreach ($trick->getMedias() as $media){
+                foreach ($trick->getFiles() as $file){
+                    var_dump($media->getPath() );
+                    var_dump($file->getName());
+                    var_dump($media->getPath() == $file->getName());
+                    var_dump('---------------------');
+                    if ($media->getPath() == $file->getName()){
+                        $media->setPath('/'.$file->getPath());
+                    }
+                }
+            }
+            die();
+            $this->objectManager->flush();
+            $this->addFlash('success', 'La figure a bien été modifié');
+            return $this->redirectToRoute('trick.show',['id' => $trick->getId(),'page'=> 1]);
+        }
+
+        return $this->render('trick/edit.html.twig', [
+            'active_menu' => 'trick.index','trick' => $trick,
+            'form' => $form->createView()
+        ]);
+    }
+
 
 }

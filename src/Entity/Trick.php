@@ -39,12 +39,14 @@ class Trick
     private $groups;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Chat", mappedBy="trick",cascade="persist")
+     * @var Collection
+     * @ORM\OneToMany(targetEntity="App\Entity\Chat", mappedBy="trick",cascade={"persist"}, orphanRemoval=true)
      */
     private $chats;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Media", mappedBy="trick",cascade="persist")
+     * @var Collection
+     * @ORM\OneToMany(targetEntity="App\Entity\Media", mappedBy="trick",cascade={"persist"}, orphanRemoval=true)
      */
     private $medias;
 
@@ -59,14 +61,23 @@ class Trick
     private $update_date;
 
     /**
-     * @Assert\File(maxSize="5000000",mimeTypes = {"image/jpeg", "image/png"})
+     * @var File
+     *
+     * @ORM\OneToMany(targetEntity="File", mappedBy="trick", cascade={"persist"})
+     *
      */
-    private $file;
+    private $files;
+
+    /**
+     * @var ArrayCollection
+     */
+    private $uploadedFiles;
 
     public function __construct()
     {
         $this->chats = new ArrayCollection();
         $this->medias = new ArrayCollection();
+        $this->uploadedFiles = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -110,20 +121,64 @@ class Trick
         return $this;
     }
 
-    /**
-     * @return UploadedFile
-     */
-    public function getFile()
+    public function getUploadedFiles()
     {
-        return $this->file;
+        return $this->uploadedFiles;
     }
 
-    /**
-     * @param UploadedFile|null $file
-     */
-    public function setFile(UploadedFile $file = null)
+    public function setUploadedFiles($uploadedFiles)
     {
-        $this->file = $file;
+        $this->uploadedFiles = $uploadedFiles;
+    }
+
+    public function getFiles()
+    {
+        return $this->files;
+    }
+
+    public function addFile(File $file): self
+    {
+        if (!$this->files->contains($file)) {
+            $this->files[] = $file;
+            $file->setTrick($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFile(File $file): self
+    {
+        if ($this->files->contains($file)) {
+            $this->files->removeElement($file);
+            // set the owning side to null (unless already changed)
+            if ($file->getTrick() === $this) {
+                $file->setTrick(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function upload()
+    {
+        if (null === $this->getFiles()) {
+            return;
+        }
+
+        foreach($this->uploadedFiles as $uploadedFile)
+        {
+            $file = new File();
+            $path = 'assets/image/' . md5(uniqid()).'.'.$uploadedFile->guessExtension();
+            $file->setPath($path);
+            $file->setSize($uploadedFile->getClientSize());
+            $file->setName($uploadedFile->getClientOriginalName());
+            $uploadedFile->move('assets/image/', $path);
+
+            $this->addFile($file);
+            $file->setTrick($this);
+
+            unset($uploadedFile);
+        }
     }
 
     /**

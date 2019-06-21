@@ -22,8 +22,9 @@
                     {% for  trick in tricks %}
                         <div class="col-12  col-lg-3">
                             <div class="card mb-4 shadow-sm">
+                                {% set header = 'false' %}
                                 {% for media in trick.medias %}
-                                    {% if media.header == 1 %}<img src="{{ media.path }}" alt=" image trick : {{ trick.name }}" class="img-fluid"/>{% endif %}
+                                    {% if media.type == 'picture' and header == 'false' %} <img src="{{ media.path }}" alt="Media de la figure{{ trick.name }}" class="img-fluid"/> {% set header = 'true' %}{% endif %}
                                 {% endfor %}
                                 <div class="card-body d-flex justify-content-between">
                                     <a href="{{ path('trick.show', {id: trick.id, page: 1})}}" style="font-weight: bold;color: black;">{{ trick.name }}</a>

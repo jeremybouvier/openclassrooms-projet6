@@ -27,15 +27,11 @@ class Media
     private $type;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\trick", inversedBy="medias",cascade="persist")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="App\Entity\Trick", inversedBy="medias")
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $trick;
 
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
-    private $header;
 
     public function getId(): ?int
     {
@@ -78,15 +74,4 @@ class Media
         return $this;
     }
 
-    public function getHeader(): ?bool
-    {
-        return $this->header;
-    }
-
-    public function setHeader(?bool $header): self
-    {
-        $this->header = $header;
-
-        return $this;
-    }
 }
