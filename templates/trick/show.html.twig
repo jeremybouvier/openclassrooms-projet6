@@ -7,8 +7,8 @@
 {% block header %}
     <div class="container-fluid header p-0">
         {% set header = 'false' %}
-        {% for media in trick.medias %}
-            {% if media.type == 'picture' and header == 'false' %} <img src="{{ media.path }}" alt="Media de la figure{{ trick.name }}" class="img-fluid"/> {% set header = 'true' %}{% endif %}
+        {% for picture in trick.pictures %}
+            {% if header == 'false' %} <img src="{{ picture.path }}" alt="Media de la figure{{ trick.name }}" class="img-fluid"/> {% set header = 'true' %}{% endif %}
         {% endfor %}
         <div id="titleArea" class="col-6 offset-3 ">
             <h1 id="title" class="col-12 text-center p-0 mb-0 font-weight-bold">{{ trick.name | upper}}</h1>

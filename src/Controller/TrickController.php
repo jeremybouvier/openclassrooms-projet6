@@ -104,17 +104,6 @@ class TrickController extends  AbstractController
 
         if ($form->isSubmitted() && $form->isValid()){
 
-            $trick->upload();
-
-
-            foreach ($trick->getMedias() as $media){
-                foreach ($trick->getFiles() as $file){
-                    if ($media->getPath() == $file->getName()){
-                        $media->setPath('/'.$file->getPath());
-                    }
-                }
-            }
-            die();
             $this->objectManager->flush();
             $this->addFlash('success', 'La figure a bien été modifié');
             return $this->redirectToRoute('trick.show',['id' => $trick->getId(),'page'=> 1]);

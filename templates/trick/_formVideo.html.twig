@@ -1,0 +1,11 @@
+<div class="card m-2 shadow-sm" id="video-{{form.vars.name}}">
+    <div class="card-header">
+        <div class="col-12 ">Video {{form.vars.name}}</div>
+    </div>
+    <div class="card-body">
+        <div class="col-12">{{ form_row(form.path) }}</div>
+    </div>
+    <div class="card-footer">
+        <button type="button" class="btn btn-sm btn-outline-danger btn-remove m-2" data-rel="#video-{{form.vars.name}}">Supprimer</button>
+    </div>
+</div>

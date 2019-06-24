@@ -7,18 +7,15 @@
     <div class="col-12 col-lg-8 mb-4">
         <div class="row justify-content-center">
             {% set i = 0 %}
-            {% for media in trick.medias %}
-                {% if media.type == 'video' %}
-                    {% set i = i+1 %}
-                    {% if i > 0 and i < 2 %}
-                        <script>
-                            initPath = '{{ media.path }}';
-                            video = 1;
-                        </script>
-                    {% endif %}
-                    <div class="col-12 col-lg-2"><a href="#view" class="btn btn-outline-info col-12 mb-2" onclick="setPath('{{ media.path }}')">video {{ i }}</a></div>
+            {% for video in trick.videos %}
+                {% set i = i+1 %}
+                {% if i > 0 and i < 2 %}
+                    <script>
+                        initPath = '{{ video.path }}';
+                        video = 1;
+                    </script>
                 {% endif %}
-
+                <div class="col-12 col-lg-2"><a href="#view" class="btn btn-outline-info col-12 mb-2" onclick="setPath('{{ video.path }}')">video {{ i }}</a></div>
             {% endfor %}
         </div>
     </div>

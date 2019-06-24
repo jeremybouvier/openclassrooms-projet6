@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\File;
+
 use App\Entity\Group;
 use App\Entity\Trick;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -23,16 +23,11 @@ class TrickType extends AbstractType
             ->add('name',TextType::class)
             ->add('description', TextareaType::class)
             ->add('groups', EntityType::class, ['class' => Group::class, 'choice_label' => 'name'])
-            ->add('uploadedFiles', FileType::class,[
-                'multiple'=>true,
-                'label'=> "ajouter un fichier",
-                'data_class'=> null,
-                'required'=>false,
-                'attr'=>['class'=>'fileSelect']])
+
         ;
         $builder
-            ->add('medias', CollectionType::class, [
-                "entry_type" => MediaType::class,
+            ->add('videos', CollectionType::class, [
+                "entry_type" =>VideoType::class,
                 "allow_add" => true,
                 "allow_delete" =>true,
                 "by_reference" => false

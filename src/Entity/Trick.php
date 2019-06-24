@@ -45,12 +45,6 @@ class Trick
     private $chats;
 
     /**
-     * @var Collection
-     * @ORM\OneToMany(targetEntity="App\Entity\Media", mappedBy="trick",cascade={"persist"}, orphanRemoval=true)
-     */
-    private $medias;
-
-    /**
      * @ORM\Column(type="datetime")
      */
     private $creation_date;
@@ -61,23 +55,27 @@ class Trick
     private $update_date;
 
     /**
-     * @var File
-     *
-     * @ORM\OneToMany(targetEntity="File", mappedBy="trick", cascade={"persist"})
-     *
-     */
-    private $files;
-
-    /**
      * @var ArrayCollection
      */
     private $uploadedFiles;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Video", mappedBy="tricks", cascade={"persist"}, orphanRemoval=true)
+     */
+    private $videos;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Picture", mappedBy="Tricks", orphanRemoval=true)
+     */
+    private $pictures;
+
     public function __construct()
     {
         $this->chats = new ArrayCollection();
-        $this->medias = new ArrayCollection();
         $this->uploadedFiles = new ArrayCollection();
+        $this->videos = new ArrayCollection();
+        $this->images = new ArrayCollection();
+        $this->pictures = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -121,65 +119,6 @@ class Trick
         return $this;
     }
 
-    public function getUploadedFiles()
-    {
-        return $this->uploadedFiles;
-    }
-
-    public function setUploadedFiles($uploadedFiles)
-    {
-        $this->uploadedFiles = $uploadedFiles;
-    }
-
-    public function getFiles()
-    {
-        return $this->files;
-    }
-
-    public function addFile(File $file): self
-    {
-        if (!$this->files->contains($file)) {
-            $this->files[] = $file;
-            $file->setTrick($this);
-        }
-
-        return $this;
-    }
-
-    public function removeFile(File $file): self
-    {
-        if ($this->files->contains($file)) {
-            $this->files->removeElement($file);
-            // set the owning side to null (unless already changed)
-            if ($file->getTrick() === $this) {
-                $file->setTrick(null);
-            }
-        }
-
-        return $this;
-    }
-
-    public function upload()
-    {
-        if (null === $this->getFiles()) {
-            return;
-        }
-
-        foreach($this->uploadedFiles as $uploadedFile)
-        {
-            $file = new File();
-            $path = 'assets/image/' . md5(uniqid()).'.'.$uploadedFile->guessExtension();
-            $file->setPath($path);
-            $file->setSize($uploadedFile->getClientSize());
-            $file->setName($uploadedFile->getClientOriginalName());
-            $uploadedFile->move('assets/image/', $path);
-
-            $this->addFile($file);
-            $file->setTrick($this);
-
-            unset($uploadedFile);
-        }
-    }
 
     /**
      * @return Collection|Chat[]
@@ -212,37 +151,6 @@ class Trick
         return $this;
     }
 
-    /**
-     * @return Collection|Media[]
-     */
-    public function getMedias(): Collection
-    {
-        return $this->medias;
-    }
-
-    public function addMedia(Media $media): self
-    {
-        if (!$this->medias->contains($media)) {
-            $this->medias[] = $media;
-            $media->setTrick($this);
-        }
-
-        return $this;
-    }
-
-    public function removeMedia(Media $media): self
-    {
-        if ($this->medias->contains($media)) {
-            $this->medias->removeElement($media);
-            // set the owning side to null (unless already changed)
-            if ($media->getTrick() === $this) {
-                $media->setTrick(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function getCreationDate(): ?\DateTimeInterface
     {
         return $this->creation_date;
@@ -263,6 +171,99 @@ class Trick
     public function setUpdateDate(\DateTimeInterface $update_date): self
     {
         $this->update_date = $update_date;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Video[]
+     */
+    public function getVideos(): Collection
+    {
+        return $this->videos;
+    }
+
+    public function addVideo(Video $video): self
+    {
+        if (!$this->videos->contains($video)) {
+            $this->videos[] = $video;
+            $video->setTricks($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVideo(Video $video): self
+    {
+        if ($this->videos->contains($video)) {
+            $this->videos->removeElement($video);
+            // set the owning side to null (unless already changed)
+            if ($video->getTricks() === $this) {
+                $video->setTricks(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Image[]
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    public function addImage(Image $image): self
+    {
+        if (!$this->images->contains($image)) {
+            $this->images[] = $image;
+            $image->setTricks($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImage(Image $image): self
+    {
+        if ($this->images->contains($image)) {
+            $this->images->removeElement($image);
+            // set the owning side to null (unless already changed)
+            if ($image->getTricks() === $this) {
+                $image->setTricks(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Picture[]
+     */
+    public function getPictures(): Collection
+    {
+        return $this->pictures;
+    }
+
+    public function addPicture(Picture $picture): self
+    {
+        if (!$this->pictures->contains($picture)) {
+            $this->pictures[] = $picture;
+            $picture->setTricks($this);
+        }
+
+        return $this;
+    }
+
+    public function removePicture(Picture $picture): self
+    {
+        if ($this->pictures->contains($picture)) {
+            $this->pictures->removeElement($picture);
+            // set the owning side to null (unless already changed)
+            if ($picture->getTricks() === $this) {
+                $picture->setTricks(null);
+            }
+        }
 
         return $this;
     }

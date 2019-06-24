@@ -7,8 +7,8 @@
 {% block header %}
     <div class="container-fluid header p-0">
         {% set header = 'false' %}
-        {% for media in trick.medias %}
-            {% if media.type == 'picture' and header == 'false' %} <img src="{{ media.path }}" alt="Media de la figure{{ trick.name }}" class="img-fluid"/> {% set header = 'true' %}{% endif %}
+        {% for picture in trick.pictures %}
+            {% if header == 'false' %} <img src="{{ picture.path }}" alt="Media de la figure{{ trick.name }}" class="img-fluid"/> {% set header = 'true' %}{% endif %}
         {% endfor %}
         <div id="titleArea" class="col-6 offset-3 ">
             <h1 id="title" class="col-12 text-center p-0 mb-0 font-weight-bold">{{ trick.name }}</h1>
@@ -28,7 +28,7 @@
 
         <div class="row">
             <div class="col-12">
-                {{ include ('trick/_formTrick.html.twig' , {form: form, button: 'Ajouter'}) }}
+                {{ include ('trick/_formTrick.html.twig' , {form: form, button: 'Enregistrer les modifications'}) }}
             </div>
         </div>
     </div>
@@ -37,33 +37,16 @@
 {% block javascripts %}
     <script>
 
-       function addItemCollection(urlItems, fileName) {
-            var $collectionHolder = $("#medias");
+        $("body").on("click", ".btn-add", function() {
+            var $collectionHolder = $($(this).data("rel"));
             var index = $collectionHolder.data("index");
             var prototype = $collectionHolder.data("prototype");
-            prototype = prototype.replace(/class="form-control"/g, 'class="form-control" value="'+ fileName +'"');
-            prototype = prototype.replace(/name="trick\[medias]\[__name__]\[type]"/g, 'name="trick[medias][__name__][type]" value="picture"');
-            prototype = prototype.replace(/img src=""/g, 'img src="'+ urlItems +'"');
             $collectionHolder.append(prototype.replace(/__name__/g, index));
             $collectionHolder.data("index", index+1);
-        }
-
-        $("body").on("click", ".btn-remove", function() {
-           $($(this).data("rel")).remove();
         });
 
-        $(".fileSelect").change( function() {
-            files = this.files,
-            filesLen = files.length;
-
-            for (var i = 0; i < filesLen; i++) {
-                var reader = new FileReader();
-                fileName = $(this).val().split('\\').pop();
-                reader.onload = function(e) {
-                    addItemCollection(e.target.result, fileName);
-                }
-                reader.readAsDataURL(files[i]);
-            }
+        $("body").on("click", ".btn-remove", function() {
+            $($(this).data("rel")).remove();
         });
 
 
