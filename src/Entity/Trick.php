@@ -55,17 +55,12 @@ class Trick
     private $update_date;
 
     /**
-     * @var ArrayCollection
-     */
-    private $uploadedFiles;
-
-    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Video", mappedBy="tricks", cascade={"persist"}, orphanRemoval=true)
      */
     private $videos;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Picture", mappedBy="Tricks", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Picture", mappedBy="Tricks", cascade={"persist"}, orphanRemoval=true)
      */
     private $pictures;
 
@@ -207,37 +202,6 @@ class Trick
     }
 
     /**
-     * @return Collection|Image[]
-     */
-    public function getImages(): Collection
-    {
-        return $this->images;
-    }
-
-    public function addImage(Image $image): self
-    {
-        if (!$this->images->contains($image)) {
-            $this->images[] = $image;
-            $image->setTricks($this);
-        }
-
-        return $this;
-    }
-
-    public function removeImage(Image $image): self
-    {
-        if ($this->images->contains($image)) {
-            $this->images->removeElement($image);
-            // set the owning side to null (unless already changed)
-            if ($image->getTricks() === $this) {
-                $image->setTricks(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
      * @return Collection|Picture[]
      */
     public function getPictures(): Collection
@@ -248,6 +212,7 @@ class Trick
     public function addPicture(Picture $picture): self
     {
         if (!$this->pictures->contains($picture)) {
+            $picture->upload();
             $this->pictures[] = $picture;
             $picture->setTricks($this);
         }
@@ -258,6 +223,7 @@ class Trick
     public function removePicture(Picture $picture): self
     {
         if ($this->pictures->contains($picture)) {
+            $picture->deleteFile();
             $this->pictures->removeElement($picture);
             // set the owning side to null (unless already changed)
             if ($picture->getTricks() === $this) {

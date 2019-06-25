@@ -37,7 +37,7 @@
 {% block javascripts %}
     <script>
 
-        $("body").on("click", ".btn-add", function() {
+        $("body").on("click", ".btn-add-video", function() {
             var $collectionHolder = $($(this).data("rel"));
             var index = $collectionHolder.data("index");
             var prototype = $collectionHolder.data("prototype");
@@ -45,7 +45,19 @@
             $collectionHolder.data("index", index+1);
         });
 
-        $("body").on("click", ".btn-remove", function() {
+        $("body").on("click", ".btn-remove-video", function() {
+            $($(this).data("rel")).remove();
+        });
+
+        $("body").on("click", ".btn-add-picture", function() {
+            var $collectionHolder = $($(this).data("rel"));
+            var index = $collectionHolder.data("index");
+            var prototype = $collectionHolder.data("prototype");
+            $collectionHolder.append(prototype.replace(/__name__/g, index));
+            $collectionHolder.data("index", index+1);
+        });
+
+        $("body").on("click", ".btn-remove-picture", function() {
             $($(this).data("rel")).remove();
         });
 
