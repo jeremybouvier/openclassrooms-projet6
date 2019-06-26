@@ -61,7 +61,21 @@
             $($(this).data("rel")).remove();
         });
 
+        $("body").on("change",".custom-file-input", function () {
+           readURL(this, 'images-' + $(this).attr('id').match(/\d+/g).join(''));
 
+        });
+
+        function readURL(input, images) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    $('div[id='+ images +'] img').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
     </script>
 
 {% endblock %}
