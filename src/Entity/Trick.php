@@ -60,6 +60,15 @@ class Trick
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Picture", mappedBy="Tricks", cascade={"persist"}, orphanRemoval=true)
+     * @Assert\Collection(
+     *     fields = {
+     *         "file" = @Assert\File(
+     *              maxSize="6M",
+     *              mimeTypes={"image/*"})
+     *     },
+     *     allowMissingFields = true,
+     *     allowExtraFields = true)
+     *
      */
     private $pictures;
 
