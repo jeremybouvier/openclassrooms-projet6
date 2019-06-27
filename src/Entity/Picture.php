@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -27,9 +25,10 @@ class Picture
 
     /**
      * @Assert\File(
-     *      maxSize="6000000",
-     *      mimeTypes="image/*",
-     *      mimeTypesMessage ="Merci de selectionner un fichier image valide")
+     *     maxSize="1M",
+     *     mimeTypes="image/*",
+     *     mimeTypesMessage = "merci de choisir un fichier image valide"
+     * )
      */
     private $file;
 
@@ -109,5 +108,14 @@ class Picture
 
     private function picturesDirectory(){
         return 'assets/image/';
+    }
+
+    public function deleteFile()
+    {
+
+        if ($this->getPath() !== '/'){
+            unlink(substr($this->getPath(),1));
+        }
+
     }
 }
