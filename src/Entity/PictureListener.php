@@ -23,6 +23,10 @@ class PictureListener
     }
     public function prePersist(LifecycleEventArgs $eventArgs)
     {
+        if (!$eventArgs->getObject() instanceof Picture){
+           return;
+        }
+
         if (null == $eventArgs->getObject()->getFile()){
             return;
         }

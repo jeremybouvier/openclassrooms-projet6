@@ -103,10 +103,35 @@ class TrickController extends  AbstractController
         $form = $this->createForm(TrickType::class, $trick)->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()){
-
+            $trick->setUpdateDate(new \DateTime());
             $this->objectManager->flush();
             $this->addFlash('success', 'La figure a bien été modifié');
             return $this->redirectToRoute('trick.show',['id' => $trick->getId(),'page'=> 1]);
+        }
+
+        return $this->render('trick/edit.html.twig', [
+            'active_menu' => 'trick.index','trick' => $trick,
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/Ajout-Figure/", name="trick.new", methods="GET|POST")
+     * @param Request $request
+     * @return Response
+     */
+    public function new( Request $request) : Response
+    {
+        $trick = new Trick();
+        $form = $this->createForm(TrickType::class, $trick)->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()){
+            $trick->setCreationDate(new \DateTime());
+            $trick->setUpdateDate(new \DateTime());
+            $this->objectManager->persist($trick);
+            $this->objectManager->flush();
+            $this->addFlash('success', 'La figure a bien été ajouté');
+            return $this->redirectToRoute('trick.index');
         }
 
         return $this->render('trick/edit.html.twig', [

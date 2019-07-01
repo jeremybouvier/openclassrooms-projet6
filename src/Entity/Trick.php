@@ -152,6 +152,7 @@ class Trick
 
     public function setCreationDate(\DateTimeInterface $creation_date): self
     {
+
         $this->creation_date = $creation_date;
 
         return $this;
