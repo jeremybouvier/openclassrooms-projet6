@@ -5,10 +5,13 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use phpDocumentor\Reflection\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PictureRepository")
+ *
  */
 class Picture
 {
@@ -34,12 +37,8 @@ class Picture
      * @ORM\ManyToOne(targetEntity="App\Entity\Trick", inversedBy="pictures")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $Tricks;
+    private $trick;
 
-    public function __construct()
-    {
-       $this->upload();
-    }
 
     public function getId(): ?int
     {
@@ -58,62 +57,27 @@ class Picture
         return $this;
     }
 
-    public function getTricks(): ?Trick
+    public function getTrick(): ?Trick
     {
-        return $this->Tricks;
+        return $this->trick;
     }
 
-    public function setTricks(?Trick $Tricks): self
+    public function setTrick(?Trick $trick): self
     {
-        $this->Tricks = $Tricks;
+        $this->trick = $trick;
 
         return $this;
     }
 
-    /**
-     * Gestion du fichier Telechargé
-     */
     public function getFile()
     {
         return $this->file;
     }
 
-    public function setFile(UploadedFile $file): self
+    public function setFile($file): self
     {
         $this->file = $file;
 
         return $this;
-    }
-
-
-    public function upload()
-    {
-        if (null == $this->getFile()){
-            return;
-        }
-
-        $fileName = $this->generateUniqueFileName().'.'.$this->file->getClientOriginalExtension();
-
-        if ($this->file->move($this->picturesDirectory(), $fileName)){
-            $this->path = '/' . $this->picturesDirectory() . $fileName;
-        }
-    }
-
-    private function generateUniqueFileName()
-    {
-        return md5(uniqid());
-    }
-
-    private function picturesDirectory(){
-        return 'assets/image/';
-    }
-
-    public function deleteFile()
-    {
-
-        if ($this->getPath() !== '/'){
-            unlink(substr($this->getPath(),1));
-        }
-
     }
 }

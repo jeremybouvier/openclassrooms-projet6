@@ -54,30 +54,21 @@ class Trick
     private $update_date;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Video", mappedBy="tricks", cascade={"persist"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Video", mappedBy="trick", cascade={"persist"}, orphanRemoval=true)
+     * @Assert\Valid
      */
     private $videos;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Picture", mappedBy="Tricks", cascade={"persist"}, orphanRemoval=true)
-     * @Assert\Collection(
-     *     fields = {
-     *         "file" = @Assert\File(
-     *              maxSize="6M",
-     *              mimeTypes={"image/*"})
-     *     },
-     *     allowMissingFields = true,
-     *     allowExtraFields = true)
-     *
+     * @ORM\OneToMany(targetEntity="App\Entity\Picture", mappedBy="trick", cascade={"persist"}, orphanRemoval=true)
+     * @Assert\Valid
      */
     private $pictures;
 
     public function __construct()
     {
         $this->chats = new ArrayCollection();
-        $this->uploadedFiles = new ArrayCollection();
         $this->videos = new ArrayCollection();
-        $this->images = new ArrayCollection();
         $this->pictures = new ArrayCollection();
     }
 
@@ -190,7 +181,7 @@ class Trick
     {
         if (!$this->videos->contains($video)) {
             $this->videos[] = $video;
-            $video->setTricks($this);
+            $video->setTrick($this);
         }
 
         return $this;
@@ -201,8 +192,8 @@ class Trick
         if ($this->videos->contains($video)) {
             $this->videos->removeElement($video);
             // set the owning side to null (unless already changed)
-            if ($video->getTricks() === $this) {
-                $video->setTricks(null);
+            if ($video->getTrick() === $this) {
+                $video->setTrick(null);
             }
         }
 
@@ -220,9 +211,8 @@ class Trick
     public function addPicture(Picture $picture): self
     {
         if (!$this->pictures->contains($picture)) {
-            $picture->upload();
             $this->pictures[] = $picture;
-            $picture->setTricks($this);
+            $picture->setTrick($this);
         }
 
         return $this;
@@ -231,11 +221,10 @@ class Trick
     public function removePicture(Picture $picture): self
     {
         if ($this->pictures->contains($picture)) {
-            $picture->deleteFile();
             $this->pictures->removeElement($picture);
-            // set the owning side to null (unless already changed)
-            if ($picture->getTricks() === $this) {
-                $picture->setTricks(null);
+
+            if ($picture->getTrick() === $this) {
+                $picture->setTrick(null);
             }
         }
 
