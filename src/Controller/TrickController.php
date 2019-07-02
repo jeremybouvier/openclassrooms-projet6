@@ -97,6 +97,7 @@ class TrickController extends  AbstractController
      * @param Trick $trick
      * @param Request $request
      * @return Response
+     * @throws \Exception
      */
     public function update(Trick $trick, Request $request) : Response
     {
@@ -119,6 +120,7 @@ class TrickController extends  AbstractController
      * @Route("/Ajout-Figure/", name="trick.new", methods="GET|POST")
      * @param Request $request
      * @return Response
+     * @throws \Exception
      */
     public function new( Request $request) : Response
     {

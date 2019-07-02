@@ -29,7 +29,7 @@ class Picture
     private $path;
 
     /**
-     *
+     * @Assert\Image
      */
     private $file;
 
