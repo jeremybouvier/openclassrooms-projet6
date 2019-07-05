@@ -1,0 +1,15 @@
+<div class="col-12 col-lg-4 mb-3">
+    <div class=" card p-0 shadow-sm" id="images-{{form.vars.name}}">
+        <div class="vignettePhoto">
+            <img src="{{ form.path.vars.data }}" alt="Selectionner un Fichier image" class="img-fluid">
+        </div>
+
+        <div class="card-footer">
+            <div class="col-12 p-0"> {{ form_errors(form.file) }}</div>
+            <div class="col-12 p-0" {% if  form.path.vars.data != null %}style="display:none;"{% endif %}>{{ form_row(form.file) }}</div>
+
+            {{ form_row(form.path) }}
+            <button type="button" class="btn btn-sm btn-outline-danger btn-remove-picture" data-rel="#images-{{form.vars.name}}">Supprimer</button>
+        </div>
+    </div>
+</div>

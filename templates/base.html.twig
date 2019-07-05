@@ -16,15 +16,18 @@
     <!-- Custom styles for this template -->
     <link href="{{ asset('assets/css/modern-business.css') }}" rel="stylesheet"/>
     <link rel="stylesheet" href="{{ asset('assets/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rock Salt">
 
-</head>
+
+
+        </head>
 
 <body>
 
 <!-- Navigation -->
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-none fixed-top" style="border-bottom: 1px solid slategrey; background-color: rgba(75,75,75,0.5);font-weight: bold;">
     <div class="container">
-        <a class="navbar-brand" href="{{ path('trick.index') }}">Jimmy Sweat Snowboard</a>
+        <a class="navbar-brand" href="{{ path('trick.index') }}" >Jimmy Sweat Snowboard</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -51,26 +54,26 @@
                     <!-- Slide One - Set the background image for this slide in the line below -->
                     <div class="carousel-item active" style="background-image: url({{ asset('assets/image/trick1.jpg') }})">
                         <div class="carousel-caption d-none d-md-block">
-                            <h1>Partager son expérience</h1>
-                            <p>This is a description for the first slide.</p>
-                            <a href="#section" ><i class="icon fa fa-arrow-down m-1" style="font-size: 40px;color: white;"></i></a>
+                            <h1 class="text-shadow">Partager son expérience</h1>
+                            <h2 class="text-shadow">Décrit Tes Meilleures Figures</h2>
+                            <a href="#section" ><i class="icon fa fa-arrow-down m-1 text-shadow" style="font-size: 40px;color: white;"></i></a>
 
                         </div>
                     </div>
                     <!-- Slide Two - Set the background image for this slide in the line below -->
                     <div class="carousel-item" style="background-image: url({{ asset('assets/image/trick2.jpeg') }})">
                         <div class="carousel-caption d-none d-md-block">
-                            <h1>Apprendre des meilleurs</h1>
-                            <p>This is a description for the second slide.</p>
-                            <a href="#section" ><i class="icon fa fa-arrow-down m-1" style="font-size: 40px;color: white;"></i></a>
+                            <h1 class="text-shadow">Apprendre des meilleurs</h1>
+                            <h2 class="text-shadow">Consulte Les Fiches Des Figures Et Entraine Toi !</h2>
+                            <a href="#section" ><i class="icon fa fa-arrow-down m-1 text-shadow" style="font-size: 40px;color: white;"></i></a>
                         </div>
                     </div>
                     <!-- Slide Three - Set the background image for this slide in the line below -->
                     <div class="carousel-item" style="background-image: url({{ asset('assets/image/trick3.jpg') }})">
                         <div class="carousel-caption d-none d-md-block">
-                            <h1>Se lancer dans l'aventure</h1>
-                            <p>This is a description for the third slide.</p>
-                            <a href="#section" ><i class="icon fa fa-arrow-down m-1" style="font-size: 40px;color: white;"></i></a>
+                            <h1 class="text-shadow">Se lancer dans l'aventure</h1>
+                            <h2 class="text-shadow">Rejoind Nous et Participe à Notre Projet  </h2>
+                            <a href="#section" ><i class="icon fa fa-arrow-down m-1 text-shadow" style="font-size: 40px;color: white;"></i></a>
                         </div>
                     </div>
                 </div>
@@ -121,7 +124,10 @@
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-{% block javascripts %}{% endblock %}
+
+{% block javascripts %}
+
+{% endblock %}
 </body>
 
 </html>

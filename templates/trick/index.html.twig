@@ -9,7 +9,7 @@
             <div class="bg-light ">
                 <div class="row">
                     <div class="col-12 col-md-8"><h1 class="p-2">Les figures</h1></div>
-                    <div class=" col-12 col-md-4 d-flex align-items-center justify-content-end "><a href="#" type="button" class="btn btn-sm btn-outline-secondary mr-3">Ajouter une figure</a></div>
+                    <div class=" col-12 col-md-4 d-flex align-items-center justify-content-end "><a href="{{ path('trick.new')}}" type="button" class="btn btn-sm btn-outline-secondary mr-3">Ajouter une figure</a></div>
                 </div>
 
                 <hr>
@@ -22,11 +22,15 @@
                     {% for  trick in tricks %}
                         <div class="col-12  col-lg-3">
                             <div class="card mb-4 shadow-sm">
-                                {% for media in trick.medias %}
-                                    {% if media.header == 1 %}<img src="{{ media.path }}" alt=" image trick : {{ trick.name }}" class="img-fluid"/>{% endif %}
-                                {% endfor %}
+                                <div class="vignettePhoto">
+                                    {% set header = 'false' %}
+                                    {% for picture in trick.pictures %}
+                                        {% if header == 'false' %} <img src="{{ picture.path }}" alt="Media de la figure{{ trick.name }}" class="img-fluid"/> {% set header = 'true' %}{% endif %}
+                                    {% endfor %}
+                                </div>
+
                                 <div class="card-body d-flex justify-content-between">
-                                    <a href="{{ path('trick.show', {id: trick.id, page: 1})}}" style="font-weight: bold;color: black;">{{ trick.name }}</a>
+                                    <a href="{{ path('trick.show', {id: trick.id, page: 1})}}" style="font-family: 'Rock Salt', Arial, sans-serif;font-weight: bold;color: black;">{{ trick.name }}</a>
                                     <div>
                                         <a href="#"><i class="icon fa fa-pencil"></i></a>
                                         <form method="post"  style="display:inline-block" onsubmit="return confirm('Etes vous sure de vouloir supprimer?')">

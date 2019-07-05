@@ -1,0 +1,15 @@
+<div class="col-12 col-lg-4 mb-3">
+    <div class="card p-0 shadow-sm" id="video-{{form.vars.name}}">
+        <div class="vignettePhoto" >
+            <img src="{{ asset('assets/image/video.jpg') }}" alt="image video" class="img-fluid">
+        </div>
+
+        <div class="card-body" {% if  form.path.vars.data != null %}style="display:none;"{% endif %}>
+            <div class="col-12" >{{ form_row(form.path) }}</div>
+        </div>
+        <div class="card-footer">
+            <button type="button" class="btn btn-sm btn-outline-danger btn-remove-video m-2" data-rel="#video-{{form.vars.name}}">Supprimer</button>
+        </div>
+    </div>
+</div>
+

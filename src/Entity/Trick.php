@@ -5,7 +5,6 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
@@ -23,12 +22,14 @@ class Trick
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      * @Assert\Length(max = 20, maxMessage = "Le nom ne doit pas excéder 20 charatères")
      */
     private $name;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank
      */
     private $description;
 
@@ -39,14 +40,10 @@ class Trick
     private $groups;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Chat", mappedBy="trick",cascade="persist")
+     * @var Collection
+     * @ORM\OneToMany(targetEntity="App\Entity\Chat", mappedBy="trick",cascade={"persist"}, orphanRemoval=true)
      */
     private $chats;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Media", mappedBy="trick",cascade="persist")
-     */
-    private $medias;
 
     /**
      * @ORM\Column(type="datetime")
@@ -59,14 +56,22 @@ class Trick
     private $update_date;
 
     /**
-     * @Assert\File(maxSize="5000000",mimeTypes = {"image/jpeg", "image/png"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Video", mappedBy="trick", cascade={"persist"}, orphanRemoval=true)
+     * @Assert\Valid
      */
-    private $file;
+    private $videos;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Picture", mappedBy="trick", cascade={"persist"}, orphanRemoval=true)
+     * @Assert\Valid
+     */
+    private $pictures;
 
     public function __construct()
     {
         $this->chats = new ArrayCollection();
-        $this->medias = new ArrayCollection();
+        $this->videos = new ArrayCollection();
+        $this->pictures = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -110,21 +115,6 @@ class Trick
         return $this;
     }
 
-    /**
-     * @return UploadedFile
-     */
-    public function getFile()
-    {
-        return $this->file;
-    }
-
-    /**
-     * @param UploadedFile|null $file
-     */
-    public function setFile(UploadedFile $file = null)
-    {
-        $this->file = $file;
-    }
 
     /**
      * @return Collection|Chat[]
@@ -157,37 +147,6 @@ class Trick
         return $this;
     }
 
-    /**
-     * @return Collection|Media[]
-     */
-    public function getMedias(): Collection
-    {
-        return $this->medias;
-    }
-
-    public function addMedia(Media $media): self
-    {
-        if (!$this->medias->contains($media)) {
-            $this->medias[] = $media;
-            $media->setTrick($this);
-        }
-
-        return $this;
-    }
-
-    public function removeMedia(Media $media): self
-    {
-        if ($this->medias->contains($media)) {
-            $this->medias->removeElement($media);
-            // set the owning side to null (unless already changed)
-            if ($media->getTrick() === $this) {
-                $media->setTrick(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function getCreationDate(): ?\DateTimeInterface
     {
         return $this->creation_date;
@@ -195,6 +154,7 @@ class Trick
 
     public function setCreationDate(\DateTimeInterface $creation_date): self
     {
+
         $this->creation_date = $creation_date;
 
         return $this;
@@ -208,6 +168,68 @@ class Trick
     public function setUpdateDate(\DateTimeInterface $update_date): self
     {
         $this->update_date = $update_date;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Video[]
+     */
+    public function getVideos(): Collection
+    {
+        return $this->videos;
+    }
+
+    public function addVideo(Video $video): self
+    {
+        if (!$this->videos->contains($video)) {
+            $this->videos[] = $video;
+            $video->setTrick($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVideo(Video $video): self
+    {
+        if ($this->videos->contains($video)) {
+            $this->videos->removeElement($video);
+            // set the owning side to null (unless already changed)
+            if ($video->getTrick() === $this) {
+                $video->setTrick(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Picture[]
+     */
+    public function getPictures(): Collection
+    {
+        return $this->pictures;
+    }
+
+    public function addPicture(Picture $picture): self
+    {
+        if (!$this->pictures->contains($picture)) {
+            $this->pictures[] = $picture;
+            $picture->setTrick($this);
+        }
+
+        return $this;
+    }
+
+    public function removePicture(Picture $picture): self
+    {
+        if ($this->pictures->contains($picture)) {
+            $this->pictures->removeElement($picture);
+
+            if ($picture->getTrick() === $this) {
+                $picture->setTrick(null);
+            }
+        }
 
         return $this;
     }

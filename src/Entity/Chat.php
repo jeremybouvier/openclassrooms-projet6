@@ -38,7 +38,6 @@ class Chat
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\trick", inversedBy="chats")
      * @ORM\JoinColumn(nullable=false)
-     * @Assert\NotBlank
      */
     private $trick;
 

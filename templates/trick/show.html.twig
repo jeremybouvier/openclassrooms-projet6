@@ -6,12 +6,13 @@
 
 {% block header %}
     <div class="container-fluid header p-0">
-        {% for media in trick.medias %}
-            {% if media.header == 1 %}<img src="{{ media.path }}" alt="Media de la figure{{ trick.name }}" class="img-fluid"/>{% endif %}
+        {% set header = 'false' %}
+        {% for picture in trick.pictures %}
+            {% if header == 'false' %} <img src="{{ picture.path }}" alt="Media de la figure{{ trick.name }}" class="img-fluid"/> {% set header = 'true' %}{% endif %}
         {% endfor %}
         <div id="titleArea" class="col-6 offset-3 ">
-            <h1 id="title" class="col-12 text-center p-0 mb-0 font-weight-bold">{{ trick.name | upper}}</h1>
-            <div class="col-12 d-flex justify-content-center"><a href="#section" class="text-center"><i class="icon fa fa-arrow-down m-1" style="font-size: 40px;color: white;"></i></a></div>
+            <h1 id="title" class="col-12 text-center p-0 mb-0 font-weight-bold text-shadow" style="color: white;">{{ trick.name | upper}}</h1>
+            <div class="col-12 d-flex justify-content-center"><a href="#section" class="text-center"><i class="icon fa fa-arrow-down m-1 text-shadow" style="font-size: 40px;color: white; "></i></a></div>
         </div>
 
     </div>
@@ -22,7 +23,7 @@
         <div class="row justify-content-center">
             <div class="col-12 d-flex justify-content-center mb-3" style="font-size: 1.2em;background-color: rgba(70,80,90,0.2)">
                 <div>
-                    <a href="#"><i class="icon fa fa-pencil " ></i></a>
+                    <a href="{{ path('trick.update',{id: trick.id}) }} "><i class="icon fa fa-pencil " ></i></a>
                     <form method="post"  style="display:inline-block" onsubmit="return confirm('Etes vous sure de vouloir supprimer?')">
                         <input type="hidden" name="_method" value="DELETE">
                         <input type="hidden" name="_token" value="{{ csrf_token('delete') }}">
@@ -37,7 +38,7 @@
             </div>
         {% endfor %}
         <span id="view"></span>
-        <div class="col-12 d-flex justify-content-center d-block d-sm-none mb-2" style="bottom: 15vw;">
+        <div class="col-12 d-flex justify-content-center d-block d-sm-none mb-2" style="bottom: 30vw;">
             <a href="#gallery" class="btn btn-outline-info" onclick="showGallery()"> Voir la Galery</a>
         </div>
         <div class="container" id="gallery">
@@ -99,7 +100,7 @@
         }
 
         if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-            document.getElementById('galery').style.display = "none";
+            document.getElementById('gallery').style.display = "none";
         }
 
 

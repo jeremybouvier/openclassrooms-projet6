@@ -6,28 +6,24 @@
 
 {% block header %}
     <div class="container-fluid header p-0">
-        {% for media in medias %}
-            {% if media.header == 1 %}<img src="{{ media.path }}" alt="Media de la figure{{ trick.name }}" class="img-fluid"/>{% endif %}
-        {% endfor %}
-        <div id="titleArea" class="col-6 offset-3 ">
-            <h1 id="title" class="col-12 text-center p-0 mb-0 font-weight-bold">{{ trick.name }}</h1>
-            <div class="col-12 d-flex justify-content-center"><a href="#section" class="text-center"><i class="icon fa fa-arrow-down m-1" style="font-size: 40px;color: white;"></i></a></div>
-        </div>
+         <img src="{{ asset('/assets/image/multipleTrick.jpg') }}" alt="Media de la figure{{ trick.name }}" class="img-fluid"/>
     </div>
 {% endblock %}
 
 {% block body%}
-    <div class="container-fluid bg-light" id="section">
+        <div class="container-fluid bg-light mt-5" id="section">
+        <h1 id="title" class="col-12 text-center p-0 mb-2 font-weight-bold text-shadow" style="font-size: 5em; color: white;">{{ trick.name }}</h1>
         <div class="row justify-content-center">
-           <div class="col-12  mb-5">
+
+            <div class="col-12  mt-3 mb-5">
                <h1 >Modification de la figure {{ trick.name }}</h1>
                <hr class="mb-2"/>
-           </div>
+            </div>
         </div>
 
         <div class="row">
             <div class="col-12">
-                {{ include ('trick/_formTrick.html.twig' , {form: form, button: 'Ajouter'}) }}
+                {{ include ('trick/_formTrick.html.twig' , {form: form, button: 'Enregistrer les modifications'}) }}
             </div>
         </div>
     </div>
@@ -35,15 +31,49 @@
 
 {% block javascripts %}
     <script>
-        function showPhotoSelect() {
-            document.getElementById('photoSelect').style.display = "block";
+
+        $("body").on("click", ".btn-add-video", function() {
+            var $collectionHolder = $($(this).data("rel"));
+            var index = $collectionHolder.data("index");
+            var prototype = $collectionHolder.data("prototype");
+            $collectionHolder.append(prototype.replace(/__name__/g, index));
+            $collectionHolder.data("index", index+1);
+        });
+
+        $("body").on("click", ".btn-remove-video", function() {
+            $($(this).data("rel")).remove();
+        });
+
+        $("body").on("click", ".btn-add-picture", function() {
+            var $collectionHolder = $($(this).data("rel"));
+            var index = $collectionHolder.data("index");
+            var prototype = $collectionHolder.data("prototype");
+            $collectionHolder.append(prototype.replace(/__name__/g, index));
+            $collectionHolder.data("index", index+1);
+        });
+
+        $("body").on("click", ".btn-remove-picture", function() {
+            $($(this).data("rel")).remove();
+        });
+
+        $("body").on("change",".custom-file-input", function () {
+           readURL(this, 'images-' + $(this).attr('id').match(/\d+/g).join(''));
+
+        });
+
+        function readURL(input, images) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    $('div[id='+ images +'] img').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
         }
 
-        function loadFile(event) {
-            var output = document.getElementById('imgFile');
-            output.src = URL.createObjectURL(event.target.files[0]);
-        }
     </script>
+
 {% endblock %}
 
 
