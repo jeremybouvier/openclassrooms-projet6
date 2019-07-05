@@ -9,9 +9,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 
 
+
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PictureRepository")
- *
+ * @ORM\EntityListeners({"App\EntityListener\PictureListener"})
  */
 class Picture
 {
@@ -24,7 +25,6 @@ class Picture
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     *
      */
     private $path;
 

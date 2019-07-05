@@ -1,6 +1,30 @@
+@font-face {
+    font-family: 'dj_grossnormal';
+    src: url('../fonts/djgross/DJGROSS-webfont.eot');
+    src: url('../fonts/djgross/DJGROSS-webfont.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/djgross/DJGROSS-webfont.woff') format('woff'),
+    url('../fonts/djgross/DJGROSS-webfont.ttf') format('truetype'),
+    url('../fonts/djgross/DJGROSS-webfont.svg#dj_grossnormal') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+h1 {
+    font-family: 'dj_grossnormal', Arial, sans-serif;
+    color: dimgrey;
+}
+
+h2 {
+    font-family: 'Rock Salt', Arial, sans-serif;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
 a{
     color: black;
 }
+
 
 .carousel-item {
   height: 65vh;
@@ -14,7 +38,7 @@ a{
 }
 .carousel-caption {
   bottom : 350px;
-  background: rgba(75,75,75,0.5);
+
   border-radius: 20px;
 }
 
@@ -36,6 +60,7 @@ a{
    margin-right:5px;
    color: white;
  }
+
 .icon:hover{
     color:deepskyblue;
 }
@@ -45,7 +70,6 @@ a{
     bottom: 35vw;
     border-radius: 10px;
     color: white;
-    background: rgba(75,75,75,0.5);
 
 }
 .header #title{
@@ -65,6 +89,24 @@ a{
     box-shadow: 2px 2px 6px grey;
 }
 
-#galery{
+.text-shadow{
+
+    text-shadow: 3px 3px 8px black;
+}
+
+#gallery{
     display: block;
+}
+
+.vignettePhoto{
+    max-height: 150px;
+    overflow: hidden;
+}
+
+@media only screen and (max-width: 767px) {
+
+.vignettePhoto{
+    max-height: none;
+    overflow: hidden;
+}
 }

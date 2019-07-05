@@ -6,24 +6,19 @@
 
 {% block header %}
     <div class="container-fluid header p-0">
-        {% set header = 'false' %}
-        {% for picture in trick.pictures %}
-            {% if header == 'false' %} <img src="{{ picture.path }}" alt="Media de la figure{{ trick.name }}" class="img-fluid"/> {% set header = 'true' %}{% endif %}
-        {% endfor %}
-        <div id="titleArea" class="col-6 offset-3 ">
-            <h1 id="title" class="col-12 text-center p-0 mb-0 font-weight-bold">{{ trick.name }}</h1>
-            <div class="col-12 d-flex justify-content-center"><a href="#section" class="text-center"><i class="icon fa fa-arrow-down m-1" style="font-size: 40px;color: white;"></i></a></div>
-        </div>
+         <img src="{{ asset('/assets/image/multipleTrick.jpg') }}" alt="Media de la figure{{ trick.name }}" class="img-fluid"/>
     </div>
 {% endblock %}
 
 {% block body%}
-    <div class="container-fluid bg-light" id="section">
+        <div class="container-fluid bg-light mt-5" id="section">
+        <h1 id="title" class="col-12 text-center p-0 mb-2 font-weight-bold text-shadow" style="font-size: 5em; color: white;">{{ trick.name }}</h1>
         <div class="row justify-content-center">
-           <div class="col-12  mb-5">
+
+            <div class="col-12  mt-3 mb-5">
                <h1 >Modification de la figure {{ trick.name }}</h1>
                <hr class="mb-2"/>
-           </div>
+            </div>
         </div>
 
         <div class="row">

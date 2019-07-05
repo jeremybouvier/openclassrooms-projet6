@@ -11,8 +11,8 @@
             {% if header == 'false' %} <img src="{{ picture.path }}" alt="Media de la figure{{ trick.name }}" class="img-fluid"/> {% set header = 'true' %}{% endif %}
         {% endfor %}
         <div id="titleArea" class="col-6 offset-3 ">
-            <h1 id="title" class="col-12 text-center p-0 mb-0 font-weight-bold">{{ trick.name | upper}}</h1>
-            <div class="col-12 d-flex justify-content-center"><a href="#section" class="text-center"><i class="icon fa fa-arrow-down m-1" style="font-size: 40px;color: white;"></i></a></div>
+            <h1 id="title" class="col-12 text-center p-0 mb-0 font-weight-bold text-shadow" style="color: white;">{{ trick.name | upper}}</h1>
+            <div class="col-12 d-flex justify-content-center"><a href="#section" class="text-center"><i class="icon fa fa-arrow-down m-1 text-shadow" style="font-size: 40px;color: white; "></i></a></div>
         </div>
 
     </div>
