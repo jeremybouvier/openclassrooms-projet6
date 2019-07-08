@@ -142,5 +142,19 @@ class TrickController extends  AbstractController
         ]);
     }
 
+    /**
+     * @Route("/Supression-Figure/{id}", name="trick.delete", methods="DELETE")
+     * @param Request $request
+     * @return Response
+     * @throws \Exception
+     */
+    public function delete( Trick $trick, Request $request) : Response
+    {
+        if ($this->isCsrfTokenValid('delete', $request->get('_token'))){
+            $this->objectManager->remove($trick);
+            $this->objectManager->flush();
+        }
+        return $this->redirectToRoute('trick.index');
+    }
 
 }
