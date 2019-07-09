@@ -1,7 +1,7 @@
 {%  extends 'base.html.twig' %}
 
 {% block title %}
-    Modification de la figure {{ trick.name }}
+    {{ title.name }} {{ trick.name }}
 {% endblock %}
 
 {% block header %}
@@ -16,7 +16,7 @@
         <div class="row justify-content-center">
 
             <div class="col-12  mt-3 mb-5">
-               <h1 >Modification de la figure {{ trick.name }}</h1>
+               <h1 > {{ title.name }} {{ trick.name }}</h1>
                <hr class="mb-2"/>
             </div>
         </div>

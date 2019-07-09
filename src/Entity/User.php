@@ -5,11 +5,13 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ *
  */
-class User
+class User implements UserInterface,\Serializable
 {
     /**
      * @ORM\Id()
@@ -39,9 +41,14 @@ class User
     private $login_name;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $password;
+
+    /**
+     * @var string
+     */
+    private $plainPassword;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Chat", mappedBy="user")
@@ -118,6 +125,17 @@ class User
         return $this;
     }
 
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword($plainPassword)
+    {
+        $this->plainPassword = $plainPassword;
+        $this->password = null;
+    }
+
     /**
      * @return Collection|Chat[]
      */
@@ -147,5 +165,58 @@ class User
         }
 
         return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getRoles()
+    {
+        return ['ROLE_USER'];
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getSalt()
+    {
+        return null;
+    }
+
+    /**
+     *
+     */
+    public function eraseCredentials()
+    {
+        $this->plainPassword = null;
+    }
+
+    /**
+     * @return mixed|string
+     */
+    public function serialize()
+    {
+        return serialize([
+            $this->id,
+            $this->email,
+            $this->password
+        ]);
+    }
+
+    /**
+     * @param string $serialized
+     */
+    public function unserialize($serialized)
+    {
+       list(
+           $this->id,
+           $this->email,
+           $this->password
+           ) = unserialize($serialized, ['allowed_classes' => false]);
+    }
+
+    public function getUsername()
+    {
+        return $this->email;
     }
 }
