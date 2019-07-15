@@ -22,6 +22,7 @@ class VideoType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Video::class,
+            'translation_domain' => 'forms',
         ]);
     }
 }

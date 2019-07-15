@@ -2,3 +2,7 @@ Name: Nom
 Groups: Groupe
 Message: Votre Message
 Description: Description
+Firstname: Prénom
+Surname: Nom
+Login name: Identifiant
+Plain password: Mot de passe

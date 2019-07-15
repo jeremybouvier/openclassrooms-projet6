@@ -36,11 +36,6 @@ class User implements UserInterface,\Serializable
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $login_name;
-
-    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $password;
@@ -54,6 +49,11 @@ class User implements UserInterface,\Serializable
      * @ORM\OneToMany(targetEntity="App\Entity\Chat", mappedBy="user")
      */
     private $chats;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Avatar", mappedBy="user", cascade={"persist", "remove"})
+     */
+    private $avatar;
 
     public function __construct()
     {
@@ -97,18 +97,6 @@ class User implements UserInterface,\Serializable
     public function setEmail(string $email): self
     {
         $this->email = $email;
-
-        return $this;
-    }
-
-    public function getLoginName(): ?string
-    {
-        return $this->login_name;
-    }
-
-    public function setLoginName(string $login_name): self
-    {
-        $this->login_name = $login_name;
 
         return $this;
     }
@@ -218,5 +206,22 @@ class User implements UserInterface,\Serializable
     public function getUsername()
     {
         return $this->email;
+    }
+
+    public function getAvatar(): ?Avatar
+    {
+        return $this->avatar;
+    }
+
+    public function setAvatar(Avatar $avatar): self
+    {
+        $this->avatar = $avatar;
+
+        // set the owning side of the relation if necessary
+        if ($this !== $avatar->getUser()) {
+            $avatar->setUser($this);
+        }
+
+        return $this;
     }
 }

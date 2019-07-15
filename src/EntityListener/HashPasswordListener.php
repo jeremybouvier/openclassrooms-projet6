@@ -38,8 +38,7 @@ class HashPasswordListener implements EventSubscriber
             return;
         }
 
-        $encodedPassword = $this->passwordEncoder->encodePassword($user, $user->getPlainPassword());
-        $user->setPassword($encodedPassword);
+        $user->setPassword($this->encodedPassword($user));
     }
 
     public function preUpdate(LifecycleEventArgs $eventArgs)
@@ -53,9 +52,12 @@ class HashPasswordListener implements EventSubscriber
             return;
         }
 
-        $encodedPassword = $this->passwordEncoder->encodePassword($user, $user->getPlainPassword());
-        $user->setPassword($encodedPassword);
+        $user->setPassword($this->encodedPassword($user));
     }
 
+    private function encodedPassword($user)
+    {
+        return $this->passwordEncoder->encodePassword($user, $user->getPlainPassword());
+    }
 
 }
