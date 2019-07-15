@@ -37,3 +37,10 @@ services:
         class: App\EntityListener\HashPasswordListener
         tags:
             - { name: doctrine.event_subscriber, autowire: true}
+
+    #service d'ajout et de suppression du fichier image lors de la création ou de la modification d'un membre
+    avatar_listener:
+        class: App\EntityListener\AvatarListener
+        tags:
+            - { name: doctrine.event_listener, event: prePersist}
+            - { name: doctrine.event_listener, event: preRemove}

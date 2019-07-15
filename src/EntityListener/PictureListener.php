@@ -48,6 +48,6 @@ class PictureListener
     }
 
     private function picturesDirectory(){
-        return 'assets/image/';
+        return 'assets/image/trick/';
     }
 }
