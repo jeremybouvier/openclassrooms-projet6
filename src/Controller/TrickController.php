@@ -16,7 +16,6 @@ use App\Form\TrickType;
 use App\Repository\ChatRepository;
 use App\Repository\TrickRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,12 +25,12 @@ use Doctrine\Common\Persistence\ObjectManager;
 class TrickController extends  AbstractController
 {
     /**
-     * @var
+     * @var TrickRepository
      */
     private $trickRepository;
 
     /**
-     * @var
+     * @var ObjectManager
      */
     private $objectManager;
 
@@ -55,7 +54,9 @@ class TrickController extends  AbstractController
     {
         $tricks = $this->trickRepository->findAll();
 
-        return $this->render('trick/index.html.twig', ['activeMenu' => 'tricks', 'tricks' => $tricks]);
+        return $this->render('trick/index.html.twig', [
+            'activeMenu' => 'tricks',
+            'tricks' => $tricks]);
     }
 
     /**
@@ -74,6 +75,7 @@ class TrickController extends  AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()){
+            $chat->setUser($this->getUser());
             $trick->addChat($chat);
             $this->objectManager->flush();
             return $this->redirectToRoute('trick.show',['id' => $trick->getId(), 'page'=> 1]);
@@ -93,7 +95,8 @@ class TrickController extends  AbstractController
     }
 
     /**
-     * @Route("/Edition-Figure/{id}", name="trick.update", methods="GET|POST")
+     * Modification d'une figure
+     * @Route("/Membre/Edition-Figure/{id}", name="trick.update", methods="GET|POST")
      * @param Trick $trick
      * @param Request $request
      * @return Response
@@ -111,13 +114,16 @@ class TrickController extends  AbstractController
         }
 
         return $this->render('trick/edit.html.twig', [
-            'active_menu' => 'trick.index','trick' => $trick,
-            'form' => $form->createView()
+            'active_menu' => 'trick.index',
+            'trick' => $trick,
+            'form' => $form->createView(),
+            'title' =>['name'=>'Modification de la figure']
         ]);
     }
 
     /**
-     * @Route("/Ajout-Figure/", name="trick.new", methods="GET|POST")
+     * Ajout d'une nouvelle figure
+     * @Route("/Membre/Ajout-Figure/", name="trick.new", methods="GET|POST")
      * @param Request $request
      * @return Response
      * @throws \Exception
@@ -137,17 +143,22 @@ class TrickController extends  AbstractController
         }
 
         return $this->render('trick/edit.html.twig', [
-            'active_menu' => 'trick.index','trick' => $trick,
-            'form' => $form->createView()
+            'active_menu' => 'trick.index',
+            'trick' => $trick,
+            'form' => $form->createView(),
+            'title' => ['name'=>'Création de la figure']
         ]);
     }
 
     /**
-     * @Route("/Supression-Figure/{id}", name="trick.delete", methods="DELETE")
+     * Suppression d'une figure
+     * @Route("/Membre/Supression-Figure/{id}", name="trick.delete", methods="DELETE")
      * @param Request $request
      * @return Response
      * @throws \Exception
+     * @param Trick $trick
      */
+
     public function delete( Trick $trick, Request $request) : Response
     {
         if ($this->isCsrfTokenValid('delete', $request->get('_token'))){

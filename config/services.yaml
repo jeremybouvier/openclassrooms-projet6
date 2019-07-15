@@ -25,11 +25,15 @@ services:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
-
+    #service d'ajout et de suppression du fichier image lors de la création ou de la modification d'une figure
     picture_listener:
         class: App\EntityListener\PictureListener
         tags:
-            - { name: doctrine.event_listener, event: prePersist, lazy: true }
-            - { name: doctrine.event_listener, event: preRemove, lazy: true }
+            - { name: doctrine.event_listener, event: prePersist}
+            - { name: doctrine.event_listener, event: preRemove}
+
+    #service d'encodage du mot de passe lors de la création ou de la modification d'un utilisateur
+    HashPassword_listener:
+        class: App\EntityListener\HashPasswordListener
+        tags:
+            - { name: doctrine.event_subscriber, autowire: true}

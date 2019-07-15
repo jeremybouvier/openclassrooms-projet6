@@ -12,7 +12,7 @@
         {% endfor %}
         <div id="titleArea" class="col-6 offset-3 ">
             <h1 id="title" class="col-12 text-center p-0 mb-0 font-weight-bold text-shadow" style="color: white;">{{ trick.name | upper}}</h1>
-            <div class="col-12 d-flex justify-content-center"><a href="#section" class="text-center"><i class="icon fa fa-arrow-down m-1 text-shadow" style="font-size: 40px;color: white; "></i></a></div>
+            <div class="col-12 d-flex justify-content-center animated bounce"><a href="#section" class="text-center"><i class="icon fa fa-arrow-down m-1 text-shadow" style="font-size: 40px;color: white; "></i></a></div>
         </div>
 
     </div>
@@ -20,33 +20,45 @@
 
 {% block body%}
     <div class="container-fluid bg-light" id="section">
-        <div class="row justify-content-center">
-            <div class="col-12 d-flex justify-content-center mb-3" style="font-size: 1.2em;background-color: rgba(70,80,90,0.2)">
-                <div>
-                    <a href="{{ path('trick.update',{id: trick.id}) }} "><i class="icon fa fa-pencil " ></i></a>
-                    <form method="post"  action="{{ path('trick.delete',{id: trick.id}) }}" style="display:inline-block" onsubmit="return confirm('Etes vous sure de vouloir supprimer?')">
-                        <input type="hidden" name="_method" value="DELETE">
-                        <input type="hidden" name="_token" value="{{ csrf_token('delete') }}">
-                        <button type="submit" class="icon fa fa-trash-o " style="background: none;border:none; cursor: pointer"></button>
-                    </form>
+
+
+            <div class="row justify-content-center">
+                <div class="col-12 d-flex justify-content-center mb-3" style="font-size: 1.2em;background-color: rgba(70,80,90,0.2)">
+                    <div>
+                        {% if is_granted('ROLE_USER') %}
+                        <a href="{{ path('trick.update',{id: trick.id}) }} "><i class="icon fa fa-pencil " ></i></a>
+                        <form method="post"  action="{{ path('trick.delete',{id: trick.id}) }}" style="display:inline-block" onsubmit="return confirm('Etes vous sure de vouloir supprimer?')">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete') }}">
+                            <button type="submit" class="icon fa fa-trash-o " style="background: none;border:none; cursor: pointer"></button>
+                        </form>
+                        {% else %}
+                            <span class="text-muted">Pour modifier une figure veuillez vous connecter ou vous enregister comme membre</span>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
+
+
+        <div class="row justify-content-center">
+            {% for message in app.flashes('success') %}
+                <div class="col-12 alert alert-success text-center" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
         </div>
-        {% for message in app.flashes('success') %}
-            <div class="col-12 alert alert-success text-center" role="alert">
-                {{ message }}
-            </div>
-        {% endfor %}
+
         <span id="view"></span>
         <div class="col-12 d-flex justify-content-center d-block d-sm-none mb-2" style="bottom: 30vw;">
             <a href="#gallery" class="btn btn-outline-info" onclick="showGallery()"> Voir la Galery</a>
         </div>
-        <div class="container" id="gallery">
-            {% include 'trick/_picturesGallery.html.twig' %}
-
-            {% include 'trick/_videoGallery.html.twig' %}
-
+        <div class="row justify-content-center">
+            <div class="container" id="gallery">
+                {% include 'trick/_picturesGallery.html.twig' %}
+                {% include 'trick/_videoGallery.html.twig' %}
+            </div>
         </div>
+
 
         <div class="row">
             <div class="col-12 col-lg-10 offset-lg-1">
@@ -64,13 +76,16 @@
             </div>
         </div>
         <hr>
-        <div class="row">
-            <div class="col-12 col-lg-8 offset-lg-2">
-               {% include 'trick/_formChat.html.twig' %}
 
+        {% if is_granted('ROLE_USER') %}
+            <div class="row">
+                <div class="col-12 col-lg-8 offset-lg-2">
+                    {% include 'trick/_formChat.html.twig' %}
+                </div>
             </div>
-        </div>
-        <hr>
+            <hr>
+        {% endif %}
+
         <div class="row">
             <div class="col-12 col-lg-8 offset-lg-2 mb-2" id="chat">
                 {% for chat in chats %}

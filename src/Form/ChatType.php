@@ -16,7 +16,6 @@ class ChatType extends AbstractType
     {
         $builder
             ->add('message',TextType::class,['data' => ''])
-            ->add('user',EntityType::class, ['class' => User::class, 'choice_label' => 'firstname'] )
         ;
     }
 

@@ -12,7 +12,7 @@
 
 h1 {
     font-family: 'dj_grossnormal', Arial, sans-serif;
-    color: dimgrey;
+    color: #17a2b8;
 }
 
 h2 {
@@ -25,26 +25,35 @@ a{
     color: black;
 }
 
+.dropdown-item:hover{
+    background-color:transparent;
+}
+
+a.dropdown-item{
+    color:white;
+}
+
+a.dropdown-item:hover{
+    color: #17a2b8;
+}
 
 .carousel-item {
-  height: 65vh;
-  min-height: 900px;
-  background: no-repeat center center scroll;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+    height: 65vh;
+    min-height: 900px;
+    background: no-repeat center center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 
 }
 .carousel-caption {
-  bottom : 350px;
-
-  border-radius: 20px;
+    bottom : 350px;
 }
 
 .carousel-caption p{
-  color: white;
-  font-weight: bold;
+    color: white;
+    font-weight: bold;
 }
 .carousel-caption h1{
     font-size: 3em;
@@ -53,12 +62,12 @@ a{
 }
 
 .portfolio-item {
-  margin-bottom: 30px;
+    margin-bottom: 30px;
 }
  .icon{
-   margin-left:5px;
-   margin-right:5px;
-   color: white;
+    margin-left:5px;
+    margin-right:5px;
+    color: white;
  }
 
 .icon:hover{

@@ -9,7 +9,9 @@
             <div class="bg-light ">
                 <div class="row">
                     <div class="col-12 col-md-8"><h1 class="p-2">Les figures</h1></div>
-                    <div class=" col-12 col-md-4 d-flex align-items-center justify-content-end "><a href="{{ path('trick.new')}}" type="button" class="btn btn-sm btn-outline-secondary mr-3">Ajouter une figure</a></div>
+                    {% if is_granted('ROLE_USER') %}
+                        <div class=" col-12 col-md-4 d-flex align-items-center justify-content-end "><a href="{{ path('trick.new')}}" type="button" class="btn btn-sm btn-outline-info mr-3">Ajouter une figure</a></div>
+                    {% endif %}
                 </div>
 
                 <hr>

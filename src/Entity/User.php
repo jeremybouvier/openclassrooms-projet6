@@ -5,11 +5,13 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ *
  */
-class User
+class User implements UserInterface,\Serializable
 {
     /**
      * @ORM\Id()
@@ -34,19 +36,24 @@ class User
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $login_name;
-
-    /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $password;
+
+    /**
+     * @var string
+     */
+    private $plainPassword;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Chat", mappedBy="user")
      */
     private $chats;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Avatar", mappedBy="user", cascade={"persist", "remove"})
+     */
+    private $avatar;
 
     public function __construct()
     {
@@ -94,18 +101,6 @@ class User
         return $this;
     }
 
-    public function getLoginName(): ?string
-    {
-        return $this->login_name;
-    }
-
-    public function setLoginName(string $login_name): self
-    {
-        $this->login_name = $login_name;
-
-        return $this;
-    }
-
     public function getPassword(): ?string
     {
         return $this->password;
@@ -116,6 +111,17 @@ class User
         $this->password = $password;
 
         return $this;
+    }
+
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword($plainPassword)
+    {
+        $this->plainPassword = $plainPassword;
+        $this->password = null;
     }
 
     /**
@@ -144,6 +150,76 @@ class User
             if ($chats->getUser() === $this) {
                 $chats->setUser(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getRoles()
+    {
+        return ['ROLE_USER'];
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getSalt()
+    {
+        return null;
+    }
+
+    /**
+     *
+     */
+    public function eraseCredentials()
+    {
+        $this->plainPassword = null;
+    }
+
+    /**
+     * @return mixed|string
+     */
+    public function serialize()
+    {
+        return serialize([
+            $this->id,
+            $this->email,
+            $this->password
+        ]);
+    }
+
+    /**
+     * @param string $serialized
+     */
+    public function unserialize($serialized)
+    {
+       list(
+           $this->id,
+           $this->email,
+           $this->password
+           ) = unserialize($serialized, ['allowed_classes' => false]);
+    }
+
+    public function getUsername()
+    {
+        return $this->email;
+    }
+
+    public function getAvatar(): ?Avatar
+    {
+        return $this->avatar;
+    }
+
+    public function setAvatar(Avatar $avatar): self
+    {
+        $this->avatar = $avatar;
+
+        // set the owning side of the relation if necessary
+        if ($this !== $avatar->getUser()) {
+            $avatar->setUser($this);
         }
 
         return $this;
