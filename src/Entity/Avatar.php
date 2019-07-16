@@ -20,10 +20,8 @@ class Avatar
     private $id;
 
     /**
-     * @Assert\Image(
-     *     maxWidth = 200,
-     *     maxHeight= 200
-     * )
+     * @Assert\Image
+     *
      */
     private $file;
 

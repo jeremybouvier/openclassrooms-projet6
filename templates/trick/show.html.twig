@@ -87,11 +87,18 @@
         {% endif %}
 
         <div class="row">
-            <div class="col-12 col-lg-8 offset-lg-2 mb-2" id="chat">
+            <div class="container col-lg-8 offset-lg-2 mb-2" id="chat">
                 {% for chat in chats %}
-                    <div class="col-12 mb-1" style="background-color: #ecf1f2;border-radius: 0 30px 0 30px;">
-                        <p class="col-12" style="color:#17a2b8;"> {{ chat.user.surname |capitalize}}  {{ chat.user.firstname |capitalize}} (le {{ chat.date.date | date("d/m/y")}})</p>
-                        <p class="col-10 offset-1 text-justify">{{ chat.message }}</p>
+
+                    <div class="row mb-1" style="background-color: #ecf1f2;border-radius: 0 30px 0 30px;">
+                        <div class="col-1 p-2">
+                            <img src="{{ chat.user.avatar.path }}" style="width: 80px; max-height: 80px; border-radius: 0 30px 0 30px">
+                        </div>
+                        <div class="col-11 p-2 pl-4">
+                            <p class="col-12" style="color:#17a2b8;"> {{ chat.user.surname |capitalize}}  {{ chat.user.firstname |capitalize}} (le {{ chat.date.date | date("d/m/y")}})</p>
+                            <p class="col-12 text-justify">{{ chat.message }}</p>
+                        </div>
+
                     </div>
                 {% endfor %}
                 <div class="col-12 col-lg-8 offset-lg-2 mb-5 text-center" style="color:#17a2b8">

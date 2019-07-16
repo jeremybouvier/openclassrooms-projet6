@@ -94,7 +94,7 @@ a.dropdown-item:hover{
 }
 
 .shadow{
-    border: 1px solid grey;
+    border: 1px solid darkgrey;
     box-shadow: 2px 2px 6px grey;
 }
 
