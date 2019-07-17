@@ -23,12 +23,7 @@ class User implements UserInterface,\Serializable
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $surname;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $firstname;
+    private $loginName;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -65,26 +60,14 @@ class User implements UserInterface,\Serializable
         return $this->id;
     }
 
-    public function getSurname(): ?string
+    public function getLoginName(): ?string
     {
-        return $this->surname;
+        return $this->loginName;
     }
 
-    public function setSurname(string $surname): self
+    public function setLoginName(string $loginName): self
     {
-        $this->surname = $surname;
-
-        return $this;
-    }
-
-    public function getFirstname(): ?string
-    {
-        return $this->firstname;
-    }
-
-    public function setFirstname(string $firstname): self
-    {
-        $this->firstname = $firstname;
+        $this->loginName = $loginName;
 
         return $this;
     }

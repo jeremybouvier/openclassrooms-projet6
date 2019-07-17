@@ -12,7 +12,6 @@
 
 {% block body%}
         <div class="container-fluid bg-light mt-5" id="section">
-        <h1 id="title" class="col-12 text-center p-0 mb-2 font-weight-bold text-shadow" style="font-size: 5em; color: white;">{{ trick.name }}</h1>
         <div class="row justify-content-center">
 
             <div class="col-12  mt-3 mb-5">
@@ -31,6 +30,13 @@
 
 {% block javascripts %}
     <script>
+        if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+            document.getElementById('medias').style.display = "none";
+        }
+
+        function showMedias(){
+            document.getElementById('medias').style.display = "block";
+        }
 
         $("body").on("click", ".btn-add-video", function() {
             var $collectionHolder = $($(this).data("rel"));

@@ -21,8 +21,7 @@ class AppFixtures extends Fixture
     {
         for ($i = 0; $i < 10; $i++) {
             $user = new User();
-            $user->setFirstname('user'.$i);
-            $user->setSurname('user'.$i);
+            $user->setLoginName('user'.$i);
             $user->setEmail('user'.$i.'@gmail.com');
             $avatar = new Avatar();
             $avatar->setPath('/assets/image/avatar/base.jpg');

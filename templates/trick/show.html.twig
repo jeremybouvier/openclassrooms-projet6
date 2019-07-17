@@ -8,8 +8,11 @@
     <div class="container-fluid header p-0">
         {% set header = 'false' %}
         {% for picture in trick.pictures %}
-            {% if header == 'false' %} <img src="{{ picture.path }}" alt="Media de la figure{{ trick.name }}" class="img-fluid"/> {% set header = 'true' %}{% endif %}
+            {% if header == 'false' %} <img src="{{ picture.path }}" alt="Media de la figure {{ trick.name }}" class="img-fluid"/> {% set header = 'true' %}{% endif %}
         {% endfor %}
+        {% if header == 'false' %}
+            <img src="{{ asset('assets/image/base.png') }}" alt="Media de la figure {{ trick.name }}" class="img-fluid" style="width: 100%;"/>
+        {% endif %}
         <div id="titleArea" class="col-6 offset-3 ">
             <h1 id="title" class="col-12 text-center p-0 mb-0 font-weight-bold text-shadow" style="color: white;">{{ trick.name | upper}}</h1>
             <div class="col-12 d-flex justify-content-center animated bounce"><a href="#section" class="text-center"><i class="icon fa fa-arrow-down m-1 text-shadow" style="font-size: 40px;color: white; "></i></a></div>
@@ -21,23 +24,26 @@
 {% block body%}
     <div class="container-fluid bg-light" id="section">
 
+        <div class="col-12 d-flex justify-content-center d-block d-sm-none mb-2" style="bottom: 20vw;">
+            <a href="#gallery" class="btn btn-outline-info" onclick="showGallery()"> Voir la Galery</a>
+        </div>
 
-            <div class="row justify-content-center">
-                <div class="col-12 d-flex justify-content-center mb-3" style="font-size: 1.2em;background-color: rgba(70,80,90,0.2)">
-                    <div>
-                        {% if is_granted('ROLE_USER') %}
-                        <a href="{{ path('trick.update',{id: trick.id}) }} "><i class="icon fa fa-pencil " ></i></a>
-                        <form method="post"  action="{{ path('trick.delete',{id: trick.id}) }}" style="display:inline-block" onsubmit="return confirm('Etes vous sure de vouloir supprimer?')">
-                            <input type="hidden" name="_method" value="DELETE">
-                            <input type="hidden" name="_token" value="{{ csrf_token('delete') }}">
-                            <button type="submit" class="icon fa fa-trash-o " style="background: none;border:none; cursor: pointer"></button>
-                        </form>
-                        {% else %}
-                            <span class="text-muted">Pour modifier une figure veuillez vous connecter ou vous enregister comme membre</span>
-                        {% endif %}
-                    </div>
+        <div class="row justify-content-center">
+            <div class="col-12 d-flex justify-content-center mb-3" style="font-size: 1.2em;background-color: rgba(70,80,90,0.2)">
+                <div>
+                    {% if is_granted('ROLE_USER') %}
+                    <a href="{{ path('trick.update',{id: trick.id}) }} "><i class="icon fa fa-pencil " ></i></a>
+                    <form method="post"  action="{{ path('trick.delete',{id: trick.id}) }}" style="display:inline-block" onsubmit="return confirm('Etes vous sure de vouloir supprimer?')">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete') }}">
+                        <button type="submit" class="icon fa fa-trash-o " style="background: none;border:none; cursor: pointer"></button>
+                    </form>
+                    {% else %}
+                        <span class="text-muted">Pour modifier une figure veuillez vous connecter ou vous enregistrer comme membre</span>
+                    {% endif %}
                 </div>
             </div>
+        </div>
 
 
         <div class="row justify-content-center">
@@ -49,9 +55,7 @@
         </div>
 
         <span id="view"></span>
-        <div class="col-12 d-flex justify-content-center d-block d-sm-none mb-2" style="bottom: 30vw;">
-            <a href="#gallery" class="btn btn-outline-info" onclick="showGallery()"> Voir la Galery</a>
-        </div>
+
         <div class="row justify-content-center">
             <div class="container" id="gallery">
                 {% include 'trick/_picturesGallery.html.twig' %}
@@ -86,16 +90,18 @@
             <hr>
         {% endif %}
 
-        <div class="row">
+        <div class="row" id="chatZone">
             <div class="container col-lg-8 offset-lg-2 mb-2" id="chat">
                 {% for chat in chats %}
 
-                    <div class="row mb-1" style="background-color: #ecf1f2;border-radius: 0 30px 0 30px;">
-                        <div class="col-1 p-2">
-                            <img src="{{ chat.user.avatar.path }}" style="width: 80px; max-height: 80px; border-radius: 0 30px 0 30px">
+                    <div class="row mb-2 " style="background-color: #ecf1f2; border-radius: 0 30px 0 30px;">
+                        <div class="col-2 p-2">
+                            <div style="width: 80px; height: 80px; border-radius: 40px 40px 40px 40px; overflow: hidden;">
+                                <img src="{{ chat.user.avatar.path }}" style="max-width: 80px;">
+                            </div>
                         </div>
-                        <div class="col-11 p-2 pl-4">
-                            <p class="col-12" style="color:#17a2b8;"> {{ chat.user.surname |capitalize}}  {{ chat.user.firstname |capitalize}} (le {{ chat.date.date | date("d/m/y")}})</p>
+                        <div class=" col-8 col-lg-10 p-2 pl-4">
+                            <p class="col-12" style="color:#17a2b8;">{{ chat.user.loginName |capitalize}} (le {{ chat.date.date | date("d/m/y")}})</p>
                             <p class="col-12 text-justify">{{ chat.message }}</p>
                         </div>
 

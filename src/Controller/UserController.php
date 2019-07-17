@@ -62,7 +62,7 @@ class UserController extends AbstractController
         }
 
         return $this->render('user/edit.html.twig', [
-            'active_menu' => 'trick.index',
+            'activeMenu' => 'connexion',
             'user' => $user,
             'form' => $form->createView(),
         ]);

@@ -27,7 +27,10 @@ class Picture
     private $path;
 
     /**
-     * @Assert\Image
+     * @Assert\Image(
+     *     allowPortrait = false,
+     *     allowPortraitMessage = "Merci de choisir une image au format paysage"
+     * )
      */
     private $file;
 

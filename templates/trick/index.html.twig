@@ -27,8 +27,13 @@
                                 <div class="vignettePhoto">
                                     {% set header = 'false' %}
                                     {% for picture in trick.pictures %}
-                                        {% if header == 'false' %} <img src="{{ picture.path }}" alt="Media de la figure{{ trick.name }}" class="img-fluid"/> {% set header = 'true' %}{% endif %}
+                                        {% if header == 'false' %}
+                                            <img src="{{ picture.path }}" alt="Media de la figure{{ trick.name }}" class="img-fluid"/> {% set header = 'true' %}
+                                        {% endif %}
                                     {% endfor %}
+                                    {% if header == 'false' %}
+                                        <img src="assets/image/base.png" alt="Media de la figure{{ trick.name }}" class="img-fluid"/>
+                                    {% endif %}
                                 </div>
 
                                 <div class="card-body d-flex justify-content-between">

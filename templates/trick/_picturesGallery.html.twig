@@ -1,7 +1,7 @@
 <div class="row .d-xs.none .d-sm-none .d-md-block mb-5 mt-2 justify-content-center" >
     {% for picture in trick.pictures %}
 
-        <div class="col-12 col-lg-2 p-0 m-2 d-flex align-items-center" style="overflow:hidden;">
+        <div class="col-12 col-lg-2 m-2 d-flex align-items-center" style="overflow:hidden;">
             <a href="#" data-toggle="modal" data-target="#displayPicture{{ picture.id }}">
                 <div class="vignettePhoto" ">
                     <img src="{{ picture.path}}" alt="Media de la figure {{ trick.name }}" class="img-fluid shadow" />

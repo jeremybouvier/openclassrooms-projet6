@@ -13,6 +13,7 @@
 h1 {
     font-family: 'dj_grossnormal', Arial, sans-serif;
     color: #17a2b8;
+
 }
 
 h2 {
@@ -114,6 +115,11 @@ a.dropdown-item:hover{
 
 @media only screen and (max-width: 767px) {
 
+h1 {
+    font-size: 1.5em;
+    font-family: 'dj_grossnormal', Arial, sans-serif;
+    color: #17a2b8;
+}
 .vignettePhoto{
     max-height: none;
     overflow: hidden;
