@@ -8,28 +8,33 @@
     </div>
 </div>
 
-<h2>Videos</h2>
-<hr/>
-<div class="col-12 col-lg-10 offset-lg-1 mb-5 mt-3" >
-    <div class="row mb-3" id= "videos" data-index="{{ form.videos|length > 0 ? form.videos|last.vars.name+1 : 0 }}" data-prototype="{{ include("trick/_formVideo.html.twig", { form: form.videos.vars.prototype })|e("html_attr") }}">
-            {% for video in form.videos %}
-                {{ include('trick/_formVideo.html.twig', {form: video})}}
+<div class="col-12 d-flex justify-content-center d-block d-sm-none mb-5">
+    <a href="#medias" class="btn btn-outline-info" onclick="showMedias()"> Gestion des médias</a>
+</div>
+
+<div id="medias">
+    <h2>Videos</h2>
+    <hr/>
+    <div class="col-12 col-lg-10 offset-lg-1 mb-5 mt-3" >
+        <div class="row mb-3" id= "videos" data-index="{{ form.videos|length > 0 ? form.videos|last.vars.name+1 : 0 }}" data-prototype="{{ include("trick/_formVideo.html.twig", { form: form.videos.vars.prototype })|e("html_attr") }}">
+                {% for video in form.videos %}
+                    {{ include('trick/_formVideo.html.twig', {form: video})}}
+                {% endfor %}
+        </div>
+        <a href="#videos" class="btn btn-sm btn-outline-secondary btn-add-video mb-2" data-rel="#videos">Ajouter une video</a>
+    </div>
+
+    <h2>Images</h2>
+    <hr/>
+    <div class="col-12 col-lg-10 offset-lg-1">
+        <div class="row mb-3" id= "pictures" data-index="{{ form.pictures|length > 0 ? form.pictures|last.vars.name+1 : 0 }}" data-prototype="{{ include("trick/_formPicture.html.twig", { form: form.pictures.vars.prototype })|e("html_attr") }}">
+            {% for picture in form.pictures %}
+                {{ include('trick/_formPicture.html.twig', {form: picture})}}
             {% endfor %}
+        </div>
+        <a href="#pictures" class="btn btn-sm btn-outline-secondary btn-add-picture mb-2" data-rel="#pictures">Ajouter une image</a>
     </div>
-    <a href="#videos" class="btn btn-sm btn-outline-secondary btn-add-video mb-2" data-rel="#videos">Ajouter une video</a>
 </div>
-
-<h2>Images</h2>
-<hr/>
-<div class="col-12 col-lg-10 offset-lg-1">
-    <div class="row mb-3" id= "pictures" data-index="{{ form.pictures|length > 0 ? form.pictures|last.vars.name+1 : 0 }}" data-prototype="{{ include("trick/_formPicture.html.twig", { form: form.pictures.vars.prototype })|e("html_attr") }}">
-        {% for picture in form.pictures %}
-            {{ include('trick/_formPicture.html.twig', {form: picture})}}
-        {% endfor %}
-    </div>
-    <a href="#pictures" class="btn btn-sm btn-outline-secondary btn-add-picture mb-2" data-rel="#pictures">Ajouter une image</a>
-</div>
-
 <hr/>
 <div class="col-12 d-flex mb-5 justify-content-center">
     <button type="submit" class="btn btn-sm btn-outline-info col-12 col-lg-6">{{ button }}</button>

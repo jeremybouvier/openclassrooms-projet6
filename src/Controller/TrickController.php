@@ -78,7 +78,7 @@ class TrickController extends  AbstractController
             $chat->setUser($this->getUser());
             $trick->addChat($chat);
             $this->objectManager->flush();
-            return $this->redirectToRoute('trick.show',['id' => $trick->getId(), 'page'=> 1]);
+            return $this->redirectToRoute('trick.show',['id' => $trick->getId(), 'page'=> 1, '_fragment'=>'chatZone']);
         }
 
        $chats = $chatRepository->findBy(['trick' => $trick], ['date' => 'DESC'], 10, ($page-1)*10);
@@ -114,7 +114,7 @@ class TrickController extends  AbstractController
         }
 
         return $this->render('trick/edit.html.twig', [
-            'active_menu' => 'trick.index',
+            'active_menu' => 'trick',
             'trick' => $trick,
             'form' => $form->createView(),
             'title' =>['name'=>'Modification de la figure']
@@ -143,7 +143,7 @@ class TrickController extends  AbstractController
         }
 
         return $this->render('trick/edit.html.twig', [
-            'active_menu' => 'trick.index',
+            'active_menu' => 'trick',
             'trick' => $trick,
             'form' => $form->createView(),
             'title' => ['name'=>'Création de la figure']

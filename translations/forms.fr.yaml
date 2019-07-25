@@ -2,7 +2,6 @@ Name: Nom
 Groups: Groupe
 Message: Votre Message
 Description: Description
-Firstname: Prénom
-Surname: Nom
-Login name: Identifiant
+Login name: Pseudo
 Plain password: Mot de passe
+Avatar: Photo de profil

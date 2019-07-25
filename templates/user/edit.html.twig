@@ -1,0 +1,49 @@
+{%  extends 'base.html.twig' %}
+
+{% block title %}
+    Enregistrement Nouveau Membre
+{% endblock %}
+
+{% block header %}
+    <div class="container-fluid header p-0">
+        <img src="{{ asset('/assets/image/multipleTrick.jpg') }}" alt="image en-tete" class="img-fluid"/>
+    </div>
+{% endblock %}
+
+{% block body%}
+    <div class="container-fluid bg-light mt-5" id="section">
+        <div class="row justify-content-center">
+            <div class="col-12  mt-3 mb-5">
+                <h1 class="text-center"> Enregistrement d'un nouveau Membre</h1>
+                <hr class="mb-2"/>
+            </div>
+        </div>
+
+        <div class="row justify-content-center p-2">
+                {{ include ('user/_formUser.html.twig') }}
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block javascripts %}
+    <script>
+        $("body").on("change",".custom-file-input", function () {
+            readURL(this);
+
+        });
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    $('img#avatar').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+{% endblock %}
+
+

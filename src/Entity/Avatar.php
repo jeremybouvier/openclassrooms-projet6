@@ -3,16 +3,14 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use phpDocumentor\Reflection\File;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\PictureRepository")
- * @ORM\EntityListeners({"App\EntityListener\PictureListener"})
+ * @ORM\Entity(repositoryClass="App\Repository\AvatarRepository")
+ * @ORM\EntityListeners({"App\EntityListener\AvatarListener"})
  */
-class Picture
+class Avatar
 {
     /**
      * @ORM\Id()
@@ -22,24 +20,21 @@ class Picture
     private $id;
 
     /**
+     * @Assert\Image
+     *
+     */
+    private $file;
+
+    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $path;
 
     /**
-     * @Assert\Image(
-     *     allowPortrait = false,
-     *     allowPortraitMessage = "Merci de choisir une image au format paysage"
-     * )
-     */
-    private $file;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Trick", inversedBy="pictures")
+     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="avatar", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
-    private $trick;
-
+    private $user;
 
     public function getId(): ?int
     {
@@ -51,21 +46,21 @@ class Picture
         return $this->path;
     }
 
-    public function setPath($path): self
+    public function setPath(string $path): self
     {
         $this->path = $path;
 
         return $this;
     }
 
-    public function getTrick(): ?Trick
+    public function getUser(): ?User
     {
-        return $this->trick;
+        return $this->user;
     }
 
-    public function setTrick(?Trick $trick): self
+    public function setUser(User $user): self
     {
-        $this->trick = $trick;
+        $this->user = $user;
 
         return $this;
     }
