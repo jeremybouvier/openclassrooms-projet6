@@ -15,6 +15,10 @@ use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 
 class PictureListener
 {
+    /**
+     * Suppression d'une image d'une figure
+     * @param $picture
+     */
     public function preRemove( $picture)
     {
         if (!$picture instanceof Picture){
@@ -25,6 +29,11 @@ class PictureListener
             unlink(substr($picture->getPath(),1));
         }
     }
+
+    /**
+     * Enregistrement d'une image d'une figure
+     * @param $picture
+     */
     public function prePersist( $picture)
     {
         if (!$picture instanceof Picture){
@@ -42,11 +51,19 @@ class PictureListener
         }
     }
 
+    /**
+     * Création d'un nom de fichier unique
+     * @return string
+     */
     private function generateUniqueFileName()
     {
         return md5(uniqid());
     }
 
+    /**
+     * Repertoire de stockage des images des figures
+     * @return string
+     */
     private function picturesDirectory(){
         return 'assets/image/trick/';
     }

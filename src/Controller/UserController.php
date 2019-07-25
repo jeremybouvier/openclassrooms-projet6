@@ -1,13 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: jeremy
- * Date: 09/07/19
- * Time: 21:42
- */
 
 namespace App\Controller;
-
 
 use App\Entity\User;
 use App\Form\UserType;
@@ -17,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+
 
 class UserController extends AbstractController
 {
@@ -42,7 +36,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * Ajout d'unnouveau menbre
+     * Ajout d'un nouveau membre
      * @Route("Enregistrement-Nouveau-Membre", name="user.new", methods="GET|POST")
      * @param Request $request
      * @return Response
@@ -54,7 +48,6 @@ class UserController extends AbstractController
         $form = $this->createForm(UserType::class, $user)->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()){
-
             $this->objectManager->persist($user);
             $this->objectManager->flush();
             $this->addFlash('success', 'Votre enregistrement a bien été effectué');

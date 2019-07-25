@@ -138,7 +138,7 @@ class Trick
     {
         if ($this->chats->contains($chat)) {
             $this->chats->removeElement($chat);
-            // set the owning side to null (unless already changed)
+
             if ($chat->getTrick() === $this) {
                 $chat->setTrick(null);
             }
@@ -194,7 +194,7 @@ class Trick
     {
         if ($this->videos->contains($video)) {
             $this->videos->removeElement($video);
-            // set the owning side to null (unless already changed)
+
             if ($video->getTrick() === $this) {
                 $video->setTrick(null);
             }

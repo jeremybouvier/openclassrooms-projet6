@@ -200,7 +200,7 @@ class User implements UserInterface,\Serializable
     {
         $this->avatar = $avatar;
 
-        // set the owning side of the relation if necessary
+
         if ($this !== $avatar->getUser()) {
             $avatar->setUser($this);
         }

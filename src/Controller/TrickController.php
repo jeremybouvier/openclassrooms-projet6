@@ -1,13 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: jeremy
- * Date: 28/05/19
- * Time: 15:16
- */
 
 namespace App\Controller;
-
 
 use App\Entity\Chat;
 use App\Entity\Trick;
@@ -52,11 +45,9 @@ class TrickController extends  AbstractController
      */
     public function index() : Response
     {
-        $tricks = $this->trickRepository->findAll();
-
         return $this->render('trick/index.html.twig', [
             'activeMenu' => 'tricks',
-            'tricks' => $tricks]);
+            'tricks' => $this->trickRepository->findAll()]);
     }
 
     /**
@@ -70,9 +61,9 @@ class TrickController extends  AbstractController
      */
     public function show(Trick $trick, $page, ChatRepository $chatRepository, Request $request) : Response
     {
+
         $chat = new Chat();
-        $form = $this->createForm(ChatType::class, $chat);
-        $form->handleRequest($request);
+        $form = $this->createForm(ChatType::class, $chat)->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()){
             $chat->setUser($this->getUser());
@@ -81,17 +72,13 @@ class TrickController extends  AbstractController
             return $this->redirectToRoute('trick.show',['id' => $trick->getId(), 'page'=> 1, '_fragment'=>'chatZone']);
         }
 
-       $chats = $chatRepository->findBy(['trick' => $trick], ['date' => 'DESC'], 10, ($page-1)*10);
-       $pages = ceil($chatRepository->count(['trick' => $trick])/10);
-
         return $this->render('trick/show.html.twig', [
             'activeMenu' => 'tricks',
             'trick' => $trick,
-            'chats'=>$chats,
-            'pages' => $pages,
+            'chats'=>$chatRepository->findBy(['trick' => $trick], ['date' => 'DESC'], 10, ($page-1)*10),
+            'pages' => ceil($chatRepository->count(['trick' => $trick])/10),
             'form' => $form->createView()
         ]);
-
     }
 
     /**
@@ -158,7 +145,6 @@ class TrickController extends  AbstractController
      * @throws \Exception
      * @param Trick $trick
      */
-
     public function delete( Trick $trick, Request $request) : Response
     {
         if ($this->isCsrfTokenValid('delete', $request->get('_token'))){

@@ -10,13 +10,24 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AppFixtures extends Fixture
 {
+    /**
+     * @var UserPasswordEncoderInterface
+     */
     private $encoder;
 
+    /**
+     * AppFixtures constructor.
+     * @param UserPasswordEncoderInterface $encoder
+     */
     public function __construct(UserPasswordEncoderInterface $encoder)
     {
         $this->encoder = $encoder;
     }
 
+    /**
+     * Modèle de construction de données utilisateurs en base de donnée
+     * @param ObjectManager $manager
+     */
     public function load(ObjectManager $manager)
     {
         for ($i = 0; $i < 10; $i++) {
@@ -29,7 +40,6 @@ class AppFixtures extends Fixture
             $user->setPlainPassword('user'.$i);
             $manager->persist($user);
         }
-
         $manager->flush();
     }
 }

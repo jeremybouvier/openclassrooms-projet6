@@ -2,7 +2,6 @@
 
 namespace App\Form;
 
-
 use App\Entity\Group;
 use App\Entity\Trick;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;

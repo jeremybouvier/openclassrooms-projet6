@@ -1,12 +1,7 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: jeremy
- * Date: 05/07/19
- * Time: 20:51
- */
 
 namespace App\Controller;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;

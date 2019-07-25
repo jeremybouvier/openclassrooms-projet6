@@ -1,19 +1,17 @@
 <?php
-/**
- * Created by PhpStorm.
- * Avatar: jeremy
- * Date: 15/07/19
- * Time: 14:37
- */
 
 namespace App\EntityListener;
-
 
 use App\Entity\Avatar;
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 
+
 class AvatarListener
 {
+    /**
+     * Suppression de l'image d'un utilisateur
+     * @param $avatar
+     */
     public function preRemove( $avatar)
     {
         if (!$avatar instanceof Avatar){
@@ -24,6 +22,11 @@ class AvatarListener
             unlink(substr($avatar->getPath(),1));
         }
     }
+
+    /**
+     * Enregistrement de l'image d'un utilisateur
+     * @param $avatar
+     */
     public function prePersist( $avatar)
     {
         if (!$avatar instanceof Avatar){
@@ -41,11 +44,19 @@ class AvatarListener
         }
     }
 
+    /**
+     * Creation d'un nom de fichier unique
+     * @return string
+     */
     private function generateUniqueFileName()
     {
         return md5(uniqid());
     }
 
+    /**
+     * Repertoire de stockage des images des utilisateurs
+     * @return string
+     */
     private function AvatarsDirectory(){
         return 'assets/image/avatar/';
     }
