@@ -6,6 +6,8 @@ use App\Entity\Chat;
 use App\Entity\Trick;
 use App\Form\ChatType;
 use App\Form\TrickType;
+use App\Handler\ChatHandler;
+use App\Handler\TrickHandler;
 use App\Repository\ChatRepository;
 use App\Repository\TrickRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -56,19 +58,18 @@ class TrickController extends  AbstractController
      * @param Trick $trick
      * @param $page
      * @param ChatRepository $chatRepository
+     * @param ChatHandler $chatHandler
      * @param Request $request
      * @return Response
      */
-    public function show(Trick $trick, $page, ChatRepository $chatRepository, Request $request) : Response
+    public function show(Trick $trick, $page, Request $request, ChatRepository $chatRepository, ChatHandler $chatHandler) : Response
     {
+        $chatHandler
+            ->createForm(ChatType::class, new Chat())
+            ->handleRequest($request);
 
-        $chat = new Chat();
-        $form = $this->createForm(ChatType::class, $chat)->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()){
-            $chat->setUser($this->getUser());
-            $trick->addChat($chat);
-            $this->objectManager->flush();
+        if ($chatHandler->isFormValid()){
+            $chatHandler->addChat($trick);
             return $this->redirectToRoute('trick.show',['id' => $trick->getId(), 'page'=> 1, '_fragment'=>'chatZone']);
         }
 
@@ -77,7 +78,7 @@ class TrickController extends  AbstractController
             'trick' => $trick,
             'chats'=>$chatRepository->findBy(['trick' => $trick], ['date' => 'DESC'], 10, ($page-1)*10),
             'pages' => ceil($chatRepository->count(['trick' => $trick])/10),
-            'form' => $form->createView()
+            'form' => $chatHandler->createView()
         ]);
     }
 
@@ -86,24 +87,25 @@ class TrickController extends  AbstractController
      * @Route("/Membre/Edition-Figure/{id}", name="trick.update", methods="GET|POST")
      * @param Trick $trick
      * @param Request $request
+     * @param TrickHandler $trickHandler
      * @return Response
      * @throws \Exception
      */
-    public function update(Trick $trick, Request $request) : Response
+    public function update(Trick $trick, Request $request, TrickHandler $trickHandler) : Response
     {
-        $form = $this->createForm(TrickType::class, $trick)->handleRequest($request);
+        $trickHandler
+            ->createForm(TrickType::class, $trick)
+            ->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()){
-            $trick->setUpdateDate(new \DateTime());
-            $this->objectManager->flush();
-            $this->addFlash('success', 'La figure a bien été modifié');
+        if ($trickHandler->isFormValid()){
+            $trickHandler->updateTrick();
             return $this->redirectToRoute('trick.show',['id' => $trick->getId(),'page'=> 1]);
         }
 
         return $this->render('trick/edit.html.twig', [
             'active_menu' => 'trick',
-            'trick' => $trick,
-            'form' => $form->createView(),
+            'trick' => $trickHandler->getEntity(),
+            'form' => $trickHandler->createView(),
             'title' =>['name'=>'Modification de la figure']
         ]);
     }
@@ -112,27 +114,25 @@ class TrickController extends  AbstractController
      * Ajout d'une nouvelle figure
      * @Route("/Membre/Ajout-Figure/", name="trick.new", methods="GET|POST")
      * @param Request $request
+     * @param TrickHandler $trickHandler
      * @return Response
      * @throws \Exception
      */
-    public function new( Request $request) : Response
+    public function new( Request $request, TrickHandler $trickHandler) : Response
     {
-        $trick = new Trick();
-        $form = $this->createForm(TrickType::class, $trick)->handleRequest($request);
+        $trickHandler
+            ->createForm(TrickType::class, new Trick())
+            ->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()){
-            $trick->setCreationDate(new \DateTime());
-            $trick->setUpdateDate(new \DateTime());
-            $this->objectManager->persist($trick);
-            $this->objectManager->flush();
-            $this->addFlash('success', 'La figure a bien été ajouté');
+        if ($trickHandler->isFormValid()){
+            $trickHandler->addTrick();
             return $this->redirectToRoute('trick.index');
         }
 
         return $this->render('trick/edit.html.twig', [
             'active_menu' => 'trick',
-            'trick' => $trick,
-            'form' => $form->createView(),
+            'trick' => $trickHandler->getEntity(),
+            'form' => $trickHandler->createView(),
             'title' => ['name'=>'Création de la figure']
         ]);
     }
