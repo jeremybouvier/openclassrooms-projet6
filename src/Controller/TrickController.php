@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+
 use App\Entity\Chat;
 use App\Entity\Trick;
 use App\Form\ChatType;
@@ -15,7 +16,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Doctrine\Common\Persistence\ObjectManager;
-
 
 class TrickController extends  AbstractController
 {
