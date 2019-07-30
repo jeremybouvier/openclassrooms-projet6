@@ -46,18 +46,13 @@ class UserController extends AbstractController
      */
     public function new( Request $request, UserHandler $userHandler) : Response
     {
-        $userHandler
-            ->createForm(UserType::class, new User())
-            ->handleRequest($request);
-
-        if ($userHandler->isFormValid()){
-            $userHandler->addUser();
+        if ($userHandler->handle($request, new User())){
             return $this->redirectToRoute('trick.index');
         }
 
         return $this->render('user/edit.html.twig', [
             'activeMenu' => 'connexion',
-            'user' => $userHandler->getEntity(),
+            'user' => $userHandler->getData(),
             'form' => $userHandler->createView(),
         ]);
     }

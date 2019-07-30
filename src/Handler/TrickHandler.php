@@ -3,30 +3,57 @@
 namespace App\Handler;
 
 
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\UnitOfWork;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
+use App\Form\TrickType;
+
 class TrickHandler extends AbstractHandler
 {
+    /**
+     * @var EntityManagerInterface
+     */
+    private $entityManager;
 
     /**
-     * Mise à jour d'une figure
-     * @throws \Exception
+     * @var FlashBagInterface
      */
-    public function updateTrick()
+    private $flashBag;
+
+    /**
+     * TrickHandler constructor.
+     * @param EntityManagerInterface $entityManager
+     * @param FlashBagInterface $flashBag
+     */
+    public function __construct(EntityManagerInterface $entityManager, FlashBagInterface $flashBag)
     {
-            $this->entity->setUpdateDate(new \DateTime());
-            $this->entityManager->flush();
-            $this->flashBag->add('success', 'La figure a bien été modifié');
+        $this->entityManager = $entityManager;
+        $this->flashBag = $flashBag;
     }
 
     /**
-     * Ajout d'une nouvelle figure
+     * Donne le type de formulaire
+     * @return string
+     */
+    protected static function getFormType(): string
+    {
+        return TrickType::class;
+    }
+
+    /**
+     * Effectue le traitement de creation ou de modification d'une figure
+     * @param null $param
      * @throws \Exception
      */
-    public function addTrick()
+    protected function process($param = null): void
     {
-        $this->entity->setCreationDate(new \DateTime());
-        $this->entity->setUpdateDate(new \DateTime());
-        $this->entityManager->persist($this->entity);
+        if ($this->entityManager->getUnitOfWork()->getEntityState($this->data) === UnitOfWork::STATE_NEW){
+            $this->entityManager->persist($this->data);
+            $this->flashBag->add('success', 'La figure a bien été ajouté');
+        } else {
+            $this->data->setUpdateDate(new \DateTime());
+            $this->flashBag->add('success', 'La figure a bien été modifié');
+        }
         $this->entityManager->flush();
-        $this->flashBag->add('success', 'La figure a bien été ajouté');
     }
 }

@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
+
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TrickRepository")
  */
@@ -48,12 +49,12 @@ class Trick
     /**
      * @ORM\Column(type="datetime")
      */
-    private $creation_date;
+    private $creationDate;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $update_date;
+    private $updateDate;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Video", mappedBy="trick", cascade={"persist"}, orphanRemoval=true)
@@ -72,6 +73,8 @@ class Trick
         $this->chats = new ArrayCollection();
         $this->videos = new ArrayCollection();
         $this->pictures = new ArrayCollection();
+        $this->creationDate = new \DateTime();
+        $this->updateDate = new \DateTime();
     }
 
     public function getId(): ?int
@@ -149,25 +152,25 @@ class Trick
 
     public function getCreationDate(): ?\DateTimeInterface
     {
-        return $this->creation_date;
+        return $this->creationDate;
     }
 
-    public function setCreationDate(\DateTimeInterface $creation_date): self
+    public function setCreationDate(\DateTimeInterface $creationDate): self
     {
 
-        $this->creation_date = $creation_date;
+        $this->creationDate = $creationDate;
 
         return $this;
     }
 
     public function getUpdateDate(): ?\DateTimeInterface
     {
-        return $this->update_date;
+        return $this->updateDate;
     }
 
-    public function setUpdateDate(\DateTimeInterface $update_date): self
+    public function setUpdateDate(\DateTimeInterface $updateDate): self
     {
-        $this->update_date = $update_date;
+        $this->updateDate = $updateDate;
 
         return $this;
     }

@@ -3,20 +3,13 @@
 namespace App\Handler;
 
 
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
-use Symfony\Component\Security\Core\Security;
 
 abstract class AbstractHandler
 {
-    /**
-     * @var EntityManagerInterface
-     */
-    protected $entityManager;
 
     /**
      * @var FormFactoryInterface
@@ -24,75 +17,54 @@ abstract class AbstractHandler
     protected $formFactory;
 
     /**
-     * @var Security
-     */
-    protected $security;
-
-    /**
-     * @var FlashBagInterface
-     */
-    protected $flashBag;
-
-    /**
      * @var Form
      */
     protected $form;
 
     /**
-     * @var
+     * @var mixed
      */
-    protected $entity;
+    protected $data;
+
+    abstract protected function process($param = null): void;
 
     /**
-     * AbstractHandler constructor.
-     * @param EntityManagerInterface $entityManager
-     * @param FormFactoryInterface $formFactory
-     * @param Security $security
+     * @return string
      */
-    public function __construct(EntityManagerInterface $entityManager, FormFactoryInterface $formFactory, Security $security, FlashBagInterface $flashBag)
+    abstract protected static function getFormType(): string;
+
+    /**
+     * @required
+     * @param FormFactoryInterface $formFactory
+     */
+    public function setFormFactory(FormFactoryInterface $formFactory)
     {
-        $this->entityManager = $entityManager;
         $this->formFactory = $formFactory;
-        $this->security = $security;
-        $this->flashBag = $flashBag;
     }
 
     /**
      * @return mixed
      */
-    public function getEntity()
+    public function getData()
     {
-        return $this->entity;
+        return $this->data;
     }
 
     /**
-     * Création du formulaire
-     * @param string $entityType
-     * @param null $entity
-     * @return AbstractHandler
-     */
-    public function createForm(string $entityType, $entity = null): self
-    {
-        $this->entity = $entity;
-        $this->form = $this->formFactory->create($entityType, $this->entity);
-        return $this;
-    }
-
-    /**
+     * @param null $data
      * @param Request $request
-     */
-    public function handleRequest(Request $request): void
-    {
-        $this->form->handleRequest($request);
-    }
-
-    /**
-     * Verification de la soumission et de la validité du formulaire
      * @return bool
      */
-    public function isFormValid(): bool
+    public function handle(Request $request, $data, $param = null)
     {
-        return ($this->form->isSubmitted() && $this->form->isValid());
+        $this->data = $data;
+        $this->form = $this->formFactory->create(static::getFormType(), $data)->handleRequest($request);
+
+        if ($this->form->isSubmitted() && $this->form->isValid()){
+            $this->process($param);
+            return true;
+        }
+        return false;
     }
 
     /**

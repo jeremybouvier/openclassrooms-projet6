@@ -5,8 +5,6 @@ namespace App\Controller;
 
 use App\Entity\Chat;
 use App\Entity\Trick;
-use App\Form\ChatType;
-use App\Form\TrickType;
 use App\Handler\ChatHandler;
 use App\Handler\TrickHandler;
 use App\Repository\ChatRepository;
@@ -64,12 +62,8 @@ class TrickController extends  AbstractController
      */
     public function show(Trick $trick, $page, Request $request, ChatRepository $chatRepository, ChatHandler $chatHandler) : Response
     {
-        $chatHandler
-            ->createForm(ChatType::class, new Chat())
-            ->handleRequest($request);
 
-        if ($chatHandler->isFormValid()){
-            $chatHandler->addChat($trick);
+        if ($chatHandler->handle($request, new Chat(), $trick)){
             return $this->redirectToRoute('trick.show',['id' => $trick->getId(), 'page'=> 1, '_fragment'=>'chatZone']);
         }
 
@@ -93,18 +87,14 @@ class TrickController extends  AbstractController
      */
     public function update(Trick $trick, Request $request, TrickHandler $trickHandler) : Response
     {
-        $trickHandler
-            ->createForm(TrickType::class, $trick)
-            ->handleRequest($request);
 
-        if ($trickHandler->isFormValid()){
-            $trickHandler->updateTrick();
+        if ($trickHandler->handle($request, $trick)){
             return $this->redirectToRoute('trick.show',['id' => $trick->getId(),'page'=> 1]);
         }
 
         return $this->render('trick/edit.html.twig', [
             'active_menu' => 'trick',
-            'trick' => $trickHandler->getEntity(),
+            'trick' => $trickHandler->getData(),
             'form' => $trickHandler->createView(),
             'title' =>['name'=>'Modification de la figure']
         ]);
@@ -120,18 +110,14 @@ class TrickController extends  AbstractController
      */
     public function new( Request $request, TrickHandler $trickHandler) : Response
     {
-        $trickHandler
-            ->createForm(TrickType::class, new Trick())
-            ->handleRequest($request);
-
-        if ($trickHandler->isFormValid()){
-            $trickHandler->addTrick();
+        $trick = new Trick();
+        if ($trickHandler->handle($request, $trick)){
             return $this->redirectToRoute('trick.index');
         }
 
         return $this->render('trick/edit.html.twig', [
             'active_menu' => 'trick',
-            'trick' => $trickHandler->getEntity(),
+            'trick' => $trickHandler->getData(),
             'form' => $trickHandler->createView(),
             'title' => ['name'=>'Création de la figure']
         ]);

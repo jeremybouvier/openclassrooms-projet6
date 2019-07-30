@@ -34,6 +34,7 @@ class AvatarListener
         }
 
         if (null == $avatar->getFile()){
+            $avatar->setPath('/assets/image/avatar/base.jpg' );
             return;
         }
 
