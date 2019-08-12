@@ -2,14 +2,12 @@
 
 namespace App\Handler;
 
-
 use App\Form\UserType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 
 class UserHandler extends AbstractHandler
 {
-
     /**
      * @var EntityManagerInterface
      */

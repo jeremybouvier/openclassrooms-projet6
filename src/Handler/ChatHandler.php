@@ -2,7 +2,6 @@
 
 namespace App\Handler;
 
-
 use App\Form\ChatType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Security;
@@ -49,5 +48,4 @@ class ChatHandler extends AbstractHandler
         $param->addChat($this->data);
         $this->entityManager->flush();
     }
-
 }

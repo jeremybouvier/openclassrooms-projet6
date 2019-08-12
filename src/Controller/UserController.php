@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-
 use App\Entity\User;
 use App\Form\UserType;
 use App\Handler\UserHandler;
@@ -44,9 +43,9 @@ class UserController extends AbstractController
      * @return Response
      * @throws \Exception
      */
-    public function new( Request $request, UserHandler $userHandler) : Response
+    public function new(Request $request, UserHandler $userHandler) : Response
     {
-        if ($userHandler->handle($request, new User())){
+        if ($userHandler->handle($request, new User())) {
             return $this->redirectToRoute('trick.index');
         }
 

@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-
 use App\Entity\Chat;
 use App\Entity\Trick;
 use App\Handler\ChatHandler;
@@ -15,8 +14,13 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Doctrine\Common\Persistence\ObjectManager;
 
-class TrickController extends  AbstractController
+class TrickController extends AbstractController
 {
+
+    const TRICK_MENU_SELECTOR = "tricks";
+
+    const TRICK = "trick";
+
     /**
      * @var TrickRepository
      */
@@ -46,7 +50,7 @@ class TrickController extends  AbstractController
     public function index() : Response
     {
         return $this->render('trick/index.html.twig', [
-            'activeMenu' => 'tricks',
+            'activeMenu' => self::TRICK_MENU_SELECTOR,
             'tricks' => $this->trickRepository->findAll()]);
     }
 
@@ -63,13 +67,20 @@ class TrickController extends  AbstractController
     public function show(Trick $trick, $page, Request $request, ChatRepository $chatRepository, ChatHandler $chatHandler) : Response
     {
 
-        if ($chatHandler->handle($request, new Chat(), $trick)){
-            return $this->redirectToRoute('trick.show',['id' => $trick->getId(), 'page'=> 1, '_fragment'=>'chatZone']);
+        if ($chatHandler->handle($request, new Chat(), $trick)) {
+            return $this->redirectToRoute(
+                'trick.show',
+                [
+                    'id' => $trick->getId(),
+                    'page'=> 1,
+                    '_fragment'=>'chatZone'
+                ]
+            );
         }
 
         return $this->render('trick/show.html.twig', [
-            'activeMenu' => 'tricks',
-            'trick' => $trick,
+            'activeMenu' => self::TRICK_MENU_SELECTOR,
+            self::TRICK => $trick,
             'chats'=>$chatRepository->findBy(['trick' => $trick], ['date' => 'DESC'], 10, ($page-1)*10),
             'pages' => ceil($chatRepository->count(['trick' => $trick])/10),
             'form' => $chatHandler->createView()
@@ -87,14 +98,13 @@ class TrickController extends  AbstractController
      */
     public function update(Trick $trick, Request $request, TrickHandler $trickHandler) : Response
     {
-
-        if ($trickHandler->handle($request, $trick)){
-            return $this->redirectToRoute('trick.show',['id' => $trick->getId(),'page'=> 1]);
+        if ($trickHandler->handle($request, $trick)) {
+            return $this->redirectToRoute('trick.show', ['id' => $trick->getId(), 'page'=> 1]);
         }
 
         return $this->render('trick/edit.html.twig', [
-            'active_menu' => 'trick',
-            'trick' => $trickHandler->getData(),
+            'active_menu' => self::TRICK,
+            self::TRICK => $trickHandler->getData(),
             'form' => $trickHandler->createView(),
             'title' =>['name'=>'Modification de la figure']
         ]);
@@ -108,16 +118,16 @@ class TrickController extends  AbstractController
      * @return Response
      * @throws \Exception
      */
-    public function new( Request $request, TrickHandler $trickHandler) : Response
+    public function new(Request $request, TrickHandler $trickHandler) : Response
     {
         $trick = new Trick();
-        if ($trickHandler->handle($request, $trick)){
+        if ($trickHandler->handle($request, $trick)) {
             return $this->redirectToRoute('trick.index');
         }
 
         return $this->render('trick/edit.html.twig', [
-            'active_menu' => 'trick',
-            'trick' => $trickHandler->getData(),
+            'active_menu' => self::TRICK,
+            self::TRICK => $trickHandler->getData(),
             'form' => $trickHandler->createView(),
             'title' => ['name'=>'Création de la figure']
         ]);
@@ -131,13 +141,12 @@ class TrickController extends  AbstractController
      * @throws \Exception
      * @param Trick $trick
      */
-    public function delete( Trick $trick, Request $request) : Response
+    public function delete(Trick $trick, Request $request) : Response
     {
-        if ($this->isCsrfTokenValid('delete', $request->get('_token'))){
+        if ($this->isCsrfTokenValid('delete', $request->get('_token'))) {
             $this->objectManager->remove($trick);
             $this->objectManager->flush();
         }
         return $this->redirectToRoute('trick.index');
     }
-
 }

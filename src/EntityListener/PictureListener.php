@@ -11,22 +11,20 @@ namespace App\EntityListener;
 use App\Entity\Picture;
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 
-
-
 class PictureListener
 {
     /**
      * Suppression d'une image d'une figure
      * @param $picture
      */
-    public function preRemove( $picture)
+    public function preRemove($picture)
     {
-        if (!$picture instanceof Picture){
+        if (!$picture instanceof Picture) {
             return;
         }
 
-        if ($picture->getPath() !== '/'){
-            unlink(substr($picture->getPath(),1));
+        if ($picture->getPath() !== '/') {
+            unlink(substr($picture->getPath(), 1));
         }
     }
 
@@ -34,20 +32,20 @@ class PictureListener
      * Enregistrement d'une image d'une figure
      * @param $picture
      */
-    public function prePersist( $picture)
+    public function prePersist($picture)
     {
-        if (!$picture instanceof Picture){
-           return;
+        if (!$picture instanceof Picture) {
+            return;
         }
 
-        if (null == $picture->getFile()){
+        if (null == $picture->getFile()) {
             return;
         }
 
         $fileName = $this->generateUniqueFileName().'.'.$picture->getFile()->getClientOriginalExtension();
 
-        if ($picture->getFile()->move($this->picturesDirectory(), $fileName)){
-        $picture->setPath('/' . $this->picturesDirectory() . $fileName) ;
+        if ($picture->getFile()->move($this->picturesDirectory(), $fileName)) {
+            $picture->setPath('/' . $this->picturesDirectory() . $fileName) ;
         }
     }
 
@@ -64,7 +62,8 @@ class PictureListener
      * Repertoire de stockage des images des figures
      * @return string
      */
-    private function picturesDirectory(){
+    private function picturesDirectory()
+    {
         return 'assets/image/trick/';
     }
 }

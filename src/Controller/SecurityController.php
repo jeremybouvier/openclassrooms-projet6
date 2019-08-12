@@ -2,14 +2,12 @@
 
 namespace App\Controller;
 
-
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
 {
-
     /**
      * @Route("/login", name="login", methods="GET|POST")
      * @param AuthenticationUtils $authenticationUtils
@@ -29,6 +27,5 @@ class SecurityController extends AbstractController
      */
     public function logout()
     {
-
     }
 }

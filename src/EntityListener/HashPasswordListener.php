@@ -7,7 +7,6 @@ use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-
 class HashPasswordListener implements EventSubscriber
 {
     /**
@@ -69,5 +68,4 @@ class HashPasswordListener implements EventSubscriber
     {
         return $this->passwordEncoder->encodePassword($user, $user->getPlainPassword());
     }
-
 }

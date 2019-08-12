@@ -2,7 +2,6 @@
 
 namespace App\Handler;
 
-
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormView;
@@ -60,7 +59,7 @@ abstract class AbstractHandler
         $this->data = $data;
         $this->form = $this->formFactory->create(static::getFormType(), $data)->handleRequest($request);
 
-        if ($this->form->isSubmitted() && $this->form->isValid()){
+        if ($this->form->isSubmitted() && $this->form->isValid()) {
             $this->process($param);
             return true;
         }
@@ -75,5 +74,4 @@ abstract class AbstractHandler
     {
         return $this->form->createView();
     }
-
 }

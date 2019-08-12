@@ -12,13 +12,12 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-
 class TrickType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name',TextType::class)
+            ->add('name', TextType::class)
             ->add('description', TextareaType::class)
             ->add('groups', EntityType::class, ['class' => Group::class, 'choice_label' => 'name'])
             ->add('videos', CollectionType::class, [
@@ -33,8 +32,7 @@ class TrickType extends AbstractType
                 "allow_delete" =>true,
                 "by_reference" => false,
 
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

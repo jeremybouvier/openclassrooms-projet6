@@ -9,14 +9,13 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-
 class PictureType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('path',HiddenType::class)
-            ->add('file', FileType::class,['label'=> false,'required'=>false])
+            ->add('path', HiddenType::class)
+            ->add('file', FileType::class, ['label'=> false, 'required'=>false])
         ;
     }
 

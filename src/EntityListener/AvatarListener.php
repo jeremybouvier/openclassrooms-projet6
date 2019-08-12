@@ -5,21 +5,20 @@ namespace App\EntityListener;
 use App\Entity\Avatar;
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 
-
 class AvatarListener
 {
     /**
      * Suppression de l'image d'un utilisateur
      * @param $avatar
      */
-    public function preRemove( $avatar)
+    public function preRemove($avatar)
     {
-        if (!$avatar instanceof Avatar){
+        if (!$avatar instanceof Avatar) {
             return;
         }
 
-        if ($avatar->getPath() !== '/'){
-            unlink(substr($avatar->getPath(),1));
+        if ($avatar->getPath() !== '/') {
+            unlink(substr($avatar->getPath(), 1));
         }
     }
 
@@ -27,21 +26,21 @@ class AvatarListener
      * Enregistrement de l'image d'un utilisateur
      * @param $avatar
      */
-    public function prePersist( $avatar)
+    public function prePersist($avatar)
     {
-        if (!$avatar instanceof Avatar){
+        if (!$avatar instanceof Avatar) {
             return;
         }
 
-        if (null == $avatar->getFile()){
-            $avatar->setPath('/assets/image/avatar/base.jpg' );
+        if (null == $avatar->getFile()) {
+            $avatar->setPath('/assets/image/avatar/base.jpg');
             return;
         }
 
         $fileName = $this->generateUniqueFileName().'.'.$avatar->getFile()->getClientOriginalExtension();
 
-        if ($avatar->getFile()->move($this->AvatarsDirectory(), $fileName)){
-            $avatar->setPath('/' . $this->AvatarsDirectory() . $fileName) ;
+        if ($avatar->getFile()->move($this->avatarsDirectory(), $fileName)) {
+            $avatar->setPath('/' . $this->avatarsDirectory() . $fileName) ;
         }
     }
 
@@ -58,7 +57,8 @@ class AvatarListener
      * Repertoire de stockage des images des utilisateurs
      * @return string
      */
-    private function AvatarsDirectory(){
+    private function avatarsDirectory()
+    {
         return 'assets/image/avatar/';
     }
 }

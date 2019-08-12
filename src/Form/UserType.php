@@ -10,7 +10,6 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-
 class UserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -20,8 +19,7 @@ class UserType extends AbstractType
             ->add('email', TextType::class)
             ->add('plainPassword', PasswordType::class)
 
-            ->add('avatar', AvatarType::class, [ "data_class" => Avatar::class ])
-        ;
+            ->add('avatar', AvatarType::class, [ "data_class" => Avatar::class ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
