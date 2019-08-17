@@ -11,43 +11,59 @@ namespace App\EntityListener;
 use App\Entity\Picture;
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 
-
-
 class PictureListener
 {
-    public function preRemove( $picture)
+    /**
+     * Suppression d'une image d'une figure
+     * @param $picture
+     */
+    public function preRemove($picture)
     {
-        if (!$picture instanceof Picture){
+        if (!$picture instanceof Picture) {
             return;
         }
 
-        if ($picture->getPath() !== '/'){
-            unlink(substr($picture->getPath(),1));
+        if ($picture->getPath() !== '/') {
+            unlink(substr($picture->getPath(), 1));
         }
     }
-    public function prePersist( $picture)
+
+    /**
+     * Enregistrement d'une image d'une figure
+     * @param $picture
+     */
+    public function prePersist($picture)
     {
-        if (!$picture instanceof Picture){
-           return;
+        if (!$picture instanceof Picture) {
+            return;
         }
 
-        if (null == $picture->getFile()){
+        if (null == $picture->getFile()) {
             return;
         }
 
         $fileName = $this->generateUniqueFileName().'.'.$picture->getFile()->getClientOriginalExtension();
 
-        if ($picture->getFile()->move($this->picturesDirectory(), $fileName)){
-        $picture->setPath('/' . $this->picturesDirectory() . $fileName) ;
+        if ($picture->getFile()->move($this->picturesDirectory(), $fileName)) {
+            $picture->setPath('/' . $this->picturesDirectory() . $fileName) ;
         }
     }
 
+    /**
+     * Création d'un nom de fichier unique
+     * @return string
+     */
     private function generateUniqueFileName()
     {
         return md5(uniqid());
     }
 
-    private function picturesDirectory(){
+    /**
+     * Repertoire de stockage des images des figures
+     * @return string
+     */
+    private function picturesDirectory()
+    {
         return 'assets/image/trick/';
     }
 }

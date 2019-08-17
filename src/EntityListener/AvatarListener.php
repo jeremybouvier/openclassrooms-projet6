@@ -1,52 +1,64 @@
 <?php
-/**
- * Created by PhpStorm.
- * Avatar: jeremy
- * Date: 15/07/19
- * Time: 14:37
- */
 
 namespace App\EntityListener;
-
 
 use App\Entity\Avatar;
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 
 class AvatarListener
 {
-    public function preRemove( $avatar)
+    /**
+     * Suppression de l'image d'un utilisateur
+     * @param $avatar
+     */
+    public function preRemove($avatar)
     {
-        if (!$avatar instanceof Avatar){
+        if (!$avatar instanceof Avatar) {
             return;
         }
 
-        if ($avatar->getPath() !== '/'){
-            unlink(substr($avatar->getPath(),1));
+        if ($avatar->getPath() !== '/') {
+            unlink(substr($avatar->getPath(), 1));
         }
     }
-    public function prePersist( $avatar)
+
+    /**
+     * Enregistrement de l'image d'un utilisateur
+     * @param $avatar
+     */
+    public function prePersist($avatar)
     {
-        if (!$avatar instanceof Avatar){
+        if (!$avatar instanceof Avatar) {
             return;
         }
 
-        if (null == $avatar->getFile()){
+        if (null == $avatar->getFile()) {
+            $avatar->setPath('/assets/image/avatar/base.jpg');
             return;
         }
 
         $fileName = $this->generateUniqueFileName().'.'.$avatar->getFile()->getClientOriginalExtension();
 
-        if ($avatar->getFile()->move($this->AvatarsDirectory(), $fileName)){
-            $avatar->setPath('/' . $this->AvatarsDirectory() . $fileName) ;
+        if ($avatar->getFile()->move($this->avatarsDirectory(), $fileName)) {
+            $avatar->setPath('/' . $this->avatarsDirectory() . $fileName) ;
         }
     }
 
+    /**
+     * Creation d'un nom de fichier unique
+     * @return string
+     */
     private function generateUniqueFileName()
     {
         return md5(uniqid());
     }
 
-    private function AvatarsDirectory(){
+    /**
+     * Repertoire de stockage des images des utilisateurs
+     * @return string
+     */
+    private function avatarsDirectory()
+    {
         return 'assets/image/avatar/';
     }
 }

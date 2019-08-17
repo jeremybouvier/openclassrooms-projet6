@@ -2,13 +2,9 @@
 
 namespace App\Form;
 
-
 use App\Entity\Avatar;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -23,9 +19,7 @@ class UserType extends AbstractType
             ->add('email', TextType::class)
             ->add('plainPassword', PasswordType::class)
 
-            ->add('avatar', AvatarType::class, [ "data_class" => Avatar::class ])
-        ;
-
+            ->add('avatar', AvatarType::class, [ "data_class" => Avatar::class ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

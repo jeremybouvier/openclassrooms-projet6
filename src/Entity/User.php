@@ -11,7 +11,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  *
  */
-class User implements UserInterface,\Serializable
+class User implements UserInterface, \Serializable
 {
     /**
      * @ORM\Id()
@@ -179,16 +179,16 @@ class User implements UserInterface,\Serializable
      */
     public function unserialize($serialized)
     {
-       list(
-           $this->id,
-           $this->email,
-           $this->password
-           ) = unserialize($serialized, ['allowed_classes' => false]);
+        list(
+            $this->id,
+            $this->email,
+            $this->password
+            ) = unserialize($serialized, ['allowed_classes' => false]);
     }
 
     public function getUsername()
     {
-        return $this->email;
+        return $this->getEmail();
     }
 
     public function getAvatar(): ?Avatar
@@ -200,7 +200,6 @@ class User implements UserInterface,\Serializable
     {
         $this->avatar = $avatar;
 
-        // set the owning side of the relation if necessary
         if ($this !== $avatar->getUser()) {
             $avatar->setUser($this);
         }

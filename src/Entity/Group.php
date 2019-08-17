@@ -74,7 +74,7 @@ class Group
     {
         if ($this->trick->contains($trick)) {
             $this->trick->removeElement($trick);
-            // set the owning side to null (unless already changed)
+
             if ($trick->getGroup() === $this) {
                 $trick->setGroup(null);
             }
