@@ -37,7 +37,7 @@ class UserController extends AbstractController
 
     /**
      * Ajout d'un nouveau membre
-     * @Route("Enregistrement-Nouveau-Membre", name="user.new", methods="GET|POST")
+     * @Route("/enregistrement-nouveau-membre", name="user.new", methods="GET|POST")
      * @param Request $request
      * @param UserHandler $userHandler
      * @return Response
@@ -49,7 +49,7 @@ class UserController extends AbstractController
             return $this->redirectToRoute('trick.index');
         }
 
-        return $this->render('user/edit.html.twig', [
+        return $this->render('User/edit.html.twig', [
             'activeMenu' => 'connexion',
             'user' => $userHandler->getData(),
             'form' => $userHandler->createView(),

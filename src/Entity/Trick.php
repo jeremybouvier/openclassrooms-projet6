@@ -36,7 +36,7 @@ class Trick
      * @ORM\ManyToOne(targetEntity="App\Entity\Group", inversedBy="trick")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $groups;
+    private $group;
 
     /**
      * @var Collection
@@ -104,14 +104,14 @@ class Trick
         return $this;
     }
 
-    public function getGroups(): ?group
+    public function getGroup(): ?group
     {
-        return $this->groups;
+        return $this->group;
     }
 
-    public function setGroups(?group $groups): self
+    public function setGroup(?group $group): self
     {
-        $this->groups = $groups;
+        $this->group = $group;
 
         return $this;
     }

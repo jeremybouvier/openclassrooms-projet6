@@ -44,19 +44,19 @@ class TrickController extends AbstractController
 
     /**
      * Affichage de la liste des figures
-     * @Route("Liste-des-figures", name="trick.index")
+     * @Route("/liste-des-figures", name="trick.index")
      * @return Response
      */
     public function index() : Response
     {
-        return $this->render('trick/index.html.twig', [
+        return $this->render('Trick/index.html.twig', [
             'activeMenu' => self::TRICK_MENU_SELECTOR,
             'tricks' => $this->trickRepository->findAll()]);
     }
 
     /**
      * Affichage le detail d'une figure
-     * @Route("Figures/{id}/{page}", name="trick.show")
+     * @Route("/figure/{id}/{page}", name="trick.show")
      * @param Trick $trick
      * @param $page
      * @param ChatRepository $chatRepository
@@ -78,7 +78,7 @@ class TrickController extends AbstractController
             );
         }
 
-        return $this->render('trick/show.html.twig', [
+        return $this->render('Trick/show.html.twig', [
             'activeMenu' => self::TRICK_MENU_SELECTOR,
             self::TRICK => $trick,
             'chats'=>$chatRepository->findBy(['trick' => $trick], ['date' => 'DESC'], 10, ($page-1)*10),
@@ -89,7 +89,7 @@ class TrickController extends AbstractController
 
     /**
      * Modification d'une figure
-     * @Route("/Membre/Edition-Figure/{id}", name="trick.update", methods="GET|POST")
+     * @Route("/membre/edition-figure/{id}", name="trick.update", methods="GET|POST")
      * @param Trick $trick
      * @param Request $request
      * @param TrickHandler $trickHandler
@@ -102,7 +102,7 @@ class TrickController extends AbstractController
             return $this->redirectToRoute('trick.show', ['id' => $trick->getId(), 'page'=> 1]);
         }
 
-        return $this->render('trick/edit.html.twig', [
+        return $this->render('Trick/edit.html.twig', [
             'active_menu' => self::TRICK,
             self::TRICK => $trickHandler->getData(),
             'form' => $trickHandler->createView(),
@@ -112,7 +112,7 @@ class TrickController extends AbstractController
 
     /**
      * Ajout d'une nouvelle figure
-     * @Route("/Membre/Ajout-Figure/", name="trick.new", methods="GET|POST")
+     * @Route("/membre/ajout-figure", name="trick.new", methods="GET|POST")
      * @param Request $request
      * @param TrickHandler $trickHandler
      * @return Response
@@ -125,7 +125,7 @@ class TrickController extends AbstractController
             return $this->redirectToRoute('trick.index');
         }
 
-        return $this->render('trick/edit.html.twig', [
+        return $this->render('Trick/edit.html.twig', [
             'active_menu' => self::TRICK,
             self::TRICK => $trickHandler->getData(),
             'form' => $trickHandler->createView(),
@@ -135,7 +135,7 @@ class TrickController extends AbstractController
 
     /**
      * Suppression d'une figure
-     * @Route("/Membre/Supression-Figure/{id}", name="trick.delete", methods="DELETE")
+     * @Route("/membre/supression-figure/{id}", name="trick.delete", methods="DELETE")
      * @param Request $request
      * @return Response
      * @throws \Exception

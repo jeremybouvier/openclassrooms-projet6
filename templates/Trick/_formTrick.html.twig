@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-12 form-group" >{{ form_row(form.name) }}</div>
         <div class="col-12 form-group">{{ form_row(form.description, {'attr':{'rows': 15}})}}</div>
-        <div class="col-12 form-group">{{ form_row(form.groups) }}</div>
+        <div class="col-12 form-group">{{ form_row(form.group) }}</div>
     </div>
 </div>
 
@@ -16,9 +16,9 @@
     <h2>Videos</h2>
     <hr/>
     <div class="col-12 col-lg-10 offset-lg-1 mb-5 mt-3" >
-        <div class="row mb-3" id= "videos" data-index="{{ form.videos|length > 0 ? form.videos|last.vars.name+1 : 0 }}" data-prototype="{{ include("trick/_formVideo.html.twig", { form: form.videos.vars.prototype })|e("html_attr") }}">
+        <div class="row mb-3" id= "videos" data-index="{{ form.videos|length > 0 ? form.videos|last.vars.name+1 : 0 }}" data-prototype="{{ include("Trick/_formVideo.html.twig", { form: form.videos.vars.prototype })|e("html_attr") }}">
                 {% for video in form.videos %}
-                    {{ include('trick/_formVideo.html.twig', {form: video})}}
+                    {{ include('Trick/_formVideo.html.twig', {form: video})}}
                 {% endfor %}
         </div>
         <a href="#videos" class="btn btn-sm btn-outline-secondary btn-add-video mb-2" data-rel="#videos">Ajouter une video</a>
@@ -27,9 +27,9 @@
     <h2>Images</h2>
     <hr/>
     <div class="col-12 col-lg-10 offset-lg-1">
-        <div class="row mb-3" id= "pictures" data-index="{{ form.pictures|length > 0 ? form.pictures|last.vars.name+1 : 0 }}" data-prototype="{{ include("trick/_formPicture.html.twig", { form: form.pictures.vars.prototype })|e("html_attr") }}">
+        <div class="row mb-3" id= "pictures" data-index="{{ form.pictures|length > 0 ? form.pictures|last.vars.name+1 : 0 }}" data-prototype="{{ include("Trick/_formPicture.html.twig", { form: form.pictures.vars.prototype })|e("html_attr") }}">
             {% for picture in form.pictures %}
-                {{ include('trick/_formPicture.html.twig', {form: picture})}}
+                {{ include('Trick/_formPicture.html.twig', {form: picture})}}
             {% endfor %}
         </div>
         <a href="#pictures" class="btn btn-sm btn-outline-secondary btn-add-picture mb-2" data-rel="#pictures">Ajouter une image</a>

@@ -19,7 +19,7 @@ class TrickType extends AbstractType
         $builder
             ->add('name', TextType::class)
             ->add('description', TextareaType::class)
-            ->add('groups', EntityType::class, ['class' => Group::class, 'choice_label' => 'name'])
+            ->add('group', EntityType::class, ['class' => Group::class, 'choice_label' => 'name'])
             ->add('videos', CollectionType::class, [
                 "entry_type" =>VideoType::class,
                 "allow_add" => true,
