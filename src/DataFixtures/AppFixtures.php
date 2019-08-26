@@ -31,7 +31,7 @@ class AppFixtures extends Fixture
     private $tricks = [
         [
             'group' => 2,
-            'name' => 'Frontside 720',
+            'name' => 'Frontside',
             'description' => "Le Frontside 7, comment ça marche? La phase d’approche consiste à arriver bien fléchi sur 
             le kicker, la planche bien à plat, les épaules dans l’axe de la board, le regard fixé sur le bout du kicker.
             Ensuite l'impulsion se fait à 2 pieds au bout du kicker. Ne pas pousser trop fort aux premiers essais au 
@@ -56,7 +56,7 @@ class AppFixtures extends Fixture
         ],
         [
             'group' => 2,
-            'name' => 'switch back 540',
+            'name' => 'switch back',
             'description' => "Avant tout, il faut bien maitriser le fait de rider en switch avec aisance ainsi que le 
             switch 180 back pour l’arrivé sur le kick et les 360 front pour la fin de la rotation et le replaquage.La 
             phase d’approche consiste à arriver bien fléchi sur le kicker, la planche bien à plat, les épaules dans 
@@ -136,7 +136,7 @@ class AppFixtures extends Fixture
         ],
         [
             'group' => 0,
-            'name' => 'Fifty Fifty 270',
+            'name' => 'Fifty Fifty',
             'description' => "Comme sur beaucoup de spots en street, un élastique a servi à cette séquence. Une fois 
             le palonnier entre les mains, les potes lâchent tout, et c'est parti. Bien penser à visualiser en amont la 
             prise d'élan et l'entrée du spot (car on arrive vite dessus), afin de se positionner au mieux et aborder 
@@ -151,7 +151,7 @@ class AppFixtures extends Fixture
         ],
         [
             'group' => 2,
-            'name' => 'Backside 180',
+            'name' => 'Backside',
             'description' => "Le Backside 180 peut s’expliquer en plusieurs phases. Tout d'abort la phase d’approche 
             consiste à avoir sa planche la plus à plat possible ou légèrement sur la carre frontside, le regard est 
             pointé vers le spot (l’endroit où on veut décoller). Les jambes sont fléchies, prêtes à donner une 
@@ -221,7 +221,7 @@ class AppFixtures extends Fixture
         ],
         [
             'group' => 2,
-            'name' => 'Front Blunt 270',
+            'name' => 'Front Blunt',
             'description' => "Prendre un peu d'élan en regardant bien l'entrée du curb. Placer son ollie et effectuer 
             un quart de tour en backside. De ce fait, vous vous retrouvez dos au module. Venir mettre son corps 
             au-dessus du tail et de sa jambe arrière afin d'effectuer un front blunt. Après avoir slidé quelques mètres,

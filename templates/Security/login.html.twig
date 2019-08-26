@@ -11,32 +11,45 @@
 {% endblock %}
 
 {% block body%}
-    <div class="container-fluid  mb-5 mt-5" id="section">
-        <div class="row justify-content-center mb-5">
-            <h1 class="text-center">Connexion Espace Membre</h1>
-            <a href="{{ path('user.new') }}" class="col-12 col-lg-6 text-center" style="font-style: italic; color: #17a2b8"> ( S'enregistrer )</a>
+    <div class="container mb-5 mt-5 d-flex justify-content-center" id="section" >
+        <div class="col-10">
+            <div class="row justify-content-center mb-5">
+                <h1 class="text-center">Connexion Espace Membre</h1>
+            </div>
+            <div class="row">
+                <div class="col-12 col-lg-6 pt-3" style="border: 1px darkgrey solid;box-shadow: 4px 4px 8px grey;">
+                    <h5 class="text-center">Connexion membre</h5>
+                    <div class="row justify-content-center mb-2">
+                        {% if error %}
+                            <div class="col-12 col-lg-6 alert alert-danger">{{ error.messageKey | trans(error.messagedata, 'security')}}</div>
+                        {% endif %}
+                    </div>
+                    <div class="row justify-content-center">
+                        <form action="{{ path('login')}}" method="post" class="col-10">
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="_username" class="form-control" value="{{ lastUsername }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="password"> Mot De Passe <a href="{{ path('user.forgot') }}" class="ml-2 text-muted font-italic" style="font-size: 0.9em;"> (mot de passe oublié?)</a></label>
+                                <input type="password" id="password" name="_password" class="form-control">
+                            </div>
+                            <div class="col-12 d-flex mb-5 justify-content-center">
+                                <a href="{{ path('trick.index') }}" class="col-12 col-lg-4 btn btn-sm btn-outline-info">Retour</a>
+                                <button type="submit" class="btn btn-sm btn-outline-info col-12 col-lg-4 ml-4">Valider</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-5 ml-4 pt-3" style="border: 1px darkgrey solid;box-shadow: 4px 4px 8px grey;">
+                    <h5 class="text-center mb-5">Nouveau membre</h5>
+                    <div class="row justify-content-center mt-5 pt-5 mb-3">
+                        <a href="{{ path('user.new') }}" class="col-12 col-lg-6 btn btn-sm btn-outline-secondary"> Créer un compte</a>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="row justify-content-center mb-2">
-            {% if error %}
-                <div class="col-12 col-lg-6 alert alert-danger">{{ error.messageKey | trans(error.messagedata, 'security')}}</div>
-            {% endif %}
-        </div>
-        <div class="row justify-content-center">
-            <form action="{{ path('login')}}" method="post" class="col-12 col-lg-6 ">
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="_username" class="form-control" value="{{ lastUsername }}">
-                </div>
-                <div class="form-group">
-                    <label for="password"> Mot De Passe</label>
-                    <input type="password" id="password" name="_password" class="form-control">
-                </div>
-                <div class="col-12 d-flex mb-5 justify-content-center">
-                    <button type="submit" class="btn btn-sm btn-outline-info col-12 col-lg-6">Valider</button>
-                </div>
-            </form>
 
-        </div>
     </div>
 {% endblock %}
 

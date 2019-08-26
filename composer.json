@@ -26,8 +26,8 @@
         "symfony/yaml": "4.2.*"
     },
     "require-dev": {
+        "dama/doctrine-test-bundle": "^6.0",
         "doctrine/doctrine-fixtures-bundle": "^3.2",
-        "phpunit/phpunit": "8.0.0",
         "sebastian/phpcpd": "^4.1",
         "squizlabs/php_codesniffer": "3.*",
         "symfony/browser-kit": "4.2.*",

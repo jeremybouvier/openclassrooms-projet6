@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Dashboard for /home/jeremy/Documents/OpenClassRooms/Projet6/ProjetSymfony/JimmySweatSnowboard/src</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href=".css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href=".css/nv.d3.min.css" rel="stylesheet" type="text/css">
+  <link href=".css/style.css" rel="stylesheet" type="text/css">
+  <link href=".css/custom.css" rel="stylesheet" type="text/css">
+ </head>
+ <body>
+  <header>
+   <div class="container-fluid">
+    <div class="row">
+     <div class="col-md-12">
+      <nav aria-label="breadcrumb">
+       <ol class="breadcrumb">
+         <li class="breadcrumb-item"><a href="index.html">/home/jeremy/Documents/OpenClassRooms/Projet6/ProjetSymfony/JimmySweatSnowboard/src</a></li>
+         <li class="breadcrumb-item active">(Dashboard)</li>
+
+       </ol>
+      </nav>
+     </div>
+    </div>
+   </div>
+  </header>
+  <div class="container-fluid">
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Classes</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="classCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="classComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Form/GroupType.php.html#10">App\Form\GroupType</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Group.php.html#13">App\Entity\Group</a></td><td class="text-right">68%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Entity/Group.php.html#13">App\Entity\Group</a></td><td class="text-right">16</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Methods</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="methodCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="methodComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Controller/SecurityController.php.html#28"><abbr title="App\Controller\SecurityController::logout">logout</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Group.php.html#73"><abbr title="App\Entity\Group::removeTrick">removeTrick</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Trick.php.html#137"><abbr title="App\Entity\Trick::removeChat">removeChat</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Trick.php.html#193"><abbr title="App\Entity\Trick::removeVideo">removeVideo</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Trick.php.html#224"><abbr title="App\Entity\Trick::removePicture">removePicture</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/User.php.html#133"><abbr title="App\Entity\User::removeChat">removeChat</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Form/GroupType.php.html#12"><abbr title="App\Form\GroupType::buildForm">buildForm</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Form/GroupType.php.html#19"><abbr title="App\Form\GroupType::configureOptions">configureOptions</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="EntityListener/AvatarListener.php.html#14"><abbr title="App\EntityListener\AvatarListener::preRemove">preRemove</abbr></a></td><td class="text-right">40%</td></tr>
+       <tr><td><a href="Controller/TrickController.php.html#149"><abbr title="App\Controller\TrickController::delete">delete</abbr></a></td><td class="text-right">50%</td></tr>
+       <tr><td><a href="EntityListener/PictureListener.php.html#21"><abbr title="App\EntityListener\PictureListener::preRemove">preRemove</abbr></a></td><td class="text-right">66%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Entity/Group.php.html#73"><abbr title="App\Entity\Group::removeTrick">removeTrick</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Entity/Trick.php.html#137"><abbr title="App\Entity\Trick::removeChat">removeChat</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Entity/Trick.php.html#193"><abbr title="App\Entity\Trick::removeVideo">removeVideo</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Entity/Trick.php.html#224"><abbr title="App\Entity\Trick::removePicture">removePicture</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Entity/User.php.html#133"><abbr title="App\Entity\User::removeChat">removeChat</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="EntityListener/AvatarListener.php.html#14"><abbr title="App\EntityListener\AvatarListener::preRemove">preRemove</abbr></a></td><td class="text-right">4</td></tr>
+       <tr><td><a href="EntityListener/PictureListener.php.html#21"><abbr title="App\EntityListener\PictureListener::preRemove">preRemove</abbr></a></td><td class="text-right">3</td></tr>
+       <tr><td><a href="Controller/TrickController.php.html#149"><abbr title="App\Controller\TrickController::delete">delete</abbr></a></td><td class="text-right">2</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <footer>
+    <hr/>
+    <p>
+     <small>Generated by <a href="https://github.com/sebastianbergmann/php-code-coverage" target="_top">php-code-coverage 6.1.4</a> using <a href="https://secure.php.net/" target="_top">PHP 7.3.7-1+ubuntu16.04.1+deb.sury.org+1</a> with <a href="https://xdebug.org/">Xdebug 2.7.1</a> and <a href="https://phpunit.de/">PHPUnit 7.5.15</a> at Mon Aug 26 22:16:28 CEST 2019.</small>
+    </p>
+   </footer>
+  </div>
+  <script src=".js/jquery.min.js" type="text/javascript"></script>
+  <script src=".js/d3.min.js" type="text/javascript"></script>
+  <script src=".js/nv.d3.min.js" type="text/javascript"></script>
+  <script type="text/javascript">
+$(document).ready(function() {
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#classCoverageDistribution svg')
+      .datum(getCoverageDistributionData([1,0,0,0,0,0,0,1,3,3,1,23], "Class Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#methodCoverageDistribution svg')
+      .datum(getCoverageDistributionData([8,0,0,0,0,1,1,1,2,2,1,128], "Method Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getCoverageDistributionData(data, label) {
+    var labels = [
+      '0%',
+      '0-10%',
+      '10-20%',
+      '20-30%',
+      '30-40%',
+      '40-50%',
+      '50-60%',
+      '60-70%',
+      '70-80%',
+      '80-90%',
+      '90-100%',
+      '100%'
+    ];
+    var values = [];
+    $.each(labels, function(key) {
+      values.push({x: labels[key], y: data[key]});
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Cyclomatic Complexity');
+
+    d3.select('#classComplexity svg')
+      .datum(getComplexityData([[100,1,"<a href=\"Controller\/HomeController.php.html#9\">App\\Controller\\HomeController<\/a>"],[80,2,"<a href=\"Controller\/SecurityController.php.html#9\">App\\Controller\\SecurityController<\/a>"],[91.8918918918919,11,"<a href=\"Controller\/TrickController.php.html#17\">App\\Controller\\TrickController<\/a>"],[100,8,"<a href=\"Controller\/UserController.php.html#15\">App\\Controller\\UserController<\/a>"],[100,10,"<a href=\"Entity\/Avatar.php.html#12\">App\\Entity\\Avatar<\/a>"],[100,17,"<a href=\"Entity\/Chat.php.html#11\">App\\Entity\\Chat<\/a>"],[68.75,12,"<a href=\"Entity\/Group.php.html#13\">App\\Entity\\Group<\/a>"],[100,11,"<a href=\"Entity\/Picture.php.html#12\">App\\Entity\\Picture<\/a>"],[71.15384615384616,37,"<a href=\"Entity\/Trick.php.html#13\">App\\Entity\\Trick<\/a>"],[89.58333333333334,34,"<a href=\"Entity\/User.php.html#14\">App\\Entity\\User<\/a>"],[100,9,"<a href=\"Entity\/Video.php.html#11\">App\\Entity\\Video<\/a>"],[76.47058823529412,9,"<a href=\"EntityListener\/AvatarListener.php.html#8\">App\\EntityListener\\AvatarListener<\/a>"],[87.5,8,"<a href=\"EntityListener\/HashPasswordListener.php.html#10\">App\\EntityListener\\HashPasswordListener<\/a>"],[77.77777777777779,10,"<a href=\"EntityListener\/PictureListener.php.html#14\">App\\EntityListener\\PictureListener<\/a>"],[100,2,"<a href=\"Form\/AvatarType.php.html#11\">App\\Form\\AvatarType<\/a>"],[100,2,"<a href=\"Form\/ChatType.php.html#11\">App\\Form\\ChatType<\/a>"],[0,2,"<a href=\"Form\/GroupType.php.html#10\">App\\Form\\GroupType<\/a>"],[100,2,"<a href=\"Form\/PictureType.php.html#12\">App\\Form\\PictureType<\/a>"],[100,2,"<a href=\"Form\/TrickType.php.html#15\">App\\Form\\TrickType<\/a>"],[100,2,"<a href=\"Form\/UserType.php.html#13\">App\\Form\\UserType<\/a>"],[100,2,"<a href=\"Form\/VideoType.php.html#11\">App\\Form\\VideoType<\/a>"],[100,8,"<a href=\"Handler\/AbstractHandler.php.html#10\">App\\Handler\\AbstractHandler<\/a>"],[100,3,"<a href=\"Handler\/ChatHandler.php.html#9\">App\\Handler\\ChatHandler<\/a>"],[100,4,"<a href=\"Handler\/TrickHandler.php.html#10\">App\\Handler\\TrickHandler<\/a>"],[100,3,"<a href=\"Handler\/UserHandler.php.html#9\">App\\Handler\\UserHandler<\/a>"],[100,1,"<a href=\"Repository\/AvatarRepository.php.html#15\">App\\Repository\\AvatarRepository<\/a>"],[100,1,"<a href=\"Repository\/ChatRepository.php.html#15\">App\\Repository\\ChatRepository<\/a>"],[100,1,"<a href=\"Repository\/GroupRepository.php.html#15\">App\\Repository\\GroupRepository<\/a>"],[100,1,"<a href=\"Repository\/PictureRepository.php.html#15\">App\\Repository\\PictureRepository<\/a>"],[100,1,"<a href=\"Repository\/TrickRepository.php.html#15\">App\\Repository\\TrickRepository<\/a>"],[100,1,"<a href=\"Repository\/UserRepository.php.html#15\">App\\Repository\\UserRepository<\/a>"],[100,1,"<a href=\"Repository\/VideoRepository.php.html#15\">App\\Repository\\VideoRepository<\/a>"]], 'Class Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Method Complexity');
+
+    d3.select('#methodComplexity svg')
+      .datum(getComplexityData([[100,1,"<a href=\"Controller\/HomeController.php.html#15\">App\\Controller\\HomeController::index<\/a>"],[100,1,"<a href=\"Controller\/SecurityController.php.html#16\">App\\Controller\\SecurityController::login<\/a>"],[0,1,"<a href=\"Controller\/SecurityController.php.html#28\">App\\Controller\\SecurityController::logout<\/a>"],[100,1,"<a href=\"Controller\/TrickController.php.html#39\">App\\Controller\\TrickController::__construct<\/a>"],[100,1,"<a href=\"Controller\/TrickController.php.html#50\">App\\Controller\\TrickController::index<\/a>"],[100,2,"<a href=\"Controller\/TrickController.php.html#67\">App\\Controller\\TrickController::show<\/a>"],[87.5,3,"<a href=\"Controller\/TrickController.php.html#99\">App\\Controller\\TrickController::update<\/a>"],[100,2,"<a href=\"Controller\/TrickController.php.html#126\">App\\Controller\\TrickController::new<\/a>"],[50,2,"<a href=\"Controller\/TrickController.php.html#149\">App\\Controller\\TrickController::delete<\/a>"],[100,1,"<a href=\"Controller\/UserController.php.html#32\">App\\Controller\\UserController::__construct<\/a>"],[100,2,"<a href=\"Controller\/UserController.php.html#46\">App\\Controller\\UserController::new<\/a>"],[100,3,"<a href=\"Controller\/UserController.php.html#68\">App\\Controller\\UserController::forgotPassword<\/a>"],[100,1,"<a href=\"Controller\/UserController.php.html#97\">App\\Controller\\UserController::sendMail<\/a>"],[100,1,"<a href=\"Controller\/UserController.php.html#120\">App\\Controller\\UserController::setToken<\/a>"],[100,2,"<a href=\"Entity\/Avatar.php.html#38\">App\\Entity\\Avatar::getId<\/a>"],[100,2,"<a href=\"Entity\/Avatar.php.html#43\">App\\Entity\\Avatar::getPath<\/a>"],[100,1,"<a href=\"Entity\/Avatar.php.html#48\">App\\Entity\\Avatar::setPath<\/a>"],[100,2,"<a href=\"Entity\/Avatar.php.html#55\">App\\Entity\\Avatar::getUser<\/a>"],[100,1,"<a href=\"Entity\/Avatar.php.html#60\">App\\Entity\\Avatar::setUser<\/a>"],[100,1,"<a href=\"Entity\/Avatar.php.html#67\">App\\Entity\\Avatar::getFile<\/a>"],[100,1,"<a href=\"Entity\/Avatar.php.html#72\">App\\Entity\\Avatar::setFile<\/a>"],[100,1,"<a href=\"Entity\/Chat.php.html#44\">App\\Entity\\Chat::__construct<\/a>"],[100,2,"<a href=\"Entity\/Chat.php.html#49\">App\\Entity\\Chat::getId<\/a>"],[100,2,"<a href=\"Entity\/Chat.php.html#54\">App\\Entity\\Chat::getMessage<\/a>"],[100,1,"<a href=\"Entity\/Chat.php.html#59\">App\\Entity\\Chat::setMessage<\/a>"],[100,2,"<a href=\"Entity\/Chat.php.html#66\">App\\Entity\\Chat::getDate<\/a>"],[100,1,"<a href=\"Entity\/Chat.php.html#71\">App\\Entity\\Chat::setDate<\/a>"],[100,2,"<a href=\"Entity\/Chat.php.html#78\">App\\Entity\\Chat::getUser<\/a>"],[100,2,"<a href=\"Entity\/Chat.php.html#83\">App\\Entity\\Chat::setUser<\/a>"],[100,2,"<a href=\"Entity\/Chat.php.html#90\">App\\Entity\\Chat::getTrick<\/a>"],[100,2,"<a href=\"Entity\/Chat.php.html#95\">App\\Entity\\Chat::setTrick<\/a>"],[100,1,"<a href=\"Entity\/Group.php.html#33\">App\\Entity\\Group::__construct<\/a>"],[100,2,"<a href=\"Entity\/Group.php.html#38\">App\\Entity\\Group::getId<\/a>"],[100,2,"<a href=\"Entity\/Group.php.html#43\">App\\Entity\\Group::getName<\/a>"],[100,1,"<a href=\"Entity\/Group.php.html#48\">App\\Entity\\Group::setName<\/a>"],[100,1,"<a href=\"Entity\/Group.php.html#58\">App\\Entity\\Group::getTrick<\/a>"],[100,2,"<a href=\"Entity\/Group.php.html#63\">App\\Entity\\Group::addTrick<\/a>"],[0,3,"<a href=\"Entity\/Group.php.html#73\">App\\Entity\\Group::removeTrick<\/a>"],[100,2,"<a href=\"Entity\/Picture.php.html#41\">App\\Entity\\Picture::getId<\/a>"],[100,2,"<a href=\"Entity\/Picture.php.html#46\">App\\Entity\\Picture::getPath<\/a>"],[100,1,"<a href=\"Entity\/Picture.php.html#51\">App\\Entity\\Picture::setPath<\/a>"],[100,2,"<a href=\"Entity\/Picture.php.html#58\">App\\Entity\\Picture::getTrick<\/a>"],[100,2,"<a href=\"Entity\/Picture.php.html#63\">App\\Entity\\Picture::setTrick<\/a>"],[100,1,"<a href=\"Entity\/Picture.php.html#70\">App\\Entity\\Picture::getFile<\/a>"],[100,1,"<a href=\"Entity\/Picture.php.html#75\">App\\Entity\\Picture::setFile<\/a>"],[100,1,"<a href=\"Entity\/Trick.php.html#69\">App\\Entity\\Trick::__construct<\/a>"],[100,2,"<a href=\"Entity\/Trick.php.html#78\">App\\Entity\\Trick::getId<\/a>"],[100,2,"<a href=\"Entity\/Trick.php.html#83\">App\\Entity\\Trick::getName<\/a>"],[100,1,"<a href=\"Entity\/Trick.php.html#88\">App\\Entity\\Trick::setName<\/a>"],[100,2,"<a href=\"Entity\/Trick.php.html#95\">App\\Entity\\Trick::getDescription<\/a>"],[100,1,"<a href=\"Entity\/Trick.php.html#100\">App\\Entity\\Trick::setDescription<\/a>"],[100,2,"<a href=\"Entity\/Trick.php.html#107\">App\\Entity\\Trick::getGroup<\/a>"],[100,2,"<a href=\"Entity\/Trick.php.html#112\">App\\Entity\\Trick::setGroup<\/a>"],[100,1,"<a href=\"Entity\/Trick.php.html#122\">App\\Entity\\Trick::getChats<\/a>"],[100,2,"<a href=\"Entity\/Trick.php.html#127\">App\\Entity\\Trick::addChat<\/a>"],[0,3,"<a href=\"Entity\/Trick.php.html#137\">App\\Entity\\Trick::removeChat<\/a>"],[100,2,"<a href=\"Entity\/Trick.php.html#150\">App\\Entity\\Trick::getCreationDate<\/a>"],[100,1,"<a href=\"Entity\/Trick.php.html#155\">App\\Entity\\Trick::setCreationDate<\/a>"],[100,2,"<a href=\"Entity\/Trick.php.html#163\">App\\Entity\\Trick::getUpdateDate<\/a>"],[100,1,"<a href=\"Entity\/Trick.php.html#168\">App\\Entity\\Trick::setUpdateDate<\/a>"],[100,1,"<a href=\"Entity\/Trick.php.html#178\">App\\Entity\\Trick::getVideos<\/a>"],[100,2,"<a href=\"Entity\/Trick.php.html#183\">App\\Entity\\Trick::addVideo<\/a>"],[0,3,"<a href=\"Entity\/Trick.php.html#193\">App\\Entity\\Trick::removeVideo<\/a>"],[100,1,"<a href=\"Entity\/Trick.php.html#209\">App\\Entity\\Trick::getPictures<\/a>"],[100,2,"<a href=\"Entity\/Trick.php.html#214\">App\\Entity\\Trick::addPicture<\/a>"],[0,3,"<a href=\"Entity\/Trick.php.html#224\">App\\Entity\\Trick::removePicture<\/a>"],[100,1,"<a href=\"Entity\/User.php.html#58\">App\\Entity\\User::__construct<\/a>"],[100,2,"<a href=\"Entity\/User.php.html#63\">App\\Entity\\User::getId<\/a>"],[100,2,"<a href=\"Entity\/User.php.html#68\">App\\Entity\\User::getLoginName<\/a>"],[100,1,"<a href=\"Entity\/User.php.html#73\">App\\Entity\\User::setLoginName<\/a>"],[100,2,"<a href=\"Entity\/User.php.html#80\">App\\Entity\\User::getEmail<\/a>"],[100,1,"<a href=\"Entity\/User.php.html#85\">App\\Entity\\User::setEmail<\/a>"],[100,2,"<a href=\"Entity\/User.php.html#92\">App\\Entity\\User::getPassword<\/a>"],[100,1,"<a href=\"Entity\/User.php.html#97\">App\\Entity\\User::setPassword<\/a>"],[100,1,"<a href=\"Entity\/User.php.html#104\">App\\Entity\\User::getPlainPassword<\/a>"],[100,1,"<a href=\"Entity\/User.php.html#109\">App\\Entity\\User::setPlainPassword<\/a>"],[100,1,"<a href=\"Entity\/User.php.html#118\">App\\Entity\\User::getChats<\/a>"],[100,2,"<a href=\"Entity\/User.php.html#123\">App\\Entity\\User::addChat<\/a>"],[0,3,"<a href=\"Entity\/User.php.html#133\">App\\Entity\\User::removeChat<\/a>"],[100,1,"<a href=\"Entity\/User.php.html#149\">App\\Entity\\User::getRoles<\/a>"],[100,1,"<a href=\"Entity\/User.php.html#157\">App\\Entity\\User::getSalt<\/a>"],[100,1,"<a href=\"Entity\/User.php.html#165\">App\\Entity\\User::eraseCredentials<\/a>"],[100,1,"<a href=\"Entity\/User.php.html#173\">App\\Entity\\User::serialize<\/a>"],[100,1,"<a href=\"Entity\/User.php.html#185\">App\\Entity\\User::unserialize<\/a>"],[100,1,"<a href=\"Entity\/User.php.html#194\">App\\Entity\\User::getUsername<\/a>"],[100,2,"<a href=\"Entity\/User.php.html#199\">App\\Entity\\User::getAvatar<\/a>"],[100,2,"<a href=\"Entity\/User.php.html#204\">App\\Entity\\User::setAvatar<\/a>"],[100,2,"<a href=\"Entity\/User.php.html#215\">App\\Entity\\User::getToken<\/a>"],[100,2,"<a href=\"Entity\/User.php.html#220\">App\\Entity\\User::setToken<\/a>"],[100,2,"<a href=\"Entity\/Video.php.html#33\">App\\Entity\\Video::getId<\/a>"],[100,2,"<a href=\"Entity\/Video.php.html#38\">App\\Entity\\Video::getPath<\/a>"],[100,1,"<a href=\"Entity\/Video.php.html#43\">App\\Entity\\Video::setPath<\/a>"],[100,2,"<a href=\"Entity\/Video.php.html#50\">App\\Entity\\Video::getTrick<\/a>"],[100,2,"<a href=\"Entity\/Video.php.html#55\">App\\Entity\\Video::setTrick<\/a>"],[40,3,"<a href=\"EntityListener\/AvatarListener.php.html#14\">App\\EntityListener\\AvatarListener::preRemove<\/a>"],[90,4,"<a href=\"EntityListener\/AvatarListener.php.html#30\">App\\EntityListener\\AvatarListener::prePersist<\/a>"],[100,1,"<a href=\"EntityListener\/AvatarListener.php.html#53\">App\\EntityListener\\AvatarListener::generateUniqueFileName<\/a>"],[100,1,"<a href=\"EntityListener\/AvatarListener.php.html#62\">App\\EntityListener\\AvatarListener::avatarsDirectory<\/a>"],[100,1,"<a href=\"EntityListener\/HashPasswordListener.php.html#17\">App\\EntityListener\\HashPasswordListener::__construct<\/a>"],[100,1,"<a href=\"EntityListener\/HashPasswordListener.php.html#25\">App\\EntityListener\\HashPasswordListener::getSubscribedEvents<\/a>"],[100,2,"<a href=\"EntityListener\/HashPasswordListener.php.html#34\">App\\EntityListener\\HashPasswordListener::prePersist<\/a>"],[71.42857142857143,3,"<a href=\"EntityListener\/HashPasswordListener.php.html#48\">App\\EntityListener\\HashPasswordListener::preUpdate<\/a>"],[100,1,"<a href=\"EntityListener\/HashPasswordListener.php.html#67\">App\\EntityListener\\HashPasswordListener::encodedPassword<\/a>"],[66.66666666666666,3,"<a href=\"EntityListener\/PictureListener.php.html#21\">App\\EntityListener\\PictureListener::preRemove<\/a>"],[83.33333333333334,3,"<a href=\"EntityListener\/PictureListener.php.html#38\">App\\EntityListener\\PictureListener::prePersist<\/a>"],[75,2,"<a href=\"EntityListener\/PictureListener.php.html#59\">App\\EntityListener\\PictureListener::uploadFile<\/a>"],[100,1,"<a href=\"EntityListener\/PictureListener.php.html#71\">App\\EntityListener\\PictureListener::generateUniqueFileName<\/a>"],[100,1,"<a href=\"EntityListener\/PictureListener.php.html#80\">App\\EntityListener\\PictureListener::picturesDirectory<\/a>"],[100,1,"<a href=\"Form\/AvatarType.php.html#13\">App\\Form\\AvatarType::buildForm<\/a>"],[100,1,"<a href=\"Form\/AvatarType.php.html#20\">App\\Form\\AvatarType::configureOptions<\/a>"],[100,1,"<a href=\"Form\/ChatType.php.html#13\">App\\Form\\ChatType::buildForm<\/a>"],[100,1,"<a href=\"Form\/ChatType.php.html#20\">App\\Form\\ChatType::configureOptions<\/a>"],[0,1,"<a href=\"Form\/GroupType.php.html#12\">App\\Form\\GroupType::buildForm<\/a>"],[0,1,"<a href=\"Form\/GroupType.php.html#19\">App\\Form\\GroupType::configureOptions<\/a>"],[100,1,"<a href=\"Form\/PictureType.php.html#14\">App\\Form\\PictureType::buildForm<\/a>"],[100,1,"<a href=\"Form\/PictureType.php.html#22\">App\\Form\\PictureType::configureOptions<\/a>"],[100,1,"<a href=\"Form\/TrickType.php.html#17\">App\\Form\\TrickType::buildForm<\/a>"],[100,1,"<a href=\"Form\/TrickType.php.html#38\">App\\Form\\TrickType::configureOptions<\/a>"],[100,1,"<a href=\"Form\/UserType.php.html#15\">App\\Form\\UserType::buildForm<\/a>"],[100,1,"<a href=\"Form\/UserType.php.html#25\">App\\Form\\UserType::configureOptions<\/a>"],[100,1,"<a href=\"Form\/VideoType.php.html#13\">App\\Form\\VideoType::buildForm<\/a>"],[100,1,"<a href=\"Form\/VideoType.php.html#19\">App\\Form\\VideoType::configureOptions<\/a>"],[100,1,"<a href=\"Handler\/AbstractHandler.php.html#28\">App\\Handler\\AbstractHandler::process<\/a>"],[100,1,"<a href=\"Handler\/AbstractHandler.php.html#33\">App\\Handler\\AbstractHandler::getFormType<\/a>"],[100,1,"<a href=\"Handler\/AbstractHandler.php.html#39\">App\\Handler\\AbstractHandler::setFormFactory<\/a>"],[100,1,"<a href=\"Handler\/AbstractHandler.php.html#47\">App\\Handler\\AbstractHandler::getData<\/a>"],[100,3,"<a href=\"Handler\/AbstractHandler.php.html#57\">App\\Handler\\AbstractHandler::handle<\/a>"],[100,1,"<a href=\"Handler\/AbstractHandler.php.html#73\">App\\Handler\\AbstractHandler::createView<\/a>"],[100,1,"<a href=\"Handler\/ChatHandler.php.html#26\">App\\Handler\\ChatHandler::__construct<\/a>"],[100,1,"<a href=\"Handler\/ChatHandler.php.html#36\">App\\Handler\\ChatHandler::getFormType<\/a>"],[100,1,"<a href=\"Handler\/ChatHandler.php.html#45\">App\\Handler\\ChatHandler::process<\/a>"],[100,1,"<a href=\"Handler\/TrickHandler.php.html#27\">App\\Handler\\TrickHandler::__construct<\/a>"],[100,1,"<a href=\"Handler\/TrickHandler.php.html#37\">App\\Handler\\TrickHandler::getFormType<\/a>"],[100,2,"<a href=\"Handler\/TrickHandler.php.html#47\">App\\Handler\\TrickHandler::process<\/a>"],[100,1,"<a href=\"Handler\/UserHandler.php.html#26\">App\\Handler\\UserHandler::__construct<\/a>"],[100,1,"<a href=\"Handler\/UserHandler.php.html#36\">App\\Handler\\UserHandler::getFormType<\/a>"],[100,1,"<a href=\"Handler\/UserHandler.php.html#44\">App\\Handler\\UserHandler::process<\/a>"],[100,1,"<a href=\"Repository\/AvatarRepository.php.html#17\">App\\Repository\\AvatarRepository::__construct<\/a>"],[100,1,"<a href=\"Repository\/ChatRepository.php.html#17\">App\\Repository\\ChatRepository::__construct<\/a>"],[100,1,"<a href=\"Repository\/GroupRepository.php.html#17\">App\\Repository\\GroupRepository::__construct<\/a>"],[100,1,"<a href=\"Repository\/PictureRepository.php.html#17\">App\\Repository\\PictureRepository::__construct<\/a>"],[100,1,"<a href=\"Repository\/TrickRepository.php.html#17\">App\\Repository\\TrickRepository::__construct<\/a>"],[100,1,"<a href=\"Repository\/UserRepository.php.html#17\">App\\Repository\\UserRepository::__construct<\/a>"],[100,1,"<a href=\"Repository\/VideoRepository.php.html#17\">App\\Repository\\VideoRepository::__construct<\/a>"]], 'Method Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getComplexityData(data, label) {
+    var values = [];
+    $.each(data, function(key) {
+      var value = Math.round(data[key][0]*100) / 100;
+      values.push({
+        x: value,
+        y: data[key][1],
+        class: data[key][2],
+        size: 0.05,
+        shape: 'diamond'
+      });
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+});
+  </script>
+ </body>
+</html>

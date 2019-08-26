@@ -25,6 +25,7 @@ class AvatarListener
     /**
      * Enregistrement de l'image d'un utilisateur
      * @param $avatar
+     * @return true
      */
     public function prePersist($avatar)
     {
@@ -37,10 +38,11 @@ class AvatarListener
             return;
         }
 
-        $fileName = $this->generateUniqueFileName().'.'.$avatar->getFile()->getClientOriginalExtension();
+        $fileName = $this->generateUniqueFileName().'.'.$avatar->getFile()->guessExtension();
 
         if ($avatar->getFile()->move($this->avatarsDirectory(), $fileName)) {
             $avatar->setPath('/' . $this->avatarsDirectory() . $fileName) ;
+            return true;
         }
     }
 

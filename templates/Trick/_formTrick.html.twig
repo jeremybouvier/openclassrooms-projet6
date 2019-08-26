@@ -36,8 +36,20 @@
     </div>
 </div>
 <hr/>
-<div class="col-12 d-flex mb-5 justify-content-center">
-    <button type="submit" class="btn btn-sm btn-outline-info col-12 col-lg-6">{{ button }}</button>
+<div class="row d-flex mb-2 justify-content-center">
+    <button type="submit" class="btn btn-sm btn-outline-info col-10 col-lg-3 mr-2">{{ button }}</button>
+</div>
+{{ form_end(form, { "render_rest": false }) }}
+
+
+<div class="row mb-5 ">
+    {% if trick.id %}
+        <form class="col-12 d-flex justify-content-center" name="formDelete" method="post" action="{{ path('trick.delete',{id: trick.id}) }}" style="display:inline-block" onsubmit="return confirm('Etes vous sure de vouloir supprimer?')" >
+            <input type="hidden" name="_method" value="DELETE">
+            <input type="hidden" name="_token" value="{{ csrf_token('delete') }}">
+            <button type="submit" class="col-12 col-lg-2 btn btn-sm btn-outline-danger ">Supprimer</button>
+        </form>
+    {% endif %}
 </div>
 
-{{ form_end(form, { "render_rest": false }) }}
+

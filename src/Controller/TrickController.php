@@ -56,7 +56,7 @@ class TrickController extends AbstractController
 
     /**
      * Affichage le detail d'une figure
-     * @Route("/figure/{id}/{page}", name="trick.show")
+     * @Route("/figure/{id}/{page}", name="trick.show", defaults={"page": 1})
      * @param Trick $trick
      * @param $page
      * @param ChatRepository $chatRepository
@@ -98,6 +98,11 @@ class TrickController extends AbstractController
      */
     public function update(Trick $trick, Request $request, TrickHandler $trickHandler) : Response
     {
+
+        if ($request->get('submitAction') == 'deleteTrick') {
+            $this->delete($trick, $request);
+        }
+
         if ($trickHandler->handle($request, $trick)) {
             return $this->redirectToRoute('trick.show', ['id' => $trick->getId(), 'page'=> 1]);
         }
@@ -135,7 +140,7 @@ class TrickController extends AbstractController
 
     /**
      * Suppression d'une figure
-     * @Route("/membre/supression-figure/{id}", name="trick.delete", methods="DELETE")
+     * @Route("/membre/suppression-figure/{id}", name="trick.delete", methods="DELETE")
      * @param Request $request
      * @return Response
      * @throws \Exception
