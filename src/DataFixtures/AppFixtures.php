@@ -23,16 +23,25 @@ class AppFixtures extends Fixture
     /**
      * @var array
      */
-    private $groups = ['niveau facile', 'niveau moyen', 'niveau difficile'];
+    private $groups = [
+        ' Straight airs',
+        'Grabs',
+        'Spins',
+        'Flips and inverted rotations',
+        ' Inverted hand plants',
+        ' Slides',
+        ' Tweaks and variations',
+        'Stalls'
+    ];
 
     /**
      * @var array
      */
     private $tricks = [
         [
-            'group' => 2,
-            'name' => 'Frontside',
-            'description' => "Le Frontside 7, comment ça marche? La phase d’approche consiste à arriver bien fléchi sur 
+            'group' => 3,
+            'name' => 'Frontside ',
+            'description' => "Le Frontside, comment ça marche? La phase d’approche consiste à arriver bien fléchi sur 
             le kicker, la planche bien à plat, les épaules dans l’axe de la board, le regard fixé sur le bout du kicker.
             Ensuite l'impulsion se fait à 2 pieds au bout du kicker. Ne pas pousser trop fort aux premiers essais au 
             risque d’être déséquilibré. Donc impulsion à 2 pieds, en lançant la rotation avec les épaules comme un 5.4 
@@ -55,32 +64,6 @@ class AppFixtures extends Fixture
             'picture' => ['fs1.jpg', 'fs2.jpg', 'fs3.jpg']
         ],
         [
-            'group' => 2,
-            'name' => 'switch back',
-            'description' => "Avant tout, il faut bien maitriser le fait de rider en switch avec aisance ainsi que le 
-            switch 180 back pour l’arrivé sur le kick et les 360 front pour la fin de la rotation et le replaquage.La 
-            phase d’approche consiste à arriver bien fléchi sur le kicker, la planche bien à plat, les épaules dans 
-            l’axe de la board, le regard fixé sur le bout du kicker. L’impulsion se fait à 2 pieds au bout du kicker, 
-            en lançant la rotation avec les épaules. Ne pas pousser trop fort aux premiers essais au risque d’être 
-            déséquilibré. La vitesse à laquelle il faut lancer les épaules pour lancer la rotation dépend de la taille 
-            du saut évidement… Le mieux est de commencer par un saut d’environ 5m, sa suffit pour tourner ce tricks. 
-            Pour que la rotation se fasse à plat, il faut lancer le mouvement avec  les épaules à l’horizontale. Le 
-            regard se porte par dessus l’épaule, le menton au niveau de l’épaule. Pour désaxer, c’est la tête qui va 
-            chercher à twister le mouvement, et les épaules ne seront plus à l’horizontale. Dès que l’on est en l’air, 
-            se regrouper et grabber. On vous conseille le Melon Grab pour commencer, c’est le plus simple avec cette 
-            rotation. Il faut aller chercher la rotation du regard par dessus l’épaule avant. On aperçoit la reception 
-            après 270° et a partir de ce moment là c’est tout comme la fin d'un bon vieux 360 front. Il faut donc fixer
-             des yeux la réception et ne pas la lâcher. Le mouvement est fini avec la tête tandis qu’il continue avec 
-             les épaules et le bas du corps restés en retard pour aller s’aligner vers la réception. Pour atterrir, 
-             il faut ramener le bas du corps dans l’axe de la réception en se regroupant si on a besoin d’accélérer 
-             le mouvement. On détend ses jambes pour aller chercher la réception puis amortir sur les deux jambes au 
-             contact du sol. Les épaules doivent être dans l’axe de la board ou légèrement en retard pour arrêter la 
-             rotation, surtout si on sent que l’on tournait trop vite, ça évite la sur-rotation. Regardez devant vous 
-             une fois que vous avez fini d’amortir.",
-            'video' => ['https://www.youtube.com/embed/wDoHk1Y6c-w'],
-            'picture' => ['sb1.jpg']
-        ],
-        [
             'group' => 0,
             'name' => 'Ollie',
             'description' => "Le Ollie est une impulsion  avec déformation de la planche qui permet de faire un saut, 
@@ -100,24 +83,20 @@ class AppFixtures extends Fixture
             'picture' => ['ol1.jpeg', 'ol2.jpeg', 'ol3.jpeg']
         ],
         [
-            'group' => 0,
-            'name' => 'Grab',
-            'description' => "Le grab, comment ça marche? Il faut d'abord faire un saut, un simple ollie par exemple 
+            'group' => 1,
+            'name' => 'Indy',
+            'description' => "Le One-Two, comment ça marche? Il faut d'abord faire un saut, un simple ollie par exemple 
             comme on peut le voir sur le tuto du ollie. Bien plier les jambes une fois en l’air pour se regrouper, et 
             aller chercher la planche avec la main. Attention il ne faut pas que le buste se casse en deux pour aller 
-            chercher la board : ce sont bien les genoux qui remontent pour amener la board vers la main. Il existe 6 
-            grabs de base (Indy : la main arrière vient graber la carre frontside entre les pieds. Sur un saut droit 
-            c’est un Indy Grab, sur un hip ou un quarter en front c’est un frontside indy ou frontside grab alors que 
-            sur un saut en back ça sera un backside Indy // Mute : la main avant grabbe la carre 
-            frontside entre les pieds. // Nose grab : la main avant grabbe le nose. // Melon : la main avant grabbe la 
-            carre bakside entre les talons. En désaxant le corps et la board cela peut faire un Method ou un Backside 
-            Air. // Stalefish : la main arrière grabbe la carre backside entre les talons. // Tail grab : La main 
-            arrière grabbe le tail .)",
+            chercher la board : ce sont bien les genoux qui remontent pour amener la board vers la main. La main 
+            arrière vient graber la carre frontside entre les pieds. Sur un saut droit c’est un Indy Grab, sur un hip 
+            ou un quarter en front c’est un frontside indy ou frontside grab alors que sur un saut en back ça sera un 
+            backside Indy ",
             'video' => ['https://www.youtube.com/embed/L4bIunv8fHM?list=PLGERIDbPqtLvyPUHaqnLSkizFoQnvpTeN'],
             'picture' => ['gb1.jpeg', 'gb2.jpeg', 'gb3.jpg']
         ],
         [
-            'group' => 2,
+            'group' => 7,
             'name' => 'Tail bonk',
             'description' => "L’idéal dans ce genre de tricks est d’avoir un spot avec un peu de distance entre le kick 
             et l’objet (poubelle, poteau, muret, jalon...) que tu veux « bonker ». Ensuite il faut arriver le plus à 
@@ -135,7 +114,7 @@ class AppFixtures extends Fixture
             'picture' => ['tb1.jpg', 'tb2.jpg', 'tb3.jpg']
         ],
         [
-            'group' => 0,
+            'group' => 5,
             'name' => 'Fifty Fifty',
             'description' => "Comme sur beaucoup de spots en street, un élastique a servi à cette séquence. Une fois 
             le palonnier entre les mains, les potes lâchent tout, et c'est parti. Bien penser à visualiser en amont la 
@@ -150,8 +129,8 @@ class AppFixtures extends Fixture
             'picture' => ['ff1.jpg', 'ff2.jpg', 'ff3.jpg']
         ],
         [
-            'group' => 2,
-            'name' => 'Backside',
+            'group' => 3,
+            'name' => 'Backside 180',
             'description' => "Le Backside 180 peut s’expliquer en plusieurs phases. Tout d'abort la phase d’approche 
             consiste à avoir sa planche la plus à plat possible ou légèrement sur la carre frontside, le regard est 
             pointé vers le spot (l’endroit où on veut décoller). Les jambes sont fléchies, prêtes à donner une 
@@ -169,7 +148,7 @@ class AppFixtures extends Fixture
             'picture' => ['bs1.jpg', 'bs2.jpg', 'bs3.jpg']
         ],
         [
-            'group' => 2,
+            'group' => 5,
             'name' => 'Shred',
             'description' => "Ce qui est bien c’est qu’avec le shred,  c'est qu'on n'a pas besoin de prendre trop de 
             vitesse pour exécuter un trick, ça rend toujours une piste banale beaucoup plus fun sans prendre 
@@ -200,7 +179,7 @@ class AppFixtures extends Fixture
             'picture' => null
         ],
         [
-            'group' => 1,
+            'group' => 3,
             'name' => 'Vale flip',
             'description' =>" Pour expliquer un peu ce trick, il faudrait déjà lui donner un nom ! C’est un mélange 
             entre un fs 5 underflip et un rodéo 5. En tout cas, c’est clairement un trick inspiré du pipe que j’ai 
@@ -221,7 +200,7 @@ class AppFixtures extends Fixture
         ],
         [
             'group' => 2,
-            'name' => 'Front Blunt',
+            'name' => 'NoseBlunt',
             'description' => "Prendre un peu d'élan en regardant bien l'entrée du curb. Placer son ollie et effectuer 
             un quart de tour en backside. De ce fait, vous vous retrouvez dos au module. Venir mettre son corps 
             au-dessus du tail et de sa jambe arrière afin d'effectuer un front blunt. Après avoir slidé quelques mètres,
@@ -233,7 +212,7 @@ class AppFixtures extends Fixture
             'picture' => ['fb1.jpg', 'fb2.jpg', 'fb3.jpeg']
         ],
         [
-            'group' => 1,
+            'group' => 3,
             'name' => 'Backflip',
             'description' => " Le mieux c’est de s’entrainer à le faire sur un trampoline car le mouvement est le même.
             Choisissez un kicker de bord de piste, qui kicke un peu de préférence, pour vous aider à envoyer facilement

@@ -66,6 +66,10 @@ class Trick
      */
     private $pictures;
 
+    /**
+     * Trick constructor.
+     * @throws \Exception
+     */
     public function __construct()
     {
         $this->chats = new ArrayCollection();
@@ -75,16 +79,26 @@ class Trick
         $this->updateDate = new \DateTime();
     }
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
+    /**
+     * @param string $name
+     * @return Trick
+     */
     public function setName(string $name): self
     {
         $this->name = $name;
@@ -92,11 +106,18 @@ class Trick
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getDescription(): ?string
     {
         return $this->description;
     }
 
+    /**
+     * @param string $description
+     * @return Trick
+     */
     public function setDescription(string $description): self
     {
         $this->description = $description;
@@ -104,11 +125,18 @@ class Trick
         return $this;
     }
 
+    /**
+     * @return group|null
+     */
     public function getGroup(): ?group
     {
         return $this->group;
     }
 
+    /**
+     * @param group|null $group
+     * @return Trick
+     */
     public function setGroup(?group $group): self
     {
         $this->group = $group;
@@ -124,6 +152,10 @@ class Trick
         return $this->chats;
     }
 
+    /**
+     * @param Chat $chat
+     * @return Trick
+     */
     public function addChat(Chat $chat): self
     {
         if (!$this->chats->contains($chat)) {
@@ -134,24 +166,18 @@ class Trick
         return $this;
     }
 
-    public function removeChat(Chat $chat): self
-    {
-        if ($this->chats->contains($chat)) {
-            $this->chats->removeElement($chat);
-
-            if ($chat->getTrick() === $this) {
-                $chat->setTrick(null);
-            }
-        }
-
-        return $this;
-    }
-
+    /**
+     * @return \DateTimeInterface|null
+     */
     public function getCreationDate(): ?\DateTimeInterface
     {
         return $this->creationDate;
     }
 
+    /**
+     * @param \DateTimeInterface $creationDate
+     * @return Trick
+     */
     public function setCreationDate(\DateTimeInterface $creationDate): self
     {
 
@@ -160,11 +186,18 @@ class Trick
         return $this;
     }
 
+    /**
+     * @return \DateTimeInterface|null
+     */
     public function getUpdateDate(): ?\DateTimeInterface
     {
         return $this->updateDate;
     }
 
+    /**
+     * @param \DateTimeInterface $updateDate
+     * @return Trick
+     */
     public function setUpdateDate(\DateTimeInterface $updateDate): self
     {
         $this->updateDate = $updateDate;
@@ -180,6 +213,10 @@ class Trick
         return $this->videos;
     }
 
+    /**
+     * @param Video $video
+     * @return Trick
+     */
     public function addVideo(Video $video): self
     {
         if (!$this->videos->contains($video)) {
@@ -190,6 +227,10 @@ class Trick
         return $this;
     }
 
+    /**
+     * @param Video $video
+     * @return Trick
+     */
     public function removeVideo(Video $video): self
     {
         if ($this->videos->contains($video)) {
@@ -211,6 +252,10 @@ class Trick
         return $this->pictures;
     }
 
+    /**
+     * @param Picture $picture
+     * @return Trick
+     */
     public function addPicture(Picture $picture): self
     {
         if (!$this->pictures->contains($picture)) {
@@ -221,6 +266,10 @@ class Trick
         return $this;
     }
 
+    /**
+     * @param Picture $picture
+     * @return Trick
+     */
     public function removePicture(Picture $picture): self
     {
         if ($this->pictures->contains($picture)) {

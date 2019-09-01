@@ -30,16 +30,26 @@ class Video
      */
     private $trick;
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
     public function getPath(): ?string
     {
         return $this->path;
     }
 
+    /**
+     * @param string $path
+     * @return Video
+     */
     public function setPath(string $path): self
     {
         $this->path = $path;
@@ -47,11 +57,18 @@ class Video
         return $this;
     }
 
+    /**
+     * @return Trick|null
+     */
     public function getTrick(): ?Trick
     {
         return $this->trick;
     }
 
+    /**
+     * @param Trick|null $trick
+     * @return Video
+     */
     public function setTrick(?Trick $trick): self
     {
         $this->trick = $trick;

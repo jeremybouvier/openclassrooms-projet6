@@ -1,13 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: jeremy
- * Date: 26/08/19
- * Time: 16:34
- */
 
 namespace App\Tests\Entity;
-
 
 use App\Entity\Chat;
 use App\Entity\Picture;

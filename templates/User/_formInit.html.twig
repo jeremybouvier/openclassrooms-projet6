@@ -1,0 +1,15 @@
+<div class="col-12 col-lg-8 mb-5  bg-white shadow">
+    {{ form_start(form) }}
+    {{ form_widget(form._token) }}
+
+    <div class="row mt-2">
+        <div class="col-12 form-group">{{ form_row(form.loginName)}}</div>
+        <div class="col-12 form-group">{{ form_row(form.email)}}</div>
+        <div class="col-12 form-group">{{ form_row(form.plainPassword)}}</div>
+    </div>
+    <div class="col-12 d-flex mb-4 justify-content-center">
+        <button type="submit" class="btn btn-sm btn-outline-info col-12 col-lg-4">Renvoi de mot de passe</button>
+    </div>
+
+    {{ form_end(form, { "render_rest": false }) }}
+</div>

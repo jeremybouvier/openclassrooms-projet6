@@ -4,6 +4,7 @@ namespace App\Handler;
 
 use App\Form\UserType;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\UnitOfWork;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 
 class UserHandler extends AbstractHandler
@@ -43,8 +44,14 @@ class UserHandler extends AbstractHandler
      */
     protected function process($param = null): void
     {
-        $this->flashBag->add('success', 'Votre enregistrement a bien été effectué');
-        $this->entityManager->persist($this->data);
+        if ($this->entityManager->getUnitOfWork()->getEntityState($this->data) === UnitOfWork::STATE_NEW) {
+            $this->flashBag->add('success', 'Votre enregistrement a bien été effectué');
+            $this->entityManager->persist($this->data);
+        } else {
+            $this->data->setToken('');
+            $this->entityManager->persist($this->data);
+        }
+
         $this->entityManager->flush();
     }
 }

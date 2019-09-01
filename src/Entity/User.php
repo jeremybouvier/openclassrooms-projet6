@@ -55,21 +55,34 @@ class User implements UserInterface, \Serializable
      */
     private $token;
 
+    /**
+     * User constructor.
+     */
     public function __construct()
     {
         $this->chats = new ArrayCollection();
     }
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
     public function getLoginName(): ?string
     {
         return $this->loginName;
     }
 
+    /**
+     * @param string $loginName
+     * @return User
+     */
     public function setLoginName(string $loginName): self
     {
         $this->loginName = $loginName;
@@ -77,11 +90,18 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getEmail(): ?string
     {
         return $this->email;
     }
 
+    /**
+     * @param string $email
+     * @return User
+     */
     public function setEmail(string $email): self
     {
         $this->email = $email;
@@ -89,11 +109,18 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getPassword(): ?string
     {
         return $this->password;
     }
 
+    /**
+     * @param string $password
+     * @return User
+     */
     public function setPassword(string $password): self
     {
         $this->password = $password;
@@ -101,11 +128,17 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
+    /**
+     * @return string
+     */
     public function getPlainPassword()
     {
         return $this->plainPassword;
     }
 
+    /**
+     * @param $plainPassword
+     */
     public function setPlainPassword($plainPassword)
     {
         $this->plainPassword = $plainPassword;
@@ -120,6 +153,10 @@ class User implements UserInterface, \Serializable
         return $this->chats;
     }
 
+    /**
+     * @param Chat $chats
+     * @return User
+     */
     public function addChat(Chat $chats): self
     {
         if (!$this->chats->contains($chats)) {
@@ -130,6 +167,10 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
+    /**
+     * @param Chat $chats
+     * @return User
+     */
     public function removeChat(Chat $chats): self
     {
         if ($this->chats->contains($chats)) {
@@ -191,16 +232,26 @@ class User implements UserInterface, \Serializable
             ) = unserialize($serialized, ['allowed_classes' => false]);
     }
 
+    /**
+     * @return string|null
+     */
     public function getUsername()
     {
         return $this->getEmail();
     }
 
+    /**
+     * @return Avatar|null
+     */
     public function getAvatar(): ?Avatar
     {
         return $this->avatar;
     }
 
+    /**
+     * @param Avatar $avatar
+     * @return User
+     */
     public function setAvatar(Avatar $avatar): self
     {
         $this->avatar = $avatar;
@@ -212,11 +263,18 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getToken(): ?string
     {
         return $this->token;
     }
 
+    /**
+     * @param string|null $token
+     * @return User
+     */
     public function setToken(?string $token): self
     {
         $this->token = $token;

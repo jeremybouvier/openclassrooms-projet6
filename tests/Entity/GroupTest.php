@@ -17,8 +17,6 @@ class GroupTest extends TestCase
         $group =new Group();
         $group->setName('test');
         $this->assertSame('test', $group->getName());
-        $group->addTrick(new Trick());
-        $this->assertNotEmpty($group->getTrick());
         $this->assertEquals(null, $group->getId());
     }
 }
