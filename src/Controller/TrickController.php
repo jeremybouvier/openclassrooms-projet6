@@ -59,13 +59,19 @@ class TrickController extends AbstractController
      * @Route("/figure/{id}/{page}", name="trick.show", defaults={"page": 1})
      * @param Trick $trick
      * @param $page
+     * @param Request $request
      * @param ChatRepository $chatRepository
      * @param ChatHandler $chatHandler
-     * @param Request $request
      * @return Response
+     * @throws \Exception
      */
-    public function show(Trick $trick, $page, Request $request, ChatRepository $chatRepository, ChatHandler $chatHandler) : Response
-    {
+    public function show(
+        Trick $trick,
+        $page,
+        Request $request,
+        ChatRepository $chatRepository,
+        ChatHandler $chatHandler
+    ) : Response {
 
         if ($chatHandler->handle($request, new Chat(), $trick)) {
             return $this->redirectToRoute(
@@ -108,7 +114,7 @@ class TrickController extends AbstractController
         }
 
         return $this->render('Trick/edit.html.twig', [
-            'active_menu' => self::TRICK,
+            'active_menu' => self::TRICK_MENU_SELECTOR,
             self::TRICK => $trickHandler->getData(),
             'form' => $trickHandler->createView(),
             'title' =>['name'=>'Modification de la figure']
@@ -131,7 +137,7 @@ class TrickController extends AbstractController
         }
 
         return $this->render('Trick/edit.html.twig', [
-            'active_menu' => self::TRICK,
+            'active_menu' => self::TRICK_MENU_SELECTOR,
             self::TRICK => $trickHandler->getData(),
             'form' => $trickHandler->createView(),
             'title' => ['name'=>'Création de la figure']

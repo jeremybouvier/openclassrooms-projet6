@@ -73,6 +73,7 @@ class UserController extends AbstractController
      * @Route("/reinitialisation-mot-de-passe/{token}", name="user.password", methods="GET|POST")
      * @param string $token
      * @param Request $request
+     * @param UserRepository $userRepository
      * @param UserHandler $userHandler
      * @return Response
      * @throws \Exception
@@ -98,7 +99,6 @@ class UserController extends AbstractController
         } else {
             return $this->redirectToRoute('trick.index');
         }
-
     }
 
     /**

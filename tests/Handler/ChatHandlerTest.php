@@ -1,13 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: jeremy
- * Date: 24/08/19
- * Time: 14:41
- */
 
 namespace App\Tests\Handler;
-
 
 use App\Entity\Chat;
 use App\Entity\Trick;
@@ -44,6 +37,4 @@ class ChatHandlerTest extends TestCase
 
         $this->assertTrue($chatHandler->handle($request, new Chat(), new Trick()));
     }
-
-
 }

@@ -5,7 +5,7 @@ namespace App\Tests\Repository;
 use App\Entity\Picture;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-class PictureRepositoryTest extends  KernelTestCase
+class PictureRepositoryTest extends KernelTestCase
 {
     /**
      * @var \Doctrine\ORM\EntityManager
