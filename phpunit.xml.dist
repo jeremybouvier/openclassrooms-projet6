@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- https://phpunit.de/manual/current/en/appendixes.configuration.html -->
+<!-- https://phpunit.readthedocs.io/en/latest/configuration.html -->
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/6.5/phpunit.xsd"
          backupGlobals="false"
@@ -12,22 +12,32 @@
         <server name="APP_ENV" value="test" force="true" />
         <server name="SHELL_VERBOSITY" value="-1" />
         <server name="SYMFONY_PHPUNIT_REMOVE" value="" />
-        <server name="SYMFONY_PHPUNIT_VERSION" value="6.5" />
+        <server name="SYMFONY_PHPUNIT_VERSION" value="7.5" />
     </php>
 
     <testsuites>
         <testsuite name="Project Test Suite">
             <directory>tests</directory>
+
         </testsuite>
     </testsuites>
 
     <filter>
         <whitelist>
             <directory>src</directory>
+            <exclude>
+                <file>./src/Kernel.php</file>
+                <directory>src/DataFixtures</directory>
+                <directory>src/Migrations</directory>
+            </exclude>
         </whitelist>
     </filter>
 
     <listeners>
         <listener class="Symfony\Bridge\PhpUnit\SymfonyTestsListener" />
+        <listener class="\DAMA\DoctrineTestBundle\PHPUnit\PHPUnitListener" />
     </listeners>
+    <logging>
+        <log type="coverage-html" target="coverage" lowUpperBound="35" highLowerBound="70"/>
+    </logging>
 </phpunit>

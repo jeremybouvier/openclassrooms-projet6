@@ -41,21 +41,35 @@ class Chat
      */
     private $trick;
 
+    /**
+     * Chat constructor.
+     * @throws \Exception
+     */
     public function __construct()
     {
         $this->date = new \DateTime();
     }
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
     public function getMessage(): ?string
     {
         return $this->message;
     }
 
+    /**
+     * @param string $message
+     * @return Chat
+     */
     public function setMessage(string $message): self
     {
         $this->message = $message;
@@ -63,11 +77,18 @@ class Chat
         return $this;
     }
 
+    /**
+     * @return \DateTimeInterface|null
+     */
     public function getDate(): ?\DateTimeInterface
     {
         return $this->date;
     }
 
+    /**
+     * @param \DateTimeInterface $date
+     * @return Chat
+     */
     public function setDate(\DateTimeInterface $date): self
     {
         $this->date = $date;
@@ -75,11 +96,18 @@ class Chat
         return $this;
     }
 
+    /**
+     * @return user|null
+     */
     public function getUser(): ?user
     {
         return $this->user;
     }
 
+    /**
+     * @param user|null $user
+     * @return Chat
+     */
     public function setUser(?user $user): self
     {
         $this->user = $user;
@@ -87,11 +115,18 @@ class Chat
         return $this;
     }
 
+    /**
+     * @return trick|null
+     */
     public function getTrick(): ?trick
     {
         return $this->trick;
     }
 
+    /**
+     * @param trick|null $trick
+     * @return Chat
+     */
     public function setTrick(?trick $trick): self
     {
         $this->trick = $trick;

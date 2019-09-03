@@ -15,7 +15,7 @@ class SecurityController extends AbstractController
      */
     public function login(AuthenticationUtils $authenticationUtils)
     {
-        return $this->render('security/login.html.twig', [
+        return $this->render('Security/login.html.twig', [
             'activeMenu' => 'connexion',
             'lastUsername' => $authenticationUtils->getLastUsername(),
             'error' => $authenticationUtils->getLastAuthenticationError()

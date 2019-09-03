@@ -35,16 +35,26 @@ class Avatar
      */
     private $user;
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
     public function getPath(): ?string
     {
         return $this->path;
     }
 
+    /**
+     * @param string $path
+     * @return Avatar
+     */
     public function setPath(string $path): self
     {
         $this->path = $path;
@@ -52,11 +62,18 @@ class Avatar
         return $this;
     }
 
+    /**
+     * @return User|null
+     */
     public function getUser(): ?User
     {
         return $this->user;
     }
 
+    /**
+     * @param User $user
+     * @return Avatar
+     */
     public function setUser(User $user): self
     {
         $this->user = $user;
@@ -64,11 +81,18 @@ class Avatar
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
     public function getFile()
     {
         return $this->file;
     }
 
+    /**
+     * @param $file
+     * @return Avatar
+     */
     public function setFile($file): self
     {
         $this->file = $file;

@@ -48,10 +48,10 @@ class TrickHandler extends AbstractHandler
     {
         if ($this->entityManager->getUnitOfWork()->getEntityState($this->data) === UnitOfWork::STATE_NEW) {
             $this->entityManager->persist($this->data);
-            $this->flashBag->add('success', 'La figure a bien été ajouté');
+            $this->flashBag->add('success', 'La figure a bien été ajoutée');
         } else {
             $this->data->setUpdateDate(new \DateTime());
-            $this->flashBag->add('success', 'La figure a bien été modifié');
+            $this->flashBag->add('success', 'La figure a bien été modifiée');
         }
         $this->entityManager->flush();
     }

@@ -58,8 +58,8 @@
 
         <div class="row justify-content-center">
             <div class="container" id="gallery">
-                {% include 'trick/_picturesGallery.html.twig' %}
-                {% include 'trick/_videoGallery.html.twig' %}
+                {% include 'Trick/_picturesGallery.html.twig' %}
+                {% include 'Trick/_videoGallery.html.twig' %}
             </div>
         </div>
 
@@ -73,7 +73,7 @@
         <div class="container">
             <div class="col-12 col-lg-8 offset-lg-3 ">
                 <div class="row ">
-                    <div class="col-12 col-lg-3 text-center m-2 btn btn-outline-info">Group : {{ trick.groups.name }}</div>
+                    <div class="col-12 col-lg-3 text-center m-2 btn btn-outline-info">Group : {{ trick.group.name }}</div>
                     <div class="col-12 col-lg-3 text-center m-2 btn btn-outline-info">Crée le : {{ trick.creationDate.date |date("d/m/y") }}</div>
                     <div class="col-12 col-lg-3 text-center m-2 btn btn-outline-info">Modifié le : {{ trick.updateDate.date |date("d/m/y") }}</div>
                 </div>
@@ -84,7 +84,7 @@
         {% if is_granted('ROLE_USER') %}
             <div class="row">
                 <div class="col-12 col-lg-8 offset-lg-2">
-                    {% include 'trick/_formChat.html.twig' %}
+                    {% include 'Trick/_formChat.html.twig' %}
                 </div>
             </div>
             <hr>
@@ -97,7 +97,7 @@
                     <div class="row mb-2 " style="background-color: #ecf1f2; border-radius: 0 30px 0 30px;">
                         <div class="col-2 p-2">
                             <div style="width: 80px; height: 80px; border-radius: 40px 40px 40px 40px; overflow: hidden;">
-                                <img src="{{ chat.user.avatar.path }}" style="max-width: 80px;">
+                                <img src="{{ chat.user.avatar.path }}" alt="photo avatar" style="max-width: 80px;">
                             </div>
                         </div>
                         <div class=" col-8 col-lg-10 p-2 pl-4">
@@ -125,12 +125,11 @@
             if (video === 1){
                 document.getElementById('videoGallery').style.display = "block";
             }
-        }
+        };
 
         if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
             document.getElementById('gallery').style.display = "none";
         }
-
 
         function setPath(path){
             document.getElementById('player').src = path;
