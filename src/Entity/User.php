@@ -56,6 +56,11 @@ class User implements UserInterface, \Serializable
     private $token;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    private $valid;
+
+    /**
      * User constructor.
      */
     public function __construct()
@@ -189,7 +194,10 @@ class User implements UserInterface, \Serializable
      */
     public function getRoles()
     {
-        return ['ROLE_USER'];
+        if ($this->getValid()==1) {
+            return ['ROLE_USER'];
+        }
+        return [''];
     }
 
     /**
@@ -278,6 +286,18 @@ class User implements UserInterface, \Serializable
     public function setToken(?string $token): self
     {
         $this->token = $token;
+
+        return $this;
+    }
+
+    public function getValid(): ?bool
+    {
+        return $this->valid;
+    }
+
+    public function setValid(bool $valid): self
+    {
+        $this->valid = $valid;
 
         return $this;
     }

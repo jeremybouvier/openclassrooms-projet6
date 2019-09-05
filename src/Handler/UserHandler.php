@@ -46,6 +46,7 @@ class UserHandler extends AbstractHandler
     {
         if ($this->entityManager->getUnitOfWork()->getEntityState($this->data) === UnitOfWork::STATE_NEW) {
             $this->flashBag->add('success', 'Votre enregistrement a bien été effectué');
+            $this->data->setValid(false);
             $this->entityManager->persist($this->data);
         } else {
             $this->data->setToken('');

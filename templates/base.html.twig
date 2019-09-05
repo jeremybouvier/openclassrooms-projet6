@@ -34,6 +34,9 @@
                 <li class="nav-item">
                     <a class="nav-link {% if activeMenu is defined and activeMenu == 'tricks' %} active {% endif %}" href="{{ path('trick.index') }}">Les Figures</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if activeMenu is defined and activeMenu == 'membre' %} active {% endif %}" href="{{ path('user.new') }}">Enregistrement</a>
+                </li>
                 <li class="nav-item dropdown" >
                     {% if is_granted('ROLE_USER') %}
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -127,14 +130,17 @@
     <div class="container">
         <div class="row">
             <div class="col-12 col-lg-3 text-center m-1">
-                <a href="#"><i class="icon fa fa-facebook-f"></i></a>
-                <a href="#"><i class="icon fa fa-twitter"></i></a>
-                <a href="#"><i class="icon fa fa-envelope"></i></a>
+                <a href="#"></a>
+                <a href="#"></a>
+                <a href="#"></a>
             </div>
             <div class="col-12 col-lg-6">
                 <p class="m-0 text-center text-muted" >Copyright &copy; jeremybouvier 2019</p>
             </div>
-            <div class="col-12 col-lg-3"></div>
+            <div class="col-12 col-lg-3">
+                <a href="#"><i class="icon fa fa-facebook-f"></i></a>
+                <a href="#"><i class="icon fa fa-twitter"></i></a>
+                <a href="#"><i class="icon fa fa-envelope"></i></a></div>
         </div>
 
     </div>
