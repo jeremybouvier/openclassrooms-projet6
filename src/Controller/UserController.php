@@ -55,17 +55,45 @@ class UserController extends AbstractController
      * @return Response
      * @throws \Exception
      */
-    public function new(Request $request, UserHandler $userHandler) : Response
+    public function new(Request $request, UserHandler $userHandler, \Swift_Mailer $swift_Mailer) : Response
     {
         if ($userHandler->handle($request, new User())) {
+            $this->sendMail($userHandler->getData(), $swift_Mailer, 'User/emailValidation.html.twig');
             return $this->redirectToRoute('trick.index');
         }
 
         return $this->render('User/new.html.twig', [
-            'activeMenu' => 'connexion',
+            'activeMenu' => 'membre',
             'user' => $userHandler->getData(),
             'form' => $userHandler->createView(),
         ]);
+    }
+
+    /**
+     * Validation nouveau membre
+     * @Route("/validation-membre/{token}", name="user.validation", methods="GET|POST")
+     * @param string $token
+     * @param Request $request
+     * @param UserRepository $userRepository
+     * @param UserHandler $userHandler
+     * @return Response
+     * @throws \Exception
+     */
+    public function validNewUser(
+        string $token,
+        Request $request,
+        UserRepository $userRepository,
+        UserHandler $userHandler
+    ) : Response {
+
+        $user = $userRepository->findOneBy(['token'=>$token]);
+        if ($user) {
+            $user->setValid(true);
+            $user->setToken('');
+            $this->objectManager->flush();
+        }
+
+        return $this->redirectToRoute('trick.index');
     }
 
     /**
@@ -120,7 +148,8 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid() && $user) {
             $this->sendMail(
                 $user,
-                $swift_Mailer
+                $swift_Mailer,
+                'User/emailForgot.html.twig'
             );
             return $this->redirectToRoute('trick.index');
         }
@@ -137,14 +166,14 @@ class UserController extends AbstractController
      * @param $user
      * @param $swift_Mailer
      */
-    private function sendMail($user, $swift_Mailer)
+    private function sendMail($user, $swift_Mailer, $view)
     {
         $message = (new \Swift_Message('JimmySweatSnowboard: Réinitialisation de votre mot de passe'))
             ->setFrom('email@JimmySweatSnowboard.com')
             ->setTo($user->getEmail())
             ->setBody(
                 $this->renderView(
-                    'User/emailForgot.html.twig',
+                    $view,
                     [
                         'token' => $this->setToken($user),
                         'user' => $user
@@ -156,7 +185,7 @@ class UserController extends AbstractController
         $swift_Mailer->send($message);
         $this->flashBag->add(
             'success',
-            'Un email vous a été envoyer afin de réinitialiser votre mot de passe'
+            'Un email vous a été envoyé afin de finaliser la procédure'
         );
     }
 

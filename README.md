@@ -6,7 +6,7 @@ inscrit comme membre ont accès à la création ou modification des figures mais
 sur chaque figure.
 Le projet utilise le Framework Symfony et inclu les tests fonctionnels et unitaires du projet. Les données et la 
 structure de la base de donnée du projet sont initialisées grâce à un script Composer. Le projet respect les normes 
-PSR1, PSR2, PSR4, PSR7 et son architecture est basée sur le modèle MVC.
+PSR1, PSR2, PSR4 et son architecture est basée sur le modèle MVC.
 
 ### Prérequis
 

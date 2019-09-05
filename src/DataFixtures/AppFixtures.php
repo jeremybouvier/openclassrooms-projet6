@@ -256,6 +256,7 @@ class AppFixtures extends Fixture
             $avatar->setPath('/assets/image/avatar/base.jpg');
             $user->setAvatar($avatar);
             $user->setPlainPassword('user'.$i);
+            $user->setValid(true);
             $manager->persist($user);
             $users[] = $user;
         }
