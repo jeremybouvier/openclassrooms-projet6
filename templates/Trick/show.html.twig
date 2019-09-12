@@ -5,10 +5,10 @@
 {% endblock %}
 
 {% block header %}
-    <div class="container-fluid header p-0">
+    <div class="container-fluid header p-0" style="overflow: hidden;height: 900px;">
         {% set header = 'false' %}
         {% for picture in trick.pictures %}
-            {% if header == 'false' %} <img src="{{ picture.path }}" alt="Media de la figure {{ trick.name }}" class="img-fluid"/> {% set header = 'true' %}{% endif %}
+            {% if header == 'false' %} <img src="{{ picture.path }}" alt="Media de la figure {{ trick.name }}" style="width: 100%"/> {% set header = 'true' %}{% endif %}
         {% endfor %}
         {% if header == 'false' %}
             <img src="{{ asset('assets/image/base.png') }}" alt="Media de la figure {{ trick.name }}" class="img-fluid" style="width: 100%;"/>

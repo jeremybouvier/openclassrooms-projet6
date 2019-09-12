@@ -57,7 +57,6 @@ abstract class AbstractHandler
     public function handle(Request $request, $data, $param = null)
     {
         $this->data = $data;
-        dump($request);
         $this->form = $this->formFactory->create(static::getFormType(), $data)->handleRequest($request);
 
         if ($this->form->isSubmitted() && $this->form->isValid()) {

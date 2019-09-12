@@ -1,19 +1,8 @@
-@font-face {
-    font-family: 'dj_grossnormal';
-    src: url('../fonts/djgross/DJGROSS-webfont.eot');
-    src: url('../fonts/djgross/DJGROSS-webfont.eot?#iefix') format('embedded-opentype'),
-    url('../fonts/djgross/DJGROSS-webfont.woff') format('woff'),
-    url('../fonts/djgross/DJGROSS-webfont.ttf') format('truetype'),
-    url('../fonts/djgross/DJGROSS-webfont.svg#dj_grossnormal') format('svg');
-    font-weight: normal;
-    font-style: normal;
 
-}
 
 h1 {
-    font-family: 'dj_grossnormal', Arial, sans-serif;
+    font-family: 'Permanent Marker', Arial, sans-serif;
     color: #17a2b8;
-
 }
 
 h2 {
@@ -57,7 +46,7 @@ a.dropdown-item:hover{
     font-weight: bold;
 }
 .carousel-caption h1{
-    font-size: 3em;
+    font-size: 5em;
     color: white;
     font-weight: bold;
 }

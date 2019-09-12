@@ -38,6 +38,11 @@ class LoginControlleurTest extends WebTestCase
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
     }
 
+    /**
+     * Connexion d'un utilisateur
+     * @param $user
+     * @param $password
+     */
     private function login($user, $password)
     {
         $this->crawler = $this->client->request('GET', '/login');
