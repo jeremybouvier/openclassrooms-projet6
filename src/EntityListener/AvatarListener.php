@@ -3,7 +3,6 @@
 namespace App\EntityListener;
 
 use App\Entity\Avatar;
-use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 
 class AvatarListener
 {

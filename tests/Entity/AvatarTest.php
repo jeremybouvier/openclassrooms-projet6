@@ -6,7 +6,7 @@ use App\Entity\Avatar;
 use Symfony\Bundle\FrameworkBundle\Tests\TestCase;
 use Symfony\Component\HttpFoundation\File\File;
 
-class AvatarTestn extends TestCase
+class AvatarTest extends TestCase
 {
     /**
      * test unitaire de la class Avatar
@@ -17,7 +17,6 @@ class AvatarTestn extends TestCase
 
         $avatar->setFile(new File(__DIR__.'/base.png'));
         $this->assertNotEmpty($avatar->getFile());
-
 
         $this->assertEquals(null, $avatar->getId());
     }

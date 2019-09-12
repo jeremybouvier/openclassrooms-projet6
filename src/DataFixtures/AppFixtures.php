@@ -23,6 +23,16 @@ class AppFixtures extends Fixture
     /**
      * @var array
      */
+    private $listGroup;
+
+    /**
+     * @var array
+     */
+    private $users;
+
+    /**
+     * @var array
+     */
     private $groups = [
         ' Straight airs',
         'Grabs',
@@ -245,8 +255,17 @@ class AppFixtures extends Fixture
     /**
      * Modèle de construction de données utilisateurs en base de donnée
      * @param ObjectManager $manager
+     * @throws \Exception
      */
     public function load(ObjectManager $manager)
+    {
+        $this->loadUsers($manager);
+        $this->loadGroups($manager);
+        $this->loadTricks($manager);
+        $manager->flush();
+    }
+
+    public function loadUsers($manager)
     {
         for ($i = 0; $i < 10; $i++) {
             $user = new User();
@@ -258,22 +277,27 @@ class AppFixtures extends Fixture
             $user->setPlainPassword('user'.$i);
             $user->setValid(true);
             $manager->persist($user);
-            $users[] = $user;
+            $this->users[] = $user;
         }
+    }
 
+    public function loadGroups($manager)
+    {
         foreach ($this->groups as $value) {
             $group = new Group();
             $group->setName($value);
             $manager->persist($group);
-            $listGroup[] = $group;
+            $this->listGroup[] = $group;
         }
+    }
 
+    public function loadTricks($manager)
+    {
         foreach ($this->tricks as $value) {
             $trick = new Trick();
-            $trick->setGroup($listGroup[$value['group']]);
+            $trick->setGroup($this->listGroup[$value['group']]);
             $trick->setName($value['name']);
             $trick->setDescription($value['description']);
-
             if ($value['picture']) {
                 foreach ($value['picture'] as $file) {
                     $picture = new Picture();
@@ -291,7 +315,7 @@ class AppFixtures extends Fixture
                 }
             }
 
-            foreach ($users as $user) {
+            foreach ($this->users as $user) {
                 $chat = new Chat();
                 $chat->setUser($user);
                 $chat->setMessage('message test');
@@ -299,7 +323,6 @@ class AppFixtures extends Fixture
             }
             $manager->persist($trick);
         }
-
-        $manager->flush();
     }
+
 }

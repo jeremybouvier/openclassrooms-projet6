@@ -35,7 +35,7 @@ class UserControllerTest extends WebTestCase
         $client = self::createClient();
         $crawler = $client->request('GET', '/oubli-mot-de-passe');
 
-        $client->submitForm('Renvoi de mot de passe', [
+        $client->submitForm('Valider', [
             'user[loginName]' => 'user0',
         ]);
         $crawler = $client->followRedirect();

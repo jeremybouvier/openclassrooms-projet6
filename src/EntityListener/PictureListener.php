@@ -1,15 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: jeremy
- * Date: 01/07/19
- * Time: 13:50
- */
 
 namespace App\EntityListener;
 
 use App\Entity\Picture;
-use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 
 class PictureListener
 {
