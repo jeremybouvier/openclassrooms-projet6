@@ -168,7 +168,7 @@ class UserController extends AbstractController
      */
     private function sendMail($user, $swift_Mailer, $view)
     {
-        $message = (new \Swift_Message('JimmySweatSnowboard: Réinitialisation de votre mot de passe'))
+        $message = (new \Swift_Message('JimmySweatSnowboard Site'))
             ->setFrom('email@JimmySweatSnowboard.com')
             ->setTo($user->getEmail())
             ->setBody(
